@@ -45,8 +45,8 @@ function renderClasses() {
       </div>`)
     .join('');
   const { km, minutes } = route();
-  $('routeInfo').textContent = `${km} км · ~${minutes} хв`;
-  $('surgeBadge').textContent = `Підвищений попит ×${surge}`;
+  $('routeInfo').textContent = `${km} km · ~${minutes} min`;
+  $('surgeBadge').textContent = `High demand ×${surge}`;
   $('surgeBadge').classList.toggle('hidden', surge === 1);
 }
 
@@ -90,7 +90,7 @@ function startTrip() {
   show('tripView');
   $('driverCard').classList.add('hidden');
   $('toast').textContent = '';
-  setStatus('Шукаємо водія…', `Попередня вартість ${formatUah(state.estimate)}`, 5);
+  setStatus('Looking for a driver…', `Estimated price ${formatUah(state.estimate)}`, 5);
   moveCar(8, 12);
 
   later(2000, () => {
@@ -100,7 +100,7 @@ function startTrip() {
     const path = [[12, 30], [18, 48], [24, 62], [28, 72]];
     path.forEach(([l, t], i) => later(i * 1000, () => {
       moveCar(l, t);
-      setStatus('Водій їде до вас', `Прибуде через ${path.length - i} хв`, 15 + i * 7);
+      setStatus('Driver is on the way', `Arrives in ${path.length - i} min`, 15 + i * 7);
     }));
     later(path.length * 1000, arrived);
   });
@@ -108,7 +108,7 @@ function startTrip() {
 
 function arrived() {
   state.phase = 'arrived';
-  setStatus('Водій на місці', 'Безкоштовне очікування — 3 хв', 45);
+  setStatus('Driver has arrived', 'Free waiting time: 3 min', 45);
   later(2500, ride);
 }
 
@@ -118,7 +118,7 @@ function ride() {
   const path = [[38, 60], [50, 48], [62, 36], [76, 24]];
   path.forEach(([l, t], i) => later(i * 1000, () => {
     moveCar(l, t);
-    setStatus('В дорозі', `До місця призначення ~${(path.length - i) * 3} хв`, 55 + i * 11);
+    setStatus('On the way', `~${(path.length - i) * 3} min to destination`, 55 + i * 11);
   }));
   later(path.length * 1000, finish);
 }
@@ -139,7 +139,7 @@ function finish() {
   state.phase = 'done';
   $('estimateValue').textContent = formatUah(state.estimate);
   $('finalValue').textContent = formatUah(state.final);
-  $('finalBreakdown').textContent = `Фактичний маршрут +5%, платне очікування ${waitMinutes - 3} хв`;
+  $('finalBreakdown').textContent = `Actual route +5%, paid waiting ${waitMinutes - 3} min`;
   renderStars();
   show('doneView');
 }
@@ -152,8 +152,8 @@ function cancelTrip() {
         driverArrived: state.phase === 'arrived',
       });
   clearTimers();
-  addHistory('Скасовано', fee);
-  resetOrder(fee ? `Поїздку скасовано, штраф ${formatUah(fee)}` : 'Поїздку скасовано без штрафу');
+  addHistory('Cancelled', fee);
+  resetOrder(fee ? `Trip cancelled, cancellation fee ${formatUah(fee)}` : 'Trip cancelled free of charge');
 }
 
 function renderStars() {
@@ -163,7 +163,7 @@ function renderStars() {
 }
 
 function addHistory(status, price) {
-  const time = new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' });
+  const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   state.history.unshift(
     `${time} · ${$('from').value} → ${$('to').selectedOptions[0].text} · ${TARIFFS[state.tariff].label} · ${status} · ${formatUah(price)}`
   );
@@ -212,7 +212,7 @@ $('doneBtn').addEventListener('click', () => {
   addHistory(`★${state.rating}`, state.final + state.tip);
   state.tip = 0;
   [...$('tips').children].forEach((b) => b.classList.add('secondary'));
-  resetOrder('Дякуємо за поїздку! Чек надіслано на e-mail');
+  resetOrder('Thanks for riding! The receipt was sent to your e-mail');
 });
 
 renderExtras();

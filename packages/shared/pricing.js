@@ -2,14 +2,14 @@
 // Loaded as a classic script so pages work from file:// without a server.
 (function (global) {
   const TARIFFS = {
-    economy: { label: 'Економ', base: 45, perKm: 11, perMin: 2, waitPerMin: 3, minFare: 70 },
-    comfort: { label: 'Комфорт', base: 60, perKm: 14, perMin: 3, waitPerMin: 4, minFare: 95 },
-    business: { label: 'Бізнес', base: 110, perKm: 22, perMin: 5, waitPerMin: 6, minFare: 180 },
+    economy: { label: 'Economy', base: 45, perKm: 11, perMin: 2, waitPerMin: 3, minFare: 70 },
+    comfort: { label: 'Comfort', base: 60, perKm: 14, perMin: 3, waitPerMin: 4, minFare: 95 },
+    business: { label: 'Business', base: 110, perKm: 22, perMin: 5, waitPerMin: 6, minFare: 180 },
   };
 
   const EXTRAS = {
-    childSeat: { label: 'Дитяче крісло', price: 30 },
-    pet: { label: 'Перевезення тварини', price: 40 },
+    childSeat: { label: 'Child seat', price: 30 },
+    pet: { label: 'Pet transport', price: 40 },
   };
 
   const PLATFORM_COMMISSION = 0.15;
@@ -34,7 +34,7 @@
     return Math.round(Math.max(t.minFare, ride * surge) + extrasSum);
   }
 
-  // Cancellation handler logic (C3: "Обробник скасувань").
+  // Cancellation handler logic (C3: "Cancellation handler").
   function cancellationFee({ secondsSinceAccepted, driverArrived }) {
     if (driverArrived) return CANCEL_FEE;
     return secondsSinceAccepted > FREE_CANCEL_SECONDS ? CANCEL_FEE : 0;
@@ -45,7 +45,7 @@
   }
 
   function formatUah(value) {
-    return value.toLocaleString('uk-UA') + ' ₴';
+    return '₴' + value.toLocaleString('en-US');
   }
 
   global.TaxiShared = {

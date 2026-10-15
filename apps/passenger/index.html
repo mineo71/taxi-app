@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Таксі — пасажир</title>
+  <title>Taxi — Passenger</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../../packages/shared/ui.css">
 </head>
 <body>
   <div class="app">
     <div class="topbar">
-      <span>🚕 Таксі</span>
-      <small>Прототип застосунку пасажира</small>
+      <span>🚕 Taxi</span>
+      <small>Passenger app prototype</small>
     </div>
 
     <div class="map" id="map">
@@ -23,16 +23,16 @@
     <!-- Step 1: order form (FR-3 … FR-8, FR-15) -->
     <section class="panel" id="orderView">
       <div>
-        <label for="from">Звідки</label>
-        <input id="from" value="вул. Хрещатик, 22">
+        <label for="from">From</label>
+        <input id="from" value="22 Khreshchatyk St">
       </div>
       <div>
-        <label for="to">Куди</label>
+        <label for="to">To</label>
         <select id="to">
-          <option value="4.2|12">Залізничний вокзал, Вокзальна пл., 1</option>
-          <option value="6.8|18">ТРЦ Ocean Plaza, вул. Антоновича, 176</option>
-          <option value="7.5|20">КПІ, просп. Берестейський, 37</option>
-          <option value="35|45">Аеропорт «Бориспіль»</option>
+          <option value="4.2|12">Central Railway Station, 1 Vokzalna Sq</option>
+          <option value="6.8|18">Ocean Plaza Mall, 176 Antonovycha St</option>
+          <option value="7.5|20">Igor Sikorsky KPI, 37 Beresteiskyi Ave</option>
+          <option value="35|45">Boryspil International Airport</option>
         </select>
       </div>
 
@@ -44,32 +44,32 @@
       <div class="classes" id="classes"></div>
 
       <div class="card">
-        <label>Додаткові побажання</label>
+        <label>Extra options</label>
         <div id="extras"></div>
         <label style="margin-top:8px">
-          <input type="checkbox" id="boost" style="width:auto"> Підняти ціну на 10% для швидшого пошуку
+          <input type="checkbox" id="boost" style="width:auto"> Raise price by 10% for a faster search
         </label>
-        <input id="comment" placeholder="Коментар водієві" style="margin-top:6px">
+        <input id="comment" placeholder="Note for the driver" style="margin-top:6px">
       </div>
 
       <div class="row">
         <div>
-          <label for="payment">Оплата</label>
+          <label for="payment">Payment</label>
           <select id="payment">
-            <option>Картка •••• 4242</option>
-            <option>Готівка</option>
+            <option>Card •••• 4242</option>
+            <option>Cash</option>
             <option>Apple Pay</option>
             <option>Google Pay</option>
-            <option>Корпоративний рахунок</option>
+            <option>Corporate account</option>
           </select>
         </div>
         <div>
-          <label for="promo">Промокод</label>
+          <label for="promo">Promo code</label>
           <input id="promo" placeholder="START10">
         </div>
       </div>
 
-      <button class="btn" id="orderBtn">Замовити</button>
+      <button class="btn" id="orderBtn">Order</button>
     </section>
 
     <!-- Step 2: active trip (FR-9 … FR-14) -->
@@ -81,47 +81,47 @@
       <div class="card hidden" id="driverCard">
         <div class="between">
           <div>
-            <b>Андрій К.</b> <span class="badge">★ 4.92</span><br>
-            <span class="muted">Skoda Octavia · сіра · <b>AA 1234 KT</b></span>
+            <b>Andrii K.</b> <span class="badge">★ 4.92</span><br>
+            <span class="muted">Skoda Octavia · grey · <b>AA 1234 KT</b></span>
           </div>
           <span style="font-size:36px">👨🏻‍✈️</span>
         </div>
         <div class="row" style="margin-top:10px">
-          <button class="btn secondary" data-msg="Дзвінок через маскований номер +380 •• ••• •• 17">📞 Дзвінок</button>
-          <button class="btn secondary" data-msg="Посилання на поїздку надіслано близьким">📤 Поділитися</button>
-          <button class="btn danger" data-msg="SOS: сигнал передано службі підтримки">SOS</button>
+          <button class="btn secondary" data-msg="Calling via masked number +380 •• ••• •• 17">📞 Call</button>
+          <button class="btn secondary" data-msg="Trip link sent to your contacts">📤 Share</button>
+          <button class="btn danger" data-msg="SOS: alert sent to the safety team">SOS</button>
         </div>
       </div>
 
       <div class="muted" id="toast"></div>
-      <button class="btn danger" id="cancelBtn">Скасувати поїздку</button>
+      <button class="btn danger" id="cancelBtn">Cancel trip</button>
     </section>
 
     <!-- Step 3: rating and receipt (FR-16 … FR-18) -->
     <section class="panel hidden" id="doneView">
-      <div class="status">Поїздку завершено</div>
+      <div class="status">Trip completed</div>
       <div class="card">
-        <div class="between"><span>Попередня оцінка</span><span id="estimateValue"></span></div>
-        <div class="between"><span>Фактична вартість</span><b id="finalValue"></b></div>
+        <div class="between"><span>Estimated price</span><span id="estimateValue"></span></div>
+        <div class="between"><span>Final price</span><b id="finalValue"></b></div>
         <div class="muted" id="finalBreakdown"></div>
       </div>
       <div class="card">
-        <label>Оцініть водія</label>
+        <label>Rate your driver</label>
         <div class="stars" id="stars"></div>
-        <label style="margin-top:8px">Чайові</label>
+        <label style="margin-top:8px">Tip</label>
         <div class="row" id="tips">
-          <button class="btn secondary" data-tip="0">Без чайових</button>
-          <button class="btn secondary" data-tip="20">20 ₴</button>
-          <button class="btn secondary" data-tip="50">50 ₴</button>
+          <button class="btn secondary" data-tip="0">No tip</button>
+          <button class="btn secondary" data-tip="20">₴20</button>
+          <button class="btn secondary" data-tip="50">₴50</button>
         </div>
       </div>
-      <button class="btn" id="doneBtn">Готово</button>
+      <button class="btn" id="doneBtn">Done</button>
     </section>
 
     <section class="panel">
       <div class="card">
-        <label>Історія поїздок</label>
-        <div id="history" class="muted">Поки що порожньо</div>
+        <label>Trip history</label>
+        <div id="history" class="muted">No trips yet</div>
       </div>
     </section>
   </div>

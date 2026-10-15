@@ -5,10 +5,10 @@ const $ = (id) => document.getElementById(id);
 const OFFER_SECONDS = 15;
 
 const ORDERS = [
-  { from: 'вул. Хрещатик, 22', to: 'Залізничний вокзал', pickupKm: 1.2, km: 4.2, minutes: 12, tariff: 'economy', pay: 'Картка' },
-  { from: 'просп. Перемоги, 5', to: 'ТРЦ Ocean Plaza', pickupKm: 3.4, km: 6.8, minutes: 18, tariff: 'comfort', pay: 'Готівка' },
-  { from: 'вул. Саксаганського, 70', to: 'Аеропорт «Бориспіль»', pickupKm: 0.8, km: 35, minutes: 45, tariff: 'business', pay: 'Картка' },
-  { from: 'Контрактова пл., 4', to: 'КПІ', pickupKm: 4.6, km: 7.5, minutes: 20, tariff: 'economy', pay: 'Готівка' },
+  { from: '22 Khreshchatyk St', to: 'Central Railway Station', pickupKm: 1.2, km: 4.2, minutes: 12, tariff: 'economy', pay: 'Card' },
+  { from: '5 Peremohy Ave', to: 'Ocean Plaza Mall', pickupKm: 3.4, km: 6.8, minutes: 18, tariff: 'comfort', pay: 'Cash' },
+  { from: '70 Saksahanskoho St', to: 'Boryspil Airport', pickupKm: 0.8, km: 35, minutes: 45, tariff: 'business', pay: 'Card' },
+  { from: '4 Kontraktova Sq', to: 'Igor Sikorsky KPI', pickupKm: 4.6, km: 7.5, minutes: 20, tariff: 'economy', pay: 'Cash' },
 ];
 
 const state = {
@@ -41,7 +41,7 @@ function showOffer() {
   if (!state.online || state.trip) return;
   const candidates = ORDERS.filter(matchesFilters);
   if (!candidates.length) {
-    $('toast').textContent = 'Немає замовлень за вашими фільтрами';
+    $('toast').textContent = 'No orders match your filters';
     return scheduleOffer(4000);
   }
   $('toast').textContent = '';
@@ -50,17 +50,17 @@ function showOffer() {
   state.offered += 1;
 
   $('offerBody').innerHTML = `
-    <div>📍 ${order.from} <span class="muted">(${order.pickupKm} км від вас)</span></div>
-    <div>🏁 ${order.to} <span class="muted">· ${order.km} км · ~${order.minutes} хв</span></div>
+    <div>📍 ${order.from} <span class="muted">(${order.pickupKm} km away)</span></div>
+    <div>🏁 ${order.to} <span class="muted">· ${order.km} km · ~${order.minutes} min</span></div>
     <div style="margin-top:6px"><b>${formatUah(state.offer.price)}</b>
       <span class="muted">· ${TARIFFS[order.tariff].label} · ${order.pay}</span></div>`;
   $('offerCard').classList.remove('hidden');
 
   let left = OFFER_SECONDS;
   const tick = () => {
-    $('offerTimer').textContent = `${left} с`;
+    $('offerTimer').textContent = `${left} s`;
     $('offerProgress').style.width = (left / OFFER_SECONDS) * 100 + '%';
-    if (left-- <= 0) declineOffer('Час на відповідь минув');
+    if (left-- <= 0) declineOffer('Response time is over');
   };
   tick();
   state.offerTimer = setInterval(tick, 1000);
@@ -74,7 +74,7 @@ function closeOffer() {
 
 function declineOffer(reason) {
   closeOffer();
-  $('toast').textContent = reason || 'Замовлення пропущено';
+  $('toast').textContent = reason || 'Order skipped';
   renderStats();
   scheduleOffer();
 }
@@ -94,18 +94,18 @@ function setStage(stage) {
   $('tripTitle').textContent = stage === 'riding' ? trip.to : trip.from;
 
   if (stage === 'toPickup') {
-    $('tripBadge').textContent = 'Їду до пасажира';
-    $('tripBody').textContent = `Пасажир чекає · ${trip.pickupKm} км · оплата: ${trip.pay}`;
-    $('tripAction').textContent = 'На місці';
+    $('tripBadge').textContent = 'Driving to pickup';
+    $('tripBody').textContent = `Passenger is waiting · ${trip.pickupKm} km · payment: ${trip.pay}`;
+    $('tripAction').textContent = 'Arrived';
   }
   if (stage === 'waiting') {
     state.waitMinutes = 0;
-    $('tripBadge').textContent = 'Очікування';
-    $('tripAction').textContent = 'Почати поїздку';
+    $('tripBadge').textContent = 'Waiting';
+    $('tripAction').textContent = 'Start trip';
     // One prototype second = one minute of waiting (FR-25).
     const tick = () => {
       const paid = Math.max(0, state.waitMinutes - 3);
-      $('tripBody').textContent = `Очікування ${state.waitMinutes} хв` + (paid ? ` · платний простій ${paid} хв` : ' · безкоштовно до 3 хв');
+      $('tripBody').textContent = `Waiting ${state.waitMinutes} min` + (paid ? ` · paid waiting ${paid} min` : ' · free for up to 3 min');
       state.waitMinutes += 1;
     };
     tick();
@@ -113,9 +113,9 @@ function setStage(stage) {
   }
   if (stage === 'riding') {
     clearInterval(state.waitTimer);
-    $('tripBadge').textContent = 'В дорозі';
-    $('tripBody').textContent = `${trip.km} км · ~${trip.minutes} хв`;
-    $('tripAction').textContent = 'Завершити';
+    $('tripBadge').textContent = 'On trip';
+    $('tripBody').textContent = `${trip.km} km · ~${trip.minutes} min`;
+    $('tripAction').textContent = 'Complete';
   }
 }
 
@@ -129,11 +129,11 @@ function completeTrip() {
   });
   const earned = driverEarnings(price);
   state.balance += earned;
-  state.trips.unshift(`${trip.from} → ${trip.to}: ${formatUah(price)}, ваш дохід ${formatUah(earned)}`);
+  state.trips.unshift(`${trip.from} → ${trip.to}: ${formatUah(price)}, your earnings ${formatUah(earned)}`);
   state.trip = null;
   state.stage = null;
   $('tripCard').classList.add('hidden');
-  $('toast').textContent = `Поїздку завершено. Оцінку пасажиру поставлено ★5`;
+  $('toast').textContent = 'Trip completed. Passenger rated ★5';
   renderStats();
   scheduleOffer();
 }
@@ -149,9 +149,9 @@ function renderStats() {
 $('onlineToggle').addEventListener('click', () => {
   state.online = !state.online;
   $('onlineToggle').classList.toggle('on', state.online);
-  $('onlineLabel').textContent = state.online ? 'На лінії' : 'Не на лінії';
+  $('onlineLabel').textContent = state.online ? 'Online' : 'Offline';
   if (state.online) {
-    $('toast').textContent = 'Шукаємо замовлення поблизу…';
+    $('toast').textContent = 'Looking for nearby orders…';
     scheduleOffer();
   } else {
     clearTimeout(state.nextOfferTimeout);
@@ -170,12 +170,12 @@ $('tripAction').addEventListener('click', () => {
 });
 
 $('navBtn').addEventListener('click', () => {
-  $('toast').textContent = `Маршрут до «${$('tripTitle').textContent}» відкрито в навігаторі`;
+  $('toast').textContent = `Route to "${$('tripTitle').textContent}" opened in navigation`;
 });
 
 $('withdrawBtn').addEventListener('click', () => {
-  if (!state.balance) return ($('toast').textContent = 'Немає коштів для виведення');
-  $('toast').textContent = `Заявку на виведення ${formatUah(state.balance)} на картку створено`;
+  if (!state.balance) return ($('toast').textContent = 'Nothing to withdraw');
+  $('toast').textContent = `Withdrawal of ${formatUah(state.balance)} to your card requested`;
   state.balance = 0;
   renderStats();
 });

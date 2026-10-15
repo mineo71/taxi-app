@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Таксі — адміністратор</title>
+  <title>Taxi — Admin</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../../packages/shared/ui.css">
 </head>
 <body>
   <div class="app wide">
     <div class="topbar" style="background:#fff">
-      <span>🚕 Таксі · Панель адміністратора</span>
-      <small>Прототип · дані фіктивні</small>
+      <span>🚕 Taxi · Admin panel</span>
+      <small>Prototype · mock data</small>
     </div>
 
     <section class="panel">
@@ -21,19 +21,19 @@
       <div class="grid">
         <!-- FR-30: tariffs -->
         <div class="card">
-          <b>Тарифи · Київ</b>
-          <p class="muted">Приклад: поїздка 5 км, 15 хв, без підвищеного попиту</p>
+          <b>Tariffs · Kyiv</b>
+          <p class="muted">Example: 5 km, 15 min trip, no surge</p>
           <table>
-            <thead><tr><th>Клас</th><th>Подача, ₴</th><th>За км, ₴</th><th>Приклад</th></tr></thead>
+            <thead><tr><th>Class</th><th>Pickup, ₴</th><th>Per km, ₴</th><th>Example</th></tr></thead>
             <tbody id="tariffs"></tbody>
           </table>
         </div>
 
         <!-- FR-29: driver moderation -->
         <div class="card">
-          <b>Модерація водіїв</b>
+          <b>Driver moderation</b>
           <table>
-            <thead><tr><th>Водій</th><th>Документи</th><th></th></tr></thead>
+            <thead><tr><th>Driver</th><th>Documents</th><th></th></tr></thead>
             <tbody id="drivers"></tbody>
           </table>
         </div>
@@ -41,21 +41,21 @@
 
       <!-- FR-31: active trips -->
       <div class="card">
-        <b>Активні поїздки</b>
+        <b>Active trips</b>
         <table>
-          <thead><tr><th>№</th><th>Пасажир</th><th>Водій</th><th>Маршрут</th><th>Статус</th><th>Вартість</th></tr></thead>
+          <thead><tr><th>#</th><th>Passenger</th><th>Driver</th><th>Route</th><th>Status</th><th>Price</th></tr></thead>
           <tbody id="trips"></tbody>
         </table>
       </div>
 
       <!-- FR-33: promo codes -->
       <div class="card">
-        <b>Промокоди</b>
+        <b>Promo codes</b>
         <table>
-          <thead><tr><th>Код</th><th>Знижка</th><th>Використано</th><th>Діє до</th></tr></thead>
+          <thead><tr><th>Code</th><th>Discount</th><th>Used</th><th>Valid until</th></tr></thead>
           <tbody>
-            <tr><td>START10</td><td>10%</td><td>412</td><td>31.12.2026</td></tr>
-            <tr><td>AIRPORT</td><td>50 ₴</td><td>87</td><td>30.11.2026</td></tr>
+            <tr><td>START10</td><td>10%</td><td>412</td><td>2026-12-31</td></tr>
+            <tr><td>AIRPORT</td><td>₴50</td><td>87</td><td>2026-11-30</td></tr>
           </tbody>
         </table>
       </div>
