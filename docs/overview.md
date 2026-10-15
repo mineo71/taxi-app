@@ -14,6 +14,8 @@ A mobile taxi ordering service that connects passengers and drivers: a passenger
 
 ## User roles
 
+Short summary; goals, permissions and external actors are described in [actors](requirements/actors.md).
+
 | Role | Channel | Main tasks |
 |---|---|---|
 | Passenger | Passenger mobile app | Orders a ride, tracks the car, pays, rates the driver |
@@ -37,7 +39,9 @@ A mobile taxi ordering service that connects passengers and drivers: a passenger
 
 ## Documents
 
+- [Actors](requirements/actors.md)
 - [Functional requirements](requirements/functional.md)
+- [Unhappy paths](requirements/unhappy-paths.md)
 - [Non-functional requirements](requirements/non-functional.md)
 - [Constraints](requirements/constraints.md)
 - [Success metrics](requirements/success-metrics.md)

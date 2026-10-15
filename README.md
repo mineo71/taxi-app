@@ -17,7 +17,7 @@ taxi-app/
 ├── services/           backend services overview (C2)
 └── docs/
     ├── overview.md     vision, roles, MVP scope
-    ├── requirements/   functional and non-functional requirements, constraints, success metrics
+    ├── requirements/   actors, functional and non-functional requirements, unhappy paths, constraints, success metrics
     ├── project/        budget
     ├── architecture/   C4 model (C1–C3) and ADRs
     └── glossary.md
@@ -28,7 +28,9 @@ taxi-app/
 | Section | File |
 |---|---|
 | Project overview | [docs/overview.md](docs/overview.md) |
+| Actors | [docs/requirements/actors.md](docs/requirements/actors.md) |
 | Functional requirements | [docs/requirements/functional.md](docs/requirements/functional.md) |
+| Unhappy paths | [docs/requirements/unhappy-paths.md](docs/requirements/unhappy-paths.md) |
 | Non-functional requirements | [docs/requirements/non-functional.md](docs/requirements/non-functional.md) |
 | Constraints | [docs/requirements/constraints.md](docs/requirements/constraints.md) |
 | Success metrics | [docs/requirements/success-metrics.md](docs/requirements/success-metrics.md) |

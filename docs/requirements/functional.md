@@ -1,6 +1,6 @@
 # Functional requirements
 
-Functional requirements describe **what** the system does. They are grouped by user role. Each requirement has concrete parameters and acceptance criteria used to verify it in demos and tests.
+Functional requirements describe **what** the system does. They are grouped by user role (see [actors](actors.md)); what happens when things go wrong is described in [unhappy paths](unhappy-paths.md). Each requirement has concrete parameters and acceptance criteria used to verify it in demos and tests.
 
 Priority follows MoSCoW: **Must** — the MVP cannot launch without it, **Should** — important, but launch is possible without it, **Could** — nice to have, moved to later releases.
 
@@ -52,7 +52,7 @@ Priority follows MoSCoW: **Must** — the MVP cannot launch without it, **Should
 | FR-32 | Ticket handling, refunds, dispute resolution | Full or partial refund, credited within ≤ 3 business days. Every decision is logged with its author and reason | Should |
 | FR-33 | Promo campaign and promo code management | Percentage or fixed discount. Total and per-user limits, validity period, cities, car classes | Could |
 | FR-34 | Analytics: orders, conversion, churn, revenue, demand heatmap | The dashboard refreshes hourly. Metrics follow the [success metrics](success-metrics.md). Demand heatmap with a 500 m grid | Should |
-| FR-35 | Dispatch algorithm based on distance, rating and acceptance rate | Candidates are searched within 3 km, then 5 and 8 km. Candidate score: pickup ETA — weight 0.6, rating — 0.2, acceptance rate — 0.2 | Must |
+| FR-35 | Dispatch algorithm based on distance, rating and acceptance rate | Candidates are searched within 3 km, then 5 and 8 km. Candidate score: pickup ETA — weight 0.6, rating — 0.2, acceptance rate — 0.2. Search stops after 3 min without acceptance and the order is cancelled with no fee ([UP-5](unhappy-paths.md#ordering)) | Must |
 | FR-36 | Dynamic pricing based on demand and supply | Multiplier = 1 + 0.5 × (orders / available drivers − 1), from 1.0 to 2.0 in 0.1 steps. Recalculated every 2 min per city zone | Should |
 | FR-37 | Final price calculation from the actual route and waiting time | Formula below. If the final price differs from the estimate by more than 20%, the passenger sees an explanation (route change, waiting) | Must |
 | FR-38 | Anti-fraud: fake GPS, multi-accounting, promo code abuse | Movement faster than 200 km/h between consecutive points is flagged as fake GPS. At most 2 accounts per device. New-user promo codes: once per device and card | Could |
@@ -87,6 +87,7 @@ Example: Economy, 4.2 km, 12 min, no waiting, no surge — 45 + 11 × 4.2 + 2 ×
 | Service fee | 15% | FR-26 |
 | Surge multiplier | 1.0 – 2.0 | FR-36 |
 | Driver search radius | 3 → 5 → 8 km | FR-35 |
+| Maximum driver search time | 3 min | FR-35 |
 
 The prototype uses these values: [`packages/shared/pricing.js`](../../packages/shared/pricing.js).
 
