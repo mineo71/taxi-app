@@ -71,7 +71,7 @@ The components fall into three layers, which is visible from their position on t
 2. **Pure logic** that knows nothing about the outside world — the lifecycle manager, price calculator, cancellation handler.
 3. **Adapters** to everything external — the repository, event publisher, clients.
 
-Dependencies only point downwards. The logic does not depend on the database or protocols; the adapters adapt to the logic instead. This is hexagonal architecture (ports and adapters), see [ADR-0011](adr/0011-hexagonal-architecture-order-service.md).
+Dependencies only point downwards. The logic does not depend on the database or protocols; the adapters adapt to the logic instead. This is hexagonal architecture (ports and adapters).
 
 ## Trip states
 

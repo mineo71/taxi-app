@@ -90,12 +90,8 @@ NFR-9 and NFR-10 deserve special attention: power outages and overloaded mobile 
 
 | Requirements | Architecture decision |
 |---|---|
-| NFR-1, NFR-5 | [ADR-0008](../architecture/adr/0008-redis-geo-index-for-driver-positions.md) Redis geo index, [ADR-0010](../architecture/adr/0010-go-for-matching-service.md) Go for the matching service |
-| NFR-2 | [ADR-0005](../architecture/adr/0005-separate-realtime-service.md) Separate real-time service |
-| NFR-3, NFR-11, NFR-13 | [ADR-0004](../architecture/adr/0004-api-gateway-single-entry-point.md) API Gateway |
-| NFR-8 | [ADR-0009](../architecture/adr/0009-kafka-for-async-events.md) Kafka for events |
-| NFR-10 | [ADR-0007](../architecture/adr/0007-postgresql-as-source-of-truth.md) PostgreSQL as the source of truth |
-| NFR-12 | [ADR-0012](../architecture/adr/0012-external-payment-provider.md) External payment provider |
-| NFR-24 | [ADR-0002](../architecture/adr/0002-monorepo.md) Monorepo, [ADR-0011](../architecture/adr/0011-hexagonal-architecture-order-service.md) Hexagonal architecture |
+| NFR-3, NFR-7, NFR-11, NFR-13, NFR-14 | [ADR-0004](../architecture/adr/0004-api-gateway-single-entry-point.md) API Gateway as the single entry point |
+| NFR-22 | [ADR-0003](../architecture/adr/0003-flutter-and-react-clients.md) Flutter for mobile apps, React for the admin panel |
+| NFR-24 | [ADR-0002](../architecture/adr/0002-monorepo.md) Monorepo |
 
 Product metrics (conversion, cancellations, retention) are listed in the [success metrics](success-metrics.md).

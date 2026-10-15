@@ -2,7 +2,7 @@
 
 Product metrics used to judge the success of the MVP. Unlike non-functional requirements, they describe the outcome for passengers, drivers and the business rather than the technical quality of the system.
 
-Targets apply to Kyiv **3 months after launch**. Data comes from app analytics events and trip events in Kafka ([ADR-0009](../architecture/adr/0009-kafka-for-async-events.md)) and is shown in the admin panel ([FR-34](functional.md)).
+Targets apply to Kyiv **3 months after launch**. Data comes from app analytics events and trip events in Kafka ([C2](../architecture/c2-containers.md)) and is shown in the admin panel ([FR-34](functional.md)).
 
 ## North Star metric
 

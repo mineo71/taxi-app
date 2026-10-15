@@ -76,11 +76,11 @@ flowchart TB
 
 **API Gateway.** The single entry point for all three clients. It takes over what would otherwise be duplicated in every service: token validation, access rights, rate limiting, routing. See [ADR-0004](adr/0004-api-gateway-single-entry-point.md).
 
-**Real-time service.** Kept separate from the gateway. Regular requests live for a fraction of a second, while a WebSocket connection stays open for hours during a trip. They also scale differently: the gateway by request count, the real-time service by the number of open connections. See [ADR-0005](adr/0005-separate-realtime-service.md).
+**Real-time service.** Kept separate from the gateway. Regular requests live for a fraction of a second, while a WebSocket connection stays open for hours during a trip. They also scale differently: the gateway by request count, the real-time service by the number of open connections.
 
-**Four internal services.** Split by area of responsibility, not by database entities. See [ADR-0006](adr/0006-services-by-responsibility.md).
+**Four internal services.** Split by area of responsibility, not by database entities. The order service runs a trip from creation to completion. The matching service finds the nearest available car and is written in Go because it is the hottest path under load. The payment service is isolated because it handles payment data and has separate security requirements. The notification service keeps all delivery channels in one place.
 
-**Three data stores.** PostgreSQL is the source of truth: users, trips, tariffs, payments. Redis holds the positions of available drivers, which change every few seconds. Kafka carries asynchronous events between services. See [ADR-0007](adr/0007-postgresql-as-source-of-truth.md), [ADR-0008](adr/0008-redis-geo-index-for-driver-positions.md), [ADR-0009](adr/0009-kafka-for-async-events.md).
+**Three data stores.** PostgreSQL is the source of truth: users, trips, tariffs, payments. Redis holds the positions of available drivers, which change every few seconds — writing them to a relational database makes no sense, and the Redis geo index finds the nearest drivers in milliseconds. Kafka carries asynchronous events between services.
 
 ## Containers
 
