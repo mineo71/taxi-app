@@ -14,14 +14,9 @@ This metric reflects demand (passengers order), supply (drivers complete trips) 
 
 ## Passenger funnel
 
-```mermaid
-flowchart LR
-  A["Opened the app<br/>100%"] --> B["Entered a destination<br/>≥ 70%"]
-  B --> C["Saw the price<br/>≥ 65%"]
-  C --> D["Ordered<br/>≥ 45%"]
-  D --> E["Driver assigned<br/>≥ 42%"]
-  E --> F["Trip completed<br/>≥ 39%"]
-```
+![Passenger funnel](diagrams/passenger-funnel.png)
+
+*Source: [`taxi-requirements.drawio`](diagrams/taxi-requirements.drawio), page "Passenger funnel". Open it at [app.diagrams.net](https://app.diagrams.net) to edit.*
 
 | Metric | Formula | Target |
 |---|---|---|

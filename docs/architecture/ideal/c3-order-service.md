@@ -4,63 +4,9 @@ A **component** is a logically grouped block of code inside one container: a pac
 
 At the C3 level only **one** container is opened up. The order service was chosen because it holds the core business logic. The other services are mostly thin wrappers around external integrations: the payment service essentially forwards calls to the payment gateway, the notification service to the push provider.
 
-```mermaid
-flowchart TB
-  gateway["<b>API Gateway</b><br/>[Container: Node.js]<br/><br/>Single entry point for the passenger,<br/>driver and admin apps"]
+![C3 — Component diagram: order service (ideal)](diagrams/c3-order-service.png)
 
-  subgraph orders["Order service [Container: Node.js]"]
-    direction TB
-    controller["<b>Order controller</b><br/>[Component: Express, REST]<br/><br/>Accepts requests to create, update<br/>and cancel a trip and validates input"]
-
-    lifecycle["<b>Trip lifecycle manager</b><br/>[Component: TypeScript]<br/><br/>Manages states: created, driver assigned,<br/>in progress, completed"]
-    pricing["<b>Price calculator</b><br/>[Component: TypeScript]<br/><br/>Calculates the price from tariff,<br/>distance and waiting time"]
-    cancel["<b>Cancellation handler</b><br/>[Component: TypeScript]<br/><br/>Decides whether a cancellation<br/>fee applies"]
-
-    repo["<b>Trip repository</b><br/>[Component: Prisma]<br/><br/>Reads and writes trip data in the database"]
-    publisher["<b>Event publisher</b><br/>[Component: Kafka client]<br/><br/>Publishes trip status change events"]
-    matchingClient["<b>Matching service client</b><br/>[Component: gRPC client]<br/><br/>Requests a search for an available car"]
-    mapsClient["<b>Maps service client</b><br/>[Component: HTTP client]<br/><br/>Gets route distance and duration"]
-  end
-
-  db[("<b>Main database</b><br/>[Container: PostgreSQL]")]
-  kafka[("<b>Message broker</b><br/>[Container: Kafka]")]
-  matching["<b>Driver matching service</b><br/>[Container: Go]"]
-  maps["<b>Maps service</b><br/>[External Software System]"]
-
-  gateway -- "Forwards trip requests<br/>[HTTPS / JSON]" --> controller
-  controller -- "Passes a state change command<br/>[in-process call]" --> lifecycle
-  lifecycle -- "Asks whether a fee applies<br/>[in-process call]" --> cancel
-  lifecycle -- "Requests the trip price<br/>[in-process call]" --> pricing
-  lifecycle -- "Saves trip state<br/>[in-process call]" --> repo
-  lifecycle -- "Publishes a status change event<br/>[in-process call]" --> publisher
-  lifecycle -- "Asks to find a driver<br/>[in-process call]" --> matchingClient
-  pricing -- "Requests distance and duration<br/>[in-process call]" --> mapsClient
-
-  repo -- "Reads and writes data<br/>[SQL / TCP]" --> db
-  publisher -- "Sends events<br/>[Kafka protocol]" --> kafka
-  matchingClient -- "Calls driver search<br/>[gRPC]" --> matching
-  mapsClient -- "Requests a route<br/>[HTTPS / REST]" --> maps
-
-  subgraph legend["Legend"]
-    direction LR
-    lComponent["Component inside<br/>the order service"]
-    lContainer["Other container<br/>of our system"]
-    lStore[("Data store")]
-    lExternal["External system"]
-    lBoundary["Dashed border = container boundary<br/>Arrow = who calls whom, [protocol]"]
-  end
-
-  classDef component fill:#85bbf0,stroke:#5d82a8,color:#0b2540
-  classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff
-  classDef external fill:#8a8a8a,stroke:#6b6b6b,color:#ffffff
-  classDef note fill:#ffffff,stroke:#bbbbbb,color:#333333
-  class controller,lifecycle,pricing,cancel,repo,publisher,matchingClient,mapsClient,lComponent component
-  class gateway,db,kafka,matching,lContainer,lStore container
-  class maps,lExternal external
-  class lBoundary note
-  style orders fill:none,stroke:#0b4884,stroke-dasharray:6 4
-  style legend fill:#fafafa,stroke:#bbbbbb
-```
+*Source: [`taxi-c4-model.drawio`](diagrams/taxi-c4-model.drawio), page "C3 — Components". Open it at [app.diagrams.net](https://app.diagrams.net) to edit.*
 
 ## Components
 
@@ -89,28 +35,9 @@ Dependencies only point downwards. The logic does not depend on the database or 
 
 The lifecycle manager allows only these transitions:
 
-```mermaid
-stateDiagram-v2
-  state "Created" as Created
-  state "Searching for driver" as Searching
-  state "Driver assigned" as Assigned
-  state "Driver arrived" as Arrived
-  state "In progress" as InProgress
-  state "Completed" as Completed
-  state "Cancelled" as Cancelled
+![Trip state machine](../../requirements/diagrams/trip-states.png)
 
-  [*] --> Created
-  Created --> Searching: passenger confirmed the order
-  Searching --> Assigned: driver accepted the offer
-  Searching --> Cancelled: passenger cancelled or no driver found
-  Assigned --> Arrived: driver arrived
-  Assigned --> Cancelled: cancellation, fee may apply
-  Arrived --> InProgress: driver started the trip
-  Arrived --> Cancelled: cancellation with fee
-  InProgress --> Completed: driver completed the trip
-  Completed --> [*]
-  Cancelled --> [*]
-```
+*Source: [`taxi-requirements.drawio`](../../requirements/diagrams/taxi-requirements.drawio), page "Trip states". Open it at [app.diagrams.net](https://app.diagrams.net) to edit.*
 
 ## External service failure
 

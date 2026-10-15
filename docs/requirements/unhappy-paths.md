@@ -64,51 +64,12 @@ Numbers (timeouts, fees, limits) are the same as in the [functional](functional.
 
 ### No driver found
 
-```mermaid
-sequenceDiagram
-  actor P as Passenger
-  participant PA as Passenger app
-  participant B as Backend (trips + matching)
-  participant R as Redis
-  participant DA as Driver apps
+![Sequence diagram — No driver found](diagrams/seq-no-driver-found.png)
 
-  P->>PA: Confirms the order
-  PA->>B: Create trip
-  B->>B: State: Searching for driver
-  loop Radius 3 km → 5 km → 8 km, at most 3 min in total
-    B->>R: Find available drivers in the radius
-    R-->>B: Candidates ranked by ETA, rating, acceptance
-    loop Each candidate, one at a time
-      B->>DA: Offer (15 s to answer)
-      DA-->>B: Declined or no answer
-    end
-  end
-  B->>B: State: Cancelled (by system, no fee)
-  B-->>PA: No driver found
-  PA-->>P: Raise price +10% / another class / schedule
-```
+*Source: [`taxi-requirements.drawio`](diagrams/taxi-requirements.drawio), page "Sequence — No driver found". Open it at [app.diagrams.net](https://app.diagrams.net) to edit.*
 
 ### Payment failed after the trip
 
-```mermaid
-sequenceDiagram
-  participant DA as Driver app
-  participant B as Backend (trips + payments)
-  participant PP as Payment provider
-  participant W as Background worker
-  participant PA as Passenger app
+![Sequence diagram — Payment failed after the trip](diagrams/seq-payment-failed.png)
 
-  DA->>B: Complete trip
-  B->>B: Final price, state: Completed
-  B->>PP: Charge the card token
-  PP-->>B: Declined
-  B->>B: Payment: Failed. Driver earnings credited
-  B->>W: Enqueue retry job
-  B-->>PA: Payment failed — update the card or pay another way
-  loop Up to 3 retries within 24 h
-    W->>PP: Charge the card token
-    PP-->>W: Declined
-  end
-  W->>B: Record a debt on the passenger account
-  Note over B,PA: Card orders are blocked until the debt is paid
-```
+*Source: [`taxi-requirements.drawio`](diagrams/taxi-requirements.drawio), page "Sequence — Payment failed". Open it at [app.diagrams.net](https://app.diagrams.net) to edit.*

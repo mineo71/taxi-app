@@ -25,77 +25,9 @@ An actor is anyone or anything outside the system that interacts with it. **Prim
 
 ## Use case diagram
 
-```mermaid
-flowchart LR
-  passenger["🧍 Passenger"]
-  driver["🧍 Driver"]
-  staff["🧍 Support operator,<br/>moderator, finance,<br/>administrator"]
+![Use case diagram](diagrams/use-cases.png)
 
-  subgraph system["Taxi ordering system"]
-    direction TB
-    signIn(["Sign in"])
-    order(["Order a ride"])
-    track(["Track the car"])
-    cancel(["Cancel a ride"])
-    pay(["Pay for a ride"])
-    rate(["Rate the trip"])
-    support(["Contact support"])
-    online(["Go online"])
-    accept(["Accept an order"])
-    complete(["Complete a trip"])
-    withdraw(["Withdraw earnings"])
-    moderate(["Moderate drivers"])
-    tariffs(["Configure tariffs"])
-    tickets(["Handle tickets and refunds"])
-    analytics(["View analytics"])
-  end
-
-  maps["⚙️ Google Maps API"]
-  provider["⚙️ Payment provider"]
-  sms["⚙️ SMS gateway"]
-  push["⚙️ Firebase Cloud Messaging"]
-
-  passenger --- signIn
-  passenger --- order
-  passenger --- track
-  passenger --- cancel
-  passenger --- pay
-  passenger --- rate
-  passenger --- support
-  driver --- signIn
-  driver --- online
-  driver --- accept
-  driver --- complete
-  driver --- withdraw
-  staff --- moderate
-  staff --- tariffs
-  staff --- tickets
-  staff --- analytics
-
-  signIn --- sms
-  order --- maps
-  track --- maps
-  track --- push
-  pay --- provider
-  tickets --- provider
-
-  subgraph legend["Legend"]
-    direction LR
-    lActor["Primary actor"]
-    lUseCase(["Use case"])
-    lSecondary["Secondary actor"]
-  end
-  analytics ~~~ legend
-
-  classDef actor fill:#08427b,stroke:#052e56,color:#ffffff
-  classDef usecase fill:#dbeafe,stroke:#1168bd,color:#0b2540
-  classDef secondary fill:#8a8a8a,stroke:#6b6b6b,color:#ffffff
-  class passenger,driver,staff,lActor actor
-  class signIn,order,track,cancel,pay,rate,support,online,accept,complete,withdraw,moderate,tariffs,tickets,analytics,lUseCase usecase
-  class maps,provider,sms,push,lSecondary secondary
-  style system fill:none,stroke:#0b4884,stroke-dasharray:6 4
-  style legend fill:#fafafa,stroke:#bbbbbb
-```
+*Source: [`taxi-requirements.drawio`](diagrams/taxi-requirements.drawio), page "Use cases". Open it at [app.diagrams.net](https://app.diagrams.net) to edit.*
 
 ## Permissions
 

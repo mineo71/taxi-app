@@ -4,83 +4,9 @@ The system is broken down into separate apps and services, each with its own tec
 
 A **container** in C4 is not Docker — it is a separately running unit that executes code or stores data. The test is simple: if it can be stopped and restarted independently of everything else, it is a separate container. A mobile app on a phone is a container too. A library or module inside a process is not.
 
-```mermaid
-flowchart TB
-  passenger["<b>Passenger</b><br/>[Person]"]
-  driver["<b>Driver</b><br/>[Person]"]
-  operator["<b>Support operator</b><br/>[Person]"]
+![C2 — Container diagram (ideal)](diagrams/c2-containers.png)
 
-  subgraph boundary["Taxi ordering system [Software System]"]
-    direction TB
-    passengerApp["<b>Passenger app</b><br/>[Container: Flutter]<br/><br/>Ride ordering, map, payment, rating"]
-    driverApp["<b>Driver app</b><br/>[Container: Flutter]<br/><br/>Accepting orders, navigation, earnings"]
-    adminApp["<b>Admin panel</b><br/>[Container: React]<br/><br/>Driver moderation, tariffs, analytics"]
-
-    gateway["<b>API Gateway</b><br/>[Container: Node.js]<br/><br/>Single entry point: authentication,<br/>authorization, request routing"]
-    realtime["<b>Real-time service</b><br/>[Container: Node.js, WebSocket]<br/><br/>Streams the car position to the passenger map"]
-
-    orders["<b>Order service</b><br/>[Container: Node.js]<br/><br/>Trip lifecycle<br/>and price calculation"]
-    matching["<b>Driver matching service</b><br/>[Container: Go]<br/><br/>Finds the nearest available car"]
-    payment["<b>Payment service</b><br/>[Container: Node.js]<br/><br/>Charges, receipts, refunds"]
-    notify["<b>Notification service</b><br/>[Container: Node.js]<br/><br/>Push notifications<br/>and verification codes"]
-
-    db[("<b>Main database</b><br/>[Container: PostgreSQL]<br/><br/>Users, trips, tariffs")]
-    redis[("<b>Cache and geo index</b><br/>[Container: Redis]<br/><br/>Positions of available drivers")]
-    kafka[("<b>Message broker</b><br/>[Container: Kafka]<br/><br/>Events between services")]
-  end
-
-  maps["<b>Maps service</b><br/>[External Software System]"]
-  smsPush["<b>Push and SMS providers</b><br/>[External Software System]"]
-  gatewayPay["<b>Payment gateway</b><br/>[External Software System]"]
-
-  passenger -- "Orders a ride<br/>[HTTPS / JSON]" --> passengerApp
-  driver -- "Accepts orders<br/>[HTTPS / JSON]" --> driverApp
-  operator -- "Manages the system<br/>[HTTPS / JSON]" --> adminApp
-
-  passengerApp -- "Makes API calls<br/>[HTTPS / JSON]" --> gateway
-  driverApp -- "Makes API calls<br/>[HTTPS / JSON]" --> gateway
-  adminApp -- "Makes API calls<br/>[HTTPS / JSON]" --> gateway
-  driverApp -- "Sends location<br/>[WebSocket]" --> realtime
-  realtime -- "Streams car position<br/>[WebSocket]" --> passengerApp
-
-  gateway -- "Creates and manages trips<br/>[gRPC]" --> orders
-  gateway -- "Sends login codes<br/>[gRPC]" --> notify
-  orders -- "Requests a driver<br/>[gRPC]" --> matching
-  orders -- "Initiates payment<br/>[gRPC]" --> payment
-
-  orders -- "Reads and writes data<br/>[SQL / TCP]" --> db
-  orders -- "Publishes trip events<br/>[Kafka protocol]" --> kafka
-  matching -- "Finds nearest drivers<br/>[Redis protocol]" --> redis
-  realtime -- "Updates driver positions<br/>[Redis protocol]" --> redis
-  notify -- "Consumes events<br/>[Kafka protocol]" --> kafka
-  payment -- "Consumes events<br/>[Kafka protocol]" --> kafka
-
-  orders -- "Requests a route<br/>[HTTPS / REST]" --> maps
-  notify -- "Sends notifications and codes<br/>[HTTPS / REST]" --> smsPush
-  payment -- "Charges cards<br/>[HTTPS / REST]" --> gatewayPay
-
-  subgraph legend["Legend"]
-    direction LR
-    lPerson["Person"]
-    lContainer["Container of our system"]
-    lStore[("Data store")]
-    lExternal["External system"]
-    lBoundary["Dashed border = system boundary<br/>Arrow = who calls whom, [protocol]"]
-  end
-
-  classDef person fill:#08427b,stroke:#052e56,color:#ffffff
-  classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff
-  classDef store fill:#1168bd,stroke:#0b4884,color:#ffffff
-  classDef external fill:#8a8a8a,stroke:#6b6b6b,color:#ffffff
-  classDef note fill:#ffffff,stroke:#bbbbbb,color:#333333
-  class passenger,driver,operator,lPerson person
-  class passengerApp,driverApp,adminApp,gateway,realtime,orders,matching,payment,notify,lContainer container
-  class db,redis,kafka,lStore store
-  class maps,smsPush,gatewayPay,lExternal external
-  class lBoundary note
-  style boundary fill:none,stroke:#0b4884,stroke-dasharray:6 4
-  style legend fill:#fafafa,stroke:#bbbbbb
-```
+*Source: [`taxi-c4-model.drawio`](diagrams/taxi-c4-model.drawio), page "C2 — Containers". Open it at [app.diagrams.net](https://app.diagrams.net) to edit.*
 
 ## What is on the diagram
 

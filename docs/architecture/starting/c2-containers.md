@@ -2,70 +2,9 @@
 
 Seven containers instead of twelve: three client apps, one backend, one background worker and two data stores. All server-side code is TypeScript. The reasoning for every change is in the [component analysis](README.md#component-analysis).
 
-```mermaid
-flowchart TB
-  passenger["<b>Passenger</b><br/>[Person]"]
-  driver["<b>Driver</b><br/>[Person]"]
-  operator["<b>Support operator</b><br/>[Person]"]
+![C2 — Container diagram (starting)](diagrams/c2-containers.png)
 
-  subgraph boundary["Taxi ordering system [Software System]"]
-    direction TB
-    passengerApp["<b>Passenger app</b><br/>[Container: Flutter]<br/><br/>Ride ordering, map, payment, rating"]
-    driverApp["<b>Driver app</b><br/>[Container: Flutter]<br/><br/>Accepting orders, navigation, earnings"]
-    adminApp["<b>Admin panel</b><br/>[Container: React, TypeScript]<br/><br/>Driver moderation, tariffs, analytics"]
-
-    backend["<b>Backend API</b><br/>[Container: Node.js, TypeScript, NestJS]<br/><br/>Modular monolith: auth, trips and pricing, matching,<br/>payments, admin. REST API and WebSocket"]
-    worker["<b>Background worker</b><br/>[Container: Node.js, TypeScript, BullMQ]<br/><br/>Same codebase as the backend. Sends notifications<br/>and receipts, retries payments"]
-
-    db[("<b>Main database</b><br/>[Container: PostgreSQL]<br/><br/>Users, drivers, trips,<br/>tariffs, payments")]
-    redis[("<b>Redis</b><br/>[Container: Redis]<br/><br/>Driver geo index, login codes,<br/>job queue, WebSocket pub/sub")]
-  end
-
-  maps["<b>Google Maps API</b><br/>[External Software System]"]
-  pay["<b>Payment provider</b><br/>[External Software System]"]
-  sms["<b>SMS gateway</b><br/>[External Software System]"]
-  push["<b>Firebase Cloud Messaging</b><br/>[External Software System]"]
-
-  passenger -- "Orders a ride" --> passengerApp
-  driver -- "Accepts orders" --> driverApp
-  operator -- "Manages the system" --> adminApp
-
-  passengerApp -- "Calls API, receives car position<br/>[HTTPS / JSON, WebSocket]" --> backend
-  driverApp -- "Calls API, sends location<br/>[HTTPS / JSON, WebSocket]" --> backend
-  adminApp -- "Calls API<br/>[HTTPS / JSON]" --> backend
-
-  backend -- "Reads and writes data<br/>[SQL / TCP]" --> db
-  backend -- "Driver positions, codes, enqueues jobs<br/>[Redis protocol]" --> redis
-  worker -- "Takes jobs from the queue<br/>[Redis protocol]" --> redis
-  worker -- "Reads and writes data<br/>[SQL / TCP]" --> db
-
-  backend -- "Requests route and ETA<br/>[HTTPS / REST]" --> maps
-  backend -- "Creates payments, receives webhooks<br/>[HTTPS / REST]" --> pay
-  worker -- "Sends login codes<br/>[HTTPS / REST]" --> sms
-  worker -- "Sends push notifications<br/>[HTTPS / REST]" --> push
-
-  subgraph legend["Legend"]
-    direction LR
-    lPerson["Person"]
-    lContainer["Container of our system"]
-    lStore[("Data store")]
-    lExternal["External system"]
-    lBoundary["Dashed border = system boundary<br/>Arrow = who calls whom, [protocol]"]
-  end
-
-  classDef person fill:#08427b,stroke:#052e56,color:#ffffff
-  classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff
-  classDef store fill:#1168bd,stroke:#0b4884,color:#ffffff
-  classDef external fill:#8a8a8a,stroke:#6b6b6b,color:#ffffff
-  classDef note fill:#ffffff,stroke:#bbbbbb,color:#333333
-  class passenger,driver,operator,lPerson person
-  class passengerApp,driverApp,adminApp,backend,worker,lContainer container
-  class db,redis,lStore store
-  class maps,pay,sms,push,lExternal external
-  class lBoundary note
-  style boundary fill:none,stroke:#0b4884,stroke-dasharray:6 4
-  style legend fill:#fafafa,stroke:#bbbbbb
-```
+*Source: [`taxi-c4-model-starting.drawio`](diagrams/taxi-c4-model-starting.drawio), page "C2 — Containers". Open it at [app.diagrams.net](https://app.diagrams.net) to edit.*
 
 ## What is on the diagram
 

@@ -34,10 +34,15 @@ Both versions are described with the **C4 model**: four levels of detail, from t
 
 ## Diagrams
 
-- Markdown diagrams (Mermaid) render directly on GitHub in the level files. Each diagram has its own legend.
-- Editable draw.io files, three pages each (C1, C2, C3), open at [app.diagrams.net](https://app.diagrams.net) via *File → Open From → Device*:
-  - [`starting/diagrams/taxi-c4-model-starting.drawio`](starting/diagrams/taxi-c4-model-starting.drawio)
-  - [`ideal/diagrams/taxi-c4-model.drawio`](ideal/diagrams/taxi-c4-model.drawio)
+All diagrams in the project are drawn in **draw.io**. Each document shows a PNG export, and the editable source is the `.drawio` file next to it. Every diagram has its own legend.
+
+| File | Pages |
+|---|---|
+| [`starting/diagrams/taxi-c4-model-starting.drawio`](starting/diagrams/taxi-c4-model-starting.drawio) | C1, C2, C3 of the starting architecture |
+| [`ideal/diagrams/taxi-c4-model.drawio`](ideal/diagrams/taxi-c4-model.drawio) | C1, C2, C3 of the ideal architecture |
+| [`../requirements/diagrams/taxi-requirements.drawio`](../requirements/diagrams/taxi-requirements.drawio) | Use cases, two sequence diagrams, passenger funnel, trip state machine |
+
+To update a diagram: open the `.drawio` file at [app.diagrams.net](https://app.diagrams.net) (*File → Open From → Device*), edit the page, then *File → Export as → PNG* at 150% zoom and overwrite the PNG with the same name.
 
 ### Notation rules
 

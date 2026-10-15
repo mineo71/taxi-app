@@ -39,6 +39,8 @@ taxi-app/
 | Architecture decision records | [docs/architecture/adr/README.md](docs/architecture/adr/README.md) |
 | Glossary | [docs/glossary.md](docs/glossary.md) |
 
+All diagrams are drawn in draw.io: the editable `.drawio` sources and their PNG exports live in the `diagrams/` folders next to the documents.
+
 ## Running the prototype
 
 The prototype has no dependencies and needs no build step. The simplest way is to open a file in the browser:

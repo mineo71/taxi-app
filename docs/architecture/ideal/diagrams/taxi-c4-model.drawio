@@ -3,7 +3,7 @@
     <mxGraphModel dx="1600" dy="1000" grid="0" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+        <mxCell id="1" parent="0" /><mxCell id="page-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=none;locked=1;" vertex="1" parent="1"><mxGeometry x="0" y="0" width="1800" height="1040" as="geometry"/></mxCell>
 
         <mxCell id="t1" value="&lt;b&gt;Level C1 — System Context diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Taxi ordering system" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
           <mxGeometry x="60" y="40" width="800" height="80" as="geometry" />
@@ -97,7 +97,7 @@
     <mxGraphModel dx="1600" dy="1000" grid="0" page="1" pageScale="1" pageWidth="2000" pageHeight="1700" math="0" shadow="0">
       <root>
         <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+        <mxCell id="1" parent="0" /><mxCell id="page-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=none;locked=1;" vertex="1" parent="1"><mxGeometry x="0" y="0" width="2000" height="1610" as="geometry"/></mxCell>
 
         <mxCell id="t2" value="&lt;b&gt;Level C2 — Container diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Taxi ordering system" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
           <mxGeometry x="60" y="30" width="800" height="80" as="geometry" />
@@ -302,7 +302,7 @@
     <mxGraphModel dx="1600" dy="1000" grid="0" page="1" pageScale="1" pageWidth="2000" pageHeight="1500" math="0" shadow="0">
       <root>
         <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+        <mxCell id="1" parent="0" /><mxCell id="page-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=none;locked=1;" vertex="1" parent="1"><mxGeometry x="0" y="0" width="1940" height="1410" as="geometry"/></mxCell>
 
         <mxCell id="t3" value="&lt;b&gt;Level C3 — Component diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Order service container of the taxi ordering system" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
           <mxGeometry x="60" y="30" width="900" height="80" as="geometry" />
