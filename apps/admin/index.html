@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Таксі — адміністратор</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../packages/shared/ui.css">
+</head>
+<body>
+  <div class="app wide">
+    <div class="topbar" style="background:#fff">
+      <span>🚕 Таксі · Панель адміністратора</span>
+      <small>Прототип · дані фіктивні</small>
+    </div>
+
+    <section class="panel">
+      <!-- FR-34: analytics -->
+      <div class="grid" id="kpis"></div>
+
+      <div class="grid">
+        <!-- FR-30: tariffs -->
+        <div class="card">
+          <b>Тарифи · Київ</b>
+          <p class="muted">Приклад: поїздка 5 км, 15 хв, без підвищеного попиту</p>
+          <table>
+            <thead><tr><th>Клас</th><th>Подача, ₴</th><th>За км, ₴</th><th>Приклад</th></tr></thead>
+            <tbody id="tariffs"></tbody>
+          </table>
+        </div>
+
+        <!-- FR-29: driver moderation -->
+        <div class="card">
+          <b>Модерація водіїв</b>
+          <table>
+            <thead><tr><th>Водій</th><th>Документи</th><th></th></tr></thead>
+            <tbody id="drivers"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- FR-31: active trips -->
+      <div class="card">
+        <b>Активні поїздки</b>
+        <table>
+          <thead><tr><th>№</th><th>Пасажир</th><th>Водій</th><th>Маршрут</th><th>Статус</th><th>Вартість</th></tr></thead>
+          <tbody id="trips"></tbody>
+        </table>
+      </div>
+
+      <!-- FR-33: promo codes -->
+      <div class="card">
+        <b>Промокоди</b>
+        <table>
+          <thead><tr><th>Код</th><th>Знижка</th><th>Використано</th><th>Діє до</th></tr></thead>
+          <tbody>
+            <tr><td>START10</td><td>10%</td><td>412</td><td>31.12.2026</td></tr>
+            <tr><td>AIRPORT</td><td>50 ₴</td><td>87</td><td>30.11.2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../packages/shared/pricing.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

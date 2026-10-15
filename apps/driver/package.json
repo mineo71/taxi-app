@@ -1,0 +1,9 @@
+{
+  "name": "@taxi/driver",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Driver app prototype (target implementation: Flutter)",
+  "dependencies": {
+    "@taxi/shared": "0.1.0"
+  }
+}

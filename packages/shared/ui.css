@@ -1,0 +1,187 @@
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #ffc107;
+  --accent-text: #1a1a1a;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --radius: 14px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  max-width: 440px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+}
+
+.app.wide { max-width: 1100px; background: transparent; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.topbar small { color: var(--muted); font-weight: 400; }
+
+.map {
+  position: relative;
+  height: 230px;
+  background-color: #e8eef3;
+  background-image:
+    linear-gradient(#d5dee6 2px, transparent 2px),
+    linear-gradient(90deg, #d5dee6 2px, transparent 2px);
+  background-size: 46px 46px;
+  overflow: hidden;
+}
+
+.pin {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+  transform: translate(-50%, -50%);
+}
+
+.pin.from { background: var(--success); }
+.pin.to { background: var(--danger); }
+
+.car {
+  position: absolute;
+  font-size: 22px;
+  transform: translate(-50%, -50%);
+  transition: left 1s linear, top 1s linear;
+}
+
+.panel { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 4px; }
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  background: #fff;
+}
+
+.row { display: flex; gap: 8px; align-items: center; }
+.row > * { flex: 1; }
+.between { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn.secondary { background: #eef0f3; color: var(--text); }
+.btn.danger { background: #fde8e8; color: var(--danger); }
+.btn:disabled { opacity: .5; cursor: default; }
+
+.classes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+.class-option {
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.class-option.active { border-color: var(--accent); background: #fff8e1; }
+.class-option b { display: block; margin-top: 4px; }
+
+.status { font-size: 18px; font-weight: 600; }
+.muted { color: var(--muted); font-size: 14px; }
+.hidden { display: none !important; }
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #eef0f3;
+}
+
+.badge.ok { background: #dcfce7; color: var(--success); }
+.badge.warn { background: #fef3c7; color: #92400e; }
+
+.stars button {
+  background: none;
+  border: 0;
+  font-size: 28px;
+  cursor: pointer;
+  color: #d1d5db;
+}
+
+.stars button.on { color: var(--accent); }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 500; }
+
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.kpi { font-size: 26px; font-weight: 700; }
+
+.toggle {
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  background: #d1d5db;
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  flex: none;
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left .2s;
+}
+
+.toggle.on { background: var(--success); }
+.toggle.on::after { left: 25px; }
+
+.progress { height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.progress > div { height: 100%; background: var(--accent); transition: width 1s linear; }

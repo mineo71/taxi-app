@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Таксі — водій</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../packages/shared/ui.css">
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <span>🚕 Таксі · Водій</span>
+      <small>Прототип застосунку водія</small>
+    </div>
+
+    <section class="panel">
+      <!-- FR-21: online / offline -->
+      <div class="card between">
+        <div>
+          <div class="status" id="onlineLabel">Не на лінії</div>
+          <div class="muted">Андрій К. · ★ 4.92 · прийняття <span id="acceptRate">96</span>%</div>
+        </div>
+        <button class="toggle" id="onlineToggle" aria-label="На лінії"></button>
+      </div>
+
+      <!-- FR-28: order filters -->
+      <div class="row">
+        <div>
+          <label for="radius">Радіус</label>
+          <select id="radius">
+            <option value="2">до 2 км</option>
+            <option value="5" selected>до 5 км</option>
+            <option value="10">до 10 км</option>
+          </select>
+        </div>
+        <div>
+          <label for="payFilter">Тип оплати</label>
+          <select id="payFilter">
+            <option value="any">Будь-який</option>
+            <option value="Картка">Лише картка</option>
+            <option value="Готівка">Лише готівка</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- FR-22: incoming offer with limited time to respond -->
+      <div class="card hidden" id="offerCard">
+        <div class="between">
+          <b>Нове замовлення</b>
+          <span class="badge warn" id="offerTimer"></span>
+        </div>
+        <div class="progress" style="margin:8px 0"><div id="offerProgress" style="width:100%"></div></div>
+        <div id="offerBody"></div>
+        <div class="row" style="margin-top:10px">
+          <button class="btn secondary" id="declineBtn">Пропустити</button>
+          <button class="btn" id="acceptBtn">Прийняти</button>
+        </div>
+      </div>
+
+      <!-- FR-23 … FR-25: active trip -->
+      <div class="card hidden" id="tripCard">
+        <div class="between">
+          <b id="tripTitle"></b>
+          <span class="badge" id="tripBadge"></span>
+        </div>
+        <div class="muted" id="tripBody" style="margin:6px 0 10px"></div>
+        <div class="row">
+          <button class="btn secondary" id="navBtn">🧭 Навігація</button>
+          <button class="btn" id="tripAction"></button>
+        </div>
+      </div>
+
+      <div class="muted" id="toast"></div>
+
+      <!-- FR-26: earnings -->
+      <div class="card">
+        <div class="between">
+          <div>
+            <label>Баланс</label>
+            <div class="kpi" id="balance">0 ₴</div>
+          </div>
+          <button class="btn secondary" id="withdrawBtn">Вивести</button>
+        </div>
+        <div class="muted">Поїздок сьогодні: <span id="tripsToday">0</span> · комісія сервісу 15%</div>
+        <div id="earnings" class="muted" style="margin-top:6px"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../packages/shared/pricing.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
