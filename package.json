@@ -1,0 +1,13 @@
+{
+  "name": "taxi-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Taxi ordering system: requirements, architecture and UI prototype",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "npx --yes serve@14 . -l 3000"
+  }
+}
