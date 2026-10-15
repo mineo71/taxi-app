@@ -1,4 +1,4 @@
-# C3 — Component diagram: Order service
+# C3 — Component diagram: Order service (ideal)
 
 A **component** is a logically grouped block of code inside one container: a package, a module, a set of classes behind a common interface. It does not run on its own; it lives in the same process as the other components of the container.
 
@@ -41,13 +41,25 @@ flowchart TB
   matchingClient -- "Calls driver search<br/>[gRPC]" --> matching
   mapsClient -- "Requests a route<br/>[HTTPS / REST]" --> maps
 
+  subgraph legend["Legend"]
+    direction LR
+    lComponent["Component inside<br/>the order service"]
+    lContainer["Other container<br/>of our system"]
+    lStore[("Data store")]
+    lExternal["External system"]
+    lBoundary["Dashed border = container boundary<br/>Arrow = who calls whom, [protocol]"]
+  end
+
   classDef component fill:#85bbf0,stroke:#5d82a8,color:#0b2540
   classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff
   classDef external fill:#8a8a8a,stroke:#6b6b6b,color:#ffffff
-  class controller,lifecycle,pricing,cancel,repo,publisher,matchingClient,mapsClient component
-  class gateway,db,kafka,matching container
-  class maps external
+  classDef note fill:#ffffff,stroke:#bbbbbb,color:#333333
+  class controller,lifecycle,pricing,cancel,repo,publisher,matchingClient,mapsClient,lComponent component
+  class gateway,db,kafka,matching,lContainer,lStore container
+  class maps,lExternal external
+  class lBoundary note
   style orders fill:none,stroke:#0b4884,stroke-dasharray:6 4
+  style legend fill:#fafafa,stroke:#bbbbbb
 ```
 
 ## Components

@@ -1,16 +1,27 @@
 # Services
 
-The backend is not implemented in the prototype. Below is the target set of services according to the [C2 container diagram](../docs/architecture/c2-containers.md).
+The backend is not implemented in the prototype. This folder is reserved for it.
 
-| Service | Technology | Responsibility | Requirements |
+## Starting architecture
+
+One TypeScript codebase, two processes ([C2 starting](../docs/architecture/starting/c2-containers.md)):
+
+| Service | Technology | Responsibility |
+|---|---|---|
+| `api` | Node.js, TypeScript, NestJS, Socket.IO | REST API and WebSocket; modules: auth, admin, trips, matching, payments ([C3](../docs/architecture/starting/c3-backend-api.md)) |
+| `api` in worker mode | Node.js, TypeScript, BullMQ | Background jobs: notifications, SMS codes, receipts, payment retries, clean-up |
+
+Data stores: PostgreSQL (main database), Redis (geo index, TTL keys, job queue, pub/sub).
+
+## Ideal architecture
+
+When load grows, the modules are extracted into separate services ([C2 ideal](../docs/architecture/ideal/c2-containers.md)):
+
+| Service | Technology | Extracted from | Requirements |
 |---|---|---|---|
-| `api-gateway` | Node.js | Single entry point: authentication, authorization, rate limiting, routing | FR-1, NFR-11, NFR-13, NFR-14 |
-| `realtime` | Node.js, WebSocket | Streams the car position to the passenger map, live trip statuses | FR-10, NFR-2 |
-| `order-service` | Node.js (TypeScript) | Trip lifecycle, price calculation, cancellations | FR-5, FR-7, FR-9, FR-24, FR-37 |
-| `matching-service` | Go | Finds the nearest available car, dispatches orders | FR-22, FR-35, NFR-1 |
-| `payment-service` | Node.js | Charges, receipts, refunds | FR-15, FR-18, FR-32, NFR-12, NFR-17 |
-| `notification-service` | Node.js | Push notifications, verification codes | FR-1, FR-14 |
-
-Data stores: PostgreSQL (main database), Redis (geo index of available drivers), Kafka (events between services).
-
-The internals of `order-service` are shown on the [C3 component diagram](../docs/architecture/c3-order-service.md).
+| `api-gateway` | Node.js | API layer, auth module | FR-1, NFR-11, NFR-13, NFR-14 |
+| `realtime` | Node.js, WebSocket | API layer (Socket.IO gateway) | FR-10, NFR-2 |
+| `order-service` | Node.js (TypeScript) | Trips module | FR-5, FR-7, FR-9, FR-24, FR-37 |
+| `matching-service` | Go | Matching module | FR-22, FR-35, NFR-1 |
+| `payment-service` | Node.js | Payments module | FR-15, FR-18, FR-32, NFR-12, NFR-17 |
+| `notification-service` | Node.js | Background worker | FR-1, FR-14 |

@@ -1,6 +1,8 @@
-# C1 — System Context diagram: Taxi ordering system
+# C1 — System Context diagram: Taxi ordering system (ideal)
 
 The system seen from the outside: it is shown as a single box, surrounded by the people who use it and the external services it cannot work without. There are no technologies at this level because it is meant for the client, not for developers.
+
+The system context is the same in the [starting architecture](../starting/c1-system-context.md): only the internals differ.
 
 ```mermaid
 flowchart TB
@@ -24,12 +26,23 @@ flowchart TB
   system -- "Sends a verification code<br/>[HTTPS / REST]" --> sms
   system -- "Sends trip status notifications<br/>[HTTPS / REST]" --> push
 
+  subgraph legend["Legend"]
+    direction LR
+    lPerson["Person"]
+    lSystem["Our system"]
+    lExternal["External system"]
+    lArrow["Arrow = who calls whom<br/>label = action + [protocol]"]
+  end
+
   classDef person fill:#08427b,stroke:#052e56,color:#ffffff
   classDef internal fill:#1168bd,stroke:#0b4884,color:#ffffff
   classDef external fill:#8a8a8a,stroke:#6b6b6b,color:#ffffff
-  class passenger,driver,operator person
-  class system internal
-  class maps,payments,sms,push external
+  classDef note fill:#ffffff,stroke:#bbbbbb,color:#333333
+  class passenger,driver,operator,lPerson person
+  class system,lSystem internal
+  class maps,payments,sms,push,lExternal external
+  class lArrow note
+  style legend fill:#fafafa,stroke:#bbbbbb
 ```
 
 ## Elements

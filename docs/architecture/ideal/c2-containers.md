@@ -1,4 +1,4 @@
-# C2 — Container diagram: Taxi ordering system
+# C2 — Container diagram: Taxi ordering system (ideal)
 
 The system is broken down into separate apps and services, each with its own technology: mobile clients, a gateway, a real-time service, four internal services and three data stores.
 
@@ -59,22 +59,34 @@ flowchart TB
   notify -- "Sends notifications and codes<br/>[HTTPS / REST]" --> smsPush
   payment -- "Charges cards<br/>[HTTPS / REST]" --> gatewayPay
 
+  subgraph legend["Legend"]
+    direction LR
+    lPerson["Person"]
+    lContainer["Container of our system"]
+    lStore[("Data store")]
+    lExternal["External system"]
+    lBoundary["Dashed border = system boundary<br/>Arrow = who calls whom, [protocol]"]
+  end
+
   classDef person fill:#08427b,stroke:#052e56,color:#ffffff
   classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff
   classDef store fill:#1168bd,stroke:#0b4884,color:#ffffff
   classDef external fill:#8a8a8a,stroke:#6b6b6b,color:#ffffff
-  class passenger,driver,operator person
-  class passengerApp,driverApp,adminApp,gateway,realtime,orders,matching,payment,notify container
-  class db,redis,kafka store
-  class maps,smsPush,gatewayPay external
+  classDef note fill:#ffffff,stroke:#bbbbbb,color:#333333
+  class passenger,driver,operator,lPerson person
+  class passengerApp,driverApp,adminApp,gateway,realtime,orders,matching,payment,notify,lContainer container
+  class db,redis,kafka,lStore store
+  class maps,smsPush,gatewayPay,lExternal external
+  class lBoundary note
   style boundary fill:none,stroke:#0b4884,stroke-dasharray:6 4
+  style legend fill:#fafafa,stroke:#bbbbbb
 ```
 
 ## What is on the diagram
 
-**Client row.** Three apps for three roles: passenger and driver apps in Flutter, admin panel in React. They are separate because the scenarios are fundamentally different: the driver needs background location tracking and offline work, the passenger does not. See [ADR-0003](adr/0003-flutter-and-react-clients.md).
+**Client row.** Three apps for three roles: passenger and driver apps in Flutter, admin panel in React. They are separate because the scenarios are fundamentally different: the driver needs background location tracking and offline work, the passenger does not. See [ADR-0003](../adr/0003-flutter-and-react-clients.md).
 
-**API Gateway.** The single entry point for all three clients. It takes over what would otherwise be duplicated in every service: token validation, access rights, rate limiting, routing. See [ADR-0004](adr/0004-api-gateway-single-entry-point.md).
+**API Gateway.** The single entry point for all three clients. It takes over what would otherwise be duplicated in every service: token validation, access rights, rate limiting, routing. See [ADR-0004](../adr/0004-api-gateway-single-entry-point.md).
 
 **Real-time service.** Kept separate from the gateway. Regular requests live for a fraction of a second, while a WebSocket connection stays open for hours during a trip. They also scale differently: the gateway by request count, the real-time service by the number of open connections.
 
