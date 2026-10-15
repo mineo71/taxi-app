@@ -1,28 +1,28 @@
-# ADR-0001: Фіксувати архітектурні рішення у форматі ADR
+# ADR-0001: Record architecture decisions as ADRs
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Архітектура системи складається з кількох застосунків, сервісів і сховищ. Причини, з яких обрано ту чи іншу технологію або межу між сервісами, швидко забуваються. Нові учасники команди бачать результат, але не бачать, які варіанти розглядали і чому їх відкинули.
+The system consists of several apps, services and data stores. The reasons for choosing a particular technology or service boundary are quickly forgotten. New team members see the result but not which options were considered and why they were rejected.
 
-## Рішення
+## Decision
 
-Кожне значуще архітектурне рішення фіксується окремим Markdown-файлом у `docs/architecture/adr/` за [шаблоном](template.md): контекст, рішення, альтернативи, наслідки.
+Every significant architecture decision is recorded as a separate Markdown file in `docs/architecture/adr/` using the [template](template.md): context, decision, alternatives, consequences.
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **Вікі або Confluence** — документація відривається від коду і застаріває непомітно для рев'ю.
-- **Не фіксувати рішення** — обговорення повторюються, рішення переглядаються без розуміння початкових причин.
+- **Wiki or Confluence** — documentation drifts away from the code and goes stale without anyone noticing in review.
+- **Not recording decisions** — discussions repeat, and decisions get revisited without understanding the original reasons.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Історія рішень лежить поруч із кодом і проходить рев'ю разом зі змінами.
-- Відповідь на питання «чому так» можна дати посиланням.
+- The decision history lives next to the code and is reviewed together with the changes.
+- The question "why is it like this" can be answered with a link.
 
-**Негативні:**
+**Negative:**
 
-- Потрібна дисципліна: рішення без ADR не вважається прийнятим.
+- Requires discipline: a decision without an ADR is not considered accepted.

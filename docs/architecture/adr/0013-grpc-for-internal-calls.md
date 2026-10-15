@@ -1,29 +1,29 @@
-# ADR-0013: gRPC для синхронних викликів між сервісами
+# ADR-0013: gRPC for synchronous calls between services
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Частина взаємодій між сервісами потребує відповіді одразу: шлюз створює поїздку в сервісі замовлень, сервіс замовлень запитує водія в сервісі підбору та ініціює оплату. Сервіси написані на різних мовах (Node.js і Go, [ADR-0010](0010-go-for-matching-service.md)). Затримка має вкладатися в 300 мс на запит ([NFR-3](../../requirements/non-functional.md)).
+Some interactions between services need an immediate response: the gateway creates a trip in the order service, the order service requests a driver from the matching service and initiates payment. Services are written in different languages (Node.js and Go, [ADR-0010](0010-go-for-matching-service.md)). Latency must fit into 300 ms per request ([NFR-3](../../requirements/non-functional.md)).
 
-## Рішення
+## Decision
 
-Синхронні виклики всередині системи — **gRPC** зі схемами Protocol Buffers у спільному пакеті монорепозиторію. Зовнішній API для клієнтів — HTTPS/JSON через шлюз. Асинхронні сповіщення — події в Kafka ([ADR-0009](0009-kafka-for-async-events.md)).
+Synchronous calls inside the system use **gRPC** with Protocol Buffers schemas in a shared monorepo package. The external API for clients is HTTPS/JSON through the gateway. Asynchronous notifications are Kafka events ([ADR-0009](0009-kafka-for-async-events.md)).
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **REST/JSON усередині** — немає строгого контракту між Node.js і Go, більший розмір повідомлень.
-- **Лише події через Kafka** — не підходить для запитів, де потрібна негайна відповідь (наприклад, пошук водія).
+- **REST/JSON internally** — no strict contract between Node.js and Go, larger messages.
+- **Kafka events only** — unsuitable for requests that need an immediate answer (for example, driver search).
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Строгий контракт: клієнтський і серверний код генерується зі схем для обох мов.
-- Компактний бінарний формат і HTTP/2 зменшують затримку.
+- Strict contract: client and server code is generated from the schemas for both languages.
+- Compact binary format and HTTP/2 reduce latency.
 
-**Негативні:**
+**Negative:**
 
-- Схеми потребують версіонування й зворотної сумісності.
-- Налагодження складніше, ніж з JSON: потрібні спеціальні інструменти.
+- Schemas need versioning and backward compatibility.
+- Debugging is harder than with JSON and requires dedicated tools.

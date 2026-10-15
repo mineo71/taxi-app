@@ -1,40 +1,40 @@
-# Бюджет
+# Budget
 
-Орієнтовні оцінки для української команди зі ставкою 25–50 $ за годину. Це приблизний розрахунок для планування, а не комерційна пропозиція.
+Rough estimates for a Ukrainian team at $25–50 per hour. This is a planning estimate, not a commercial quote.
 
-## Розробка MVP
+## MVP development
 
-| Напрям | Вартість, USD |
+| Area | Cost, USD |
 |---|---|
-| Дизайн (UX/UI) | 3 000 – 6 000 |
-| Застосунок пасажира | 10 000 – 18 000 |
-| Застосунок водія | 8 000 – 14 000 |
-| Бекенд (сервер, логіка, підбір водія) | 10 000 – 20 000 |
-| Адмін-панель | 4 000 – 8 000 |
-| Тестування | 3 000 – 6 000 |
-| Керування проєктом | 3 000 – 6 000 |
-| **Разом MVP** | **40 000 – 80 000** |
+| Design (UX/UI) | 3,000 – 6,000 |
+| Passenger app | 10,000 – 18,000 |
+| Driver app | 8,000 – 14,000 |
+| Backend (server, logic, driver matching) | 10,000 – 20,000 |
+| Admin panel | 4,000 – 8,000 |
+| Testing | 3,000 – 6,000 |
+| Project management | 3,000 – 6,000 |
+| **MVP total** | **40,000 – 80,000** |
 
-Термін MVP — приблизно 4–6 місяців. Повноцінний продукт рівня Uklon — від 150 000 до 500 000 $ і більше, від року розробки плюс постійна підтримка.
+MVP timeline: about 4–6 months. A full product on the level of Uklon costs from $150,000 to $500,000 or more, with a year or more of development plus ongoing support.
 
-## Щомісячні витрати після запуску
+## Monthly costs after launch
 
-| Стаття | Вартість, USD на місяць |
+| Item | Cost, USD per month |
 |---|---|
-| Сервери | 300 – 2 000 |
-| Google Maps API | 200 – 3 000 (залежить від кількості поїздок) |
-| SMS для входу | 100 – 500 |
-| Підтримка та доробки | 3 000 – 10 000 |
+| Servers | 300 – 2,000 |
+| Google Maps API | 200 – 3,000 (depends on the number of trips) |
+| SMS for login | 100 – 500 |
+| Support and improvements | 3,000 – 10,000 |
 
-Комісія платіжного провайдера — 1,5–2,5% від суми оплат.
+Payment provider fee: 1.5–2.5% of payment volume.
 
-## Разові платежі
+## One-time payments
 
-- Акаунт розробника Apple — 99 $ на рік
-- Акаунт Google Play — 25 $ одноразово
+- Apple Developer account — $99 per year
+- Google Play account — $25 once
 
-## Бюджет як обмеження
+## Budget as a constraint
 
-> Бюджет на розробку MVP — до 60 000 $. Щомісячні витрати на інфраструктуру — до 2 000 $.
+> MVP development budget: up to $60,000. Monthly infrastructure costs: up to $2,000.
 
-Див. [CON-1](../requirements/constraints.md).
+See [CON-1](../requirements/constraints.md).

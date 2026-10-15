@@ -1,16 +1,16 @@
-# Сервіси
+# Services
 
-Бекенд у прототипі не реалізований. Нижче — цільовий склад сервісів відповідно до діаграми контейнерів [C2](../docs/architecture/c2-containers.md).
+The backend is not implemented in the prototype. Below is the target set of services according to the [C2 container diagram](../docs/architecture/c2-containers.md).
 
-| Сервіс | Технологія | Відповідальність | Вимоги |
+| Service | Technology | Responsibility | Requirements |
 |---|---|---|---|
-| `api-gateway` | Node.js | Єдина точка входу: автентифікація, перевірка прав, обмеження частоти запитів, маршрутизація | FR-1, NFR-11, NFR-13, NFR-14 |
-| `realtime` | Node.js, WebSocket | Передача позиції авто на карту пасажира, статуси поїздки в реальному часі | FR-10, NFR-2 |
-| `order-service` | Node.js (TypeScript) | Життєвий цикл поїздки, розрахунок вартості, скасування | FR-5, FR-7, FR-9, FR-24, FR-37 |
-| `matching-service` | Go | Пошук найближчого вільного авто, розподіл замовлень | FR-22, FR-35, NFR-1 |
-| `payment-service` | Node.js | Списання коштів, чеки, повернення | FR-15, FR-18, FR-32, NFR-12, NFR-17 |
-| `notification-service` | Node.js | Push-сповіщення, коди підтвердження | FR-1, FR-14 |
+| `api-gateway` | Node.js | Single entry point: authentication, authorization, rate limiting, routing | FR-1, NFR-11, NFR-13, NFR-14 |
+| `realtime` | Node.js, WebSocket | Streams the car position to the passenger map, live trip statuses | FR-10, NFR-2 |
+| `order-service` | Node.js (TypeScript) | Trip lifecycle, price calculation, cancellations | FR-5, FR-7, FR-9, FR-24, FR-37 |
+| `matching-service` | Go | Finds the nearest available car, dispatches orders | FR-22, FR-35, NFR-1 |
+| `payment-service` | Node.js | Charges, receipts, refunds | FR-15, FR-18, FR-32, NFR-12, NFR-17 |
+| `notification-service` | Node.js | Push notifications, verification codes | FR-1, FR-14 |
 
-Сховища: PostgreSQL (основна база), Redis (геоіндекс вільних водіїв), Kafka (події між сервісами).
+Data stores: PostgreSQL (main database), Redis (geo index of available drivers), Kafka (events between services).
 
-Внутрішня будова `order-service` описана на діаграмі компонентів [C3](../docs/architecture/c3-order-service.md).
+The internals of `order-service` are shown on the [C3 component diagram](../docs/architecture/c3-order-service.md).

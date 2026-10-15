@@ -1,45 +1,47 @@
-# Огляд проєкту
+# Project overview
 
-## Бачення
+## Vision
 
-Мобільний сервіс замовлення таксі, який з'єднує пасажирів і водіїв: пасажир за кілька дій замовляє поїздку з відомою наперед ціною, система підбирає найближче вільне авто, а обидві сторони бачать перебіг поїздки в реальному часі.
+A mobile taxi ordering service that connects passengers and drivers: a passenger orders a ride in a few taps with the price known upfront, the system finds the nearest available car, and both sides follow the trip in real time.
 
-## Цілі
+## Goals
 
-- Замовлення поїздки не більше ніж за 3–4 дії ([NFR-18](requirements/non-functional.md)).
-- Пошук водія до 5 секунд у 95% випадків ([NFR-1](requirements/non-functional.md)).
-- Стабільна робота в умовах слабкого зв'язку та відключень електроенергії ([NFR-8](requirements/non-functional.md), [NFR-9](requirements/non-functional.md)).
-- Запуск MVP за 4–6 місяців у межах бюджету до 60 000 $ ([обмеження](requirements/constraints.md)).
+- Order a ride in no more than 3 actions ([NFR-18](requirements/non-functional.md)).
+- Find a driver candidate within 5 seconds in 95% of cases ([NFR-1](requirements/non-functional.md)).
+- Keep working on poor connections and during power outages ([NFR-8](requirements/non-functional.md), [NFR-9](requirements/non-functional.md)).
+- Launch the MVP in 4–6 months within a $60,000 budget ([constraints](requirements/constraints.md)).
+- Reach 10,000 completed trips per week in Kyiv 3 months after launch ([success metrics](requirements/success-metrics.md)).
 
-## Ролі користувачів
+## User roles
 
-| Роль | Канал | Основні задачі |
+| Role | Channel | Main tasks |
 |---|---|---|
-| Пасажир | Мобільний застосунок пасажира | Замовляє поїздку, відстежує авто, оплачує, оцінює водія |
-| Водій | Мобільний застосунок водія | Виходить на лінію, приймає замовлення, виконує поїздки, керує заробітком |
-| Оператор підтримки / адміністратор | Вебпанель адміністратора | Модерує водіїв, налаштовує тарифи, обробляє звернення, стежить за аналітикою |
+| Passenger | Passenger mobile app | Orders a ride, tracks the car, pays, rates the driver |
+| Driver | Driver mobile app | Goes online, accepts orders, completes trips, manages earnings |
+| Support operator / administrator | Web admin panel | Moderates drivers, configures tariffs, handles tickets, monitors analytics |
 
-## Зовнішні системи
+## External systems
 
-| Система | Навіщо |
+| System | Purpose |
 |---|---|
-| Картографічний сервіс (Google Maps API) | Маршрут, відстань, час подачі, автопідказки адрес |
-| Платіжний шлюз | Списання коштів з картки, повернення |
-| Шлюз коротких повідомлень (SMS) | Одноразовий код для входу |
-| Сервіс push-сповіщень (FCM / APNs) | Сповіщення про статус поїздки |
+| Maps service (Google Maps API) | Routes, distance, pickup ETA, address autocomplete |
+| Payment gateway | Card charges and refunds |
+| SMS gateway | One-time login codes |
+| Push notification service (FCM / APNs) | Trip status notifications |
 
-## Межі MVP
+## MVP scope
 
-**Входить:** реєстрація та вхід, замовлення поїздки з попередньою ціною, підбір водія, скасування, відстеження авто на карті, дані про водія, зв'язок з водієм, оплата, оцінка, історія поїздок, підтримка, кабінет водія, адмін-панель.
+**In scope:** sign-up and login, ride ordering with an upfront price, driver matching, cancellation, live car tracking, driver details, contacting the driver, payment, rating, trip history, support, driver dashboard, admin panel.
 
-**Не входить у MVP** (пріоритет Could у [функціональних вимогах](requirements/functional.md)): попереднє замовлення на час, підвищення ціни пасажиром, промокоди та кешбек, керування промоакціями, антифрод.
+**Out of MVP scope** (priority *Could* in the [functional requirements](requirements/functional.md)): scheduled rides, passenger price boost, promo codes and cashback, promo campaign management, anti-fraud.
 
-## Документи
+## Documents
 
-- [Функціональні вимоги](requirements/functional.md)
-- [Нефункціональні вимоги](requirements/non-functional.md)
-- [Обмеження](requirements/constraints.md)
-- [Бюджет](project/budget.md)
-- [Архітектура (C4)](architecture/README.md)
-- [Архітектурні рішення (ADR)](architecture/adr/README.md)
-- [Глосарій](glossary.md)
+- [Functional requirements](requirements/functional.md)
+- [Non-functional requirements](requirements/non-functional.md)
+- [Constraints](requirements/constraints.md)
+- [Success metrics](requirements/success-metrics.md)
+- [Budget](project/budget.md)
+- [Architecture (C4)](architecture/README.md)
+- [Architecture decision records](architecture/adr/README.md)
+- [Glossary](glossary.md)

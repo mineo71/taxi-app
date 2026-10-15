@@ -1,38 +1,38 @@
-# ADR-0006: Поділ на сервіси за зонами відповідальності
+# ADR-0006: Split services by area of responsibility
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Бекенд має кілька частин з різним навантаженням і різними вимогами: пошук водія — найгарячіше місце, платежі підпадають під окремі вимоги безпеки ([NFR-12](../../requirements/non-functional.md)), сповіщення працюють з кількома каналами доставки.
+The backend has several parts with different load profiles and requirements: driver matching is the hottest path, payments are subject to separate security requirements ([NFR-12](../../requirements/non-functional.md)), notifications work with several delivery channels.
 
-## Рішення
+## Decision
 
-Бекенд розділено на чотири сервіси за зонами відповідальності, а не за сутностями бази:
+The backend is split into four services by area of responsibility, not by database entities:
 
-| Сервіс | Зона відповідальності |
+| Service | Area of responsibility |
 |---|---|
-| Сервіс замовлень | Веде поїздку від створення до завершення |
-| Сервіс підбору водіїв | Шукає найближче вільне авто |
-| Сервіс оплати | Платежі, чеки, повернення — ізольований через вимоги безпеки |
-| Сервіс сповіщень | Усі канали доставки (push, SMS) в одному місці |
+| Order service | Runs a trip from creation to completion |
+| Driver matching service | Finds the nearest available car |
+| Payment service | Payments, receipts, refunds — isolated because of security requirements |
+| Notification service | All delivery channels (push, SMS) in one place |
 
-Критерій: кожен сервіс має окрему причину для зміни та окремий профіль навантаження. Якщо такої причини немає — сервіс зайвий.
+The test: each service has its own reason to change and its own load profile. If there is no such reason, the service is unnecessary.
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **Моноліт** — простіший старт, але пошук водія й платежі неможливо масштабувати й захищати окремо.
-- **Сервіс на кожну сутність** (користувачі, водії, поїздки, тарифи…) — дрібні сервіси з постійними синхронними викликами один до одного, бізнес-операція розмазана по кількох сервісах.
+- **Monolith** — simpler to start with, but driver matching and payments cannot be scaled and secured separately.
+- **One service per entity** (users, drivers, trips, tariffs…) — small services constantly calling each other synchronously, with one business operation spread across several services.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Кожен сервіс масштабується за своїм навантаженням.
-- Платіжні дані ізольовані в одному сервісі, що спрощує аудит.
+- Each service scales with its own load.
+- Payment data is isolated in one service, which simplifies audits.
 
-**Негативні:**
+**Negative:**
 
-- Розподілена система: потрібні моніторинг і трасування між сервісами ([NFR-25](../../requirements/non-functional.md)).
-- Узгодженість між сервісами досягається через події, а не транзакції ([ADR-0009](0009-kafka-for-async-events.md)).
+- A distributed system: monitoring and tracing across services are required ([NFR-25](../../requirements/non-functional.md)).
+- Consistency between services is achieved through events, not transactions ([ADR-0009](0009-kafka-for-async-events.md)).

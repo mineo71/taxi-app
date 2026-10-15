@@ -1,34 +1,34 @@
-# ADR-0003: Flutter для мобільних застосунків, React для адмін-панелі
+# ADR-0003: Flutter for mobile apps, React for the admin panel
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Потрібні три клієнти: застосунок пасажира, застосунок водія (обидва iOS і Android) та вебпанель адміністратора. Бюджет MVP обмежений ([CON-1](../../requirements/constraints.md)), команда має досвід Flutter ([CON-4](../../requirements/constraints.md)). Потрібна підтримка iOS 15+ і Android 8+ зі стабільною роботою на бюджетних пристроях ([NFR-22](../../requirements/non-functional.md)).
+Three clients are needed: a passenger app, a driver app (both iOS and Android) and a web admin panel. The MVP budget is limited ([CON-1](../../requirements/constraints.md)) and the team has Flutter experience ([CON-4](../../requirements/constraints.md)). The apps must support iOS 15+ and Android 8+ and run reliably on budget devices ([NFR-22](../../requirements/non-functional.md)).
 
-Сценарії пасажира й водія принципово різні: водієві потрібне фонове відстеження позиції, робота офлайн і навігація, пасажирові — ні.
+Passenger and driver scenarios are fundamentally different: the driver needs background location tracking, offline work and navigation; the passenger does not.
 
-## Рішення
+## Decision
 
-- Застосунок пасажира й застосунок водія — **два окремі Flutter-застосунки**.
-- Панель адміністратора — **React**-вебзастосунок.
+- The passenger app and the driver app are **two separate Flutter apps**.
+- The admin panel is a **React** web app.
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **Нативна розробка (Swift + Kotlin)** — подвоює вартість мобільної розробки, не вкладається в бюджет.
-- **React Native** — прийнятний варіант, але команда не має досвіду, що збільшує ризик за терміном.
-- **Один мобільний застосунок з перемиканням ролей** — різні дозволи (фонова геолокація), різні сценарії й різні вимоги App Store до застосунків водіїв ускладнюють один застосунок.
-- **Адмінка на Flutter Web** — для таблиць, фільтрів і дашбордів екосистема React зріліша.
+- **Native development (Swift + Kotlin)** — doubles the cost of mobile development, does not fit the budget.
+- **React Native** — a viable option, but the team has no experience with it, which increases schedule risk.
+- **One mobile app with role switching** — different permissions (background location), different flows and different App Store rules for driver apps make a single app harder to build.
+- **Admin panel in Flutter Web** — the React ecosystem is more mature for tables, filters and dashboards.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Одна кодова база для iOS і Android на кожен застосунок.
-- Спільні Flutter-пакети (UI-компоненти, API-клієнт) між застосунками пасажира й водія.
+- One codebase for iOS and Android per app.
+- Shared Flutter packages (UI components, API client) between the passenger and driver apps.
 
-**Негативні:**
+**Negative:**
 
-- Дві технології на клієнті (Dart і TypeScript).
-- Фонова геолокація й навігація потребують нативних плагінів.
+- Two client technologies (Dart and TypeScript).
+- Background location and navigation require native plugins.

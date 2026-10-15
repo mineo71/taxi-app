@@ -1,29 +1,29 @@
-# ADR-0008: Redis з геоіндексом для позицій вільних водіїв
+# ADR-0008: Redis geo index for available driver positions
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Позиція кожного водія на лінії змінюється кожні 2–5 секунд ([NFR-2](../../requirements/non-functional.md)). Пошук водія має займати до 5 секунд у 95% випадків ([NFR-1](../../requirements/non-functional.md)), а кожен пошук — це запит «знайти найближчих вільних водіїв у радіусі N км». Історія позицій для пошуку не потрібна — лише поточна.
+The position of every online driver changes every 2–5 seconds ([NFR-2](../../requirements/non-functional.md)) — about 330 updates per second on average and 1,700 at peak. Matching must take up to 5 seconds in 95% of cases ([NFR-1](../../requirements/non-functional.md)), and every search is a query like "find the nearest available drivers within N km". Search needs only the current position, not the history.
 
-## Рішення
+## Decision
 
-Поточні позиції вільних водіїв зберігаються в **Redis** з географічним індексом (`GEOADD` / `GEOSEARCH`). Сервіс реального часу оновлює позиції, сервіс підбору водіїв шукає найближчих.
+Current positions of available drivers are stored in **Redis** with a geo index (`GEOADD` / `GEOSEARCH`). The real-time service updates positions, the matching service searches for the nearest drivers.
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **PostgreSQL + PostGIS** — тисячі оновлень на секунду в реляційну базу безглузді: кожен запис — це транзакція, журнал і індекс на диску.
-- **Пам'ять сервісу підбору** — втрачається при перезапуску, не працює з кількома екземплярами.
+- **PostgreSQL + PostGIS** — thousands of updates per second in a relational database make no sense: every write is a transaction, a log entry and an index update on disk.
+- **In-memory in the matching service** — lost on restart and does not work with multiple instances.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Пошук найближчих водіїв за мілісекунди.
-- Основна база не навантажена частими оновленнями.
+- Nearest-driver search in milliseconds.
+- The main database is not loaded with frequent updates.
 
-**Негативні:**
+**Negative:**
 
-- Redis не є джерелом істини: при втраті даних позиції відновлюються з наступних оновлень від водіїв за кілька секунд.
-- Термін зберігання треків для аналітики й безпеки регулюється окремо ([NFR-16](../../requirements/non-functional.md)).
+- Redis is not the source of truth: if data is lost, positions are rebuilt from the next driver updates within a few seconds.
+- Retention of tracks for analytics and safety is handled separately ([NFR-16](../../requirements/non-functional.md)).

@@ -1,31 +1,31 @@
-# ADR-0012: Платежі через зовнішнього провайдера з PCI DSS
+# ADR-0012: Payments through an external PCI DSS provider
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Пасажир платить карткою, Apple Pay, Google Pay або корпоративним рахунком ([FR-15](../../requirements/functional.md)). Обробка даних карток вимагає відповідності PCI DSS ([NFR-12](../../requirements/non-functional.md)), що для MVP недосяжно ні за бюджетом, ні за термінами. Кожна оплата має бути фіскалізована ([NFR-17](../../requirements/non-functional.md)). Обмеження: один платіжний провайдер ([CON-6](../../requirements/constraints.md)).
+Passengers pay by card, Apple Pay, Google Pay or corporate account ([FR-15](../../requirements/functional.md)). Handling card data requires PCI DSS compliance ([NFR-12](../../requirements/non-functional.md)), which is out of reach for the MVP in both budget and time. Every payment must be fiscalised ([NFR-17](../../requirements/non-functional.md)). Constraint: a single payment provider ([CON-6](../../requirements/constraints.md)).
 
-## Рішення
+## Decision
 
-- Дані карток вводяться у форму **сертифікованого платіжного провайдера**; система отримує й зберігає лише токен картки.
-- Уся взаємодія з провайдером зосереджена в **сервісі оплати**, ізольованому від решти системи.
-- Результат оплати підтверджується вебхуком провайдера; обробка вебхуків ідемпотентна.
+- Card details are entered into the form of a **certified payment provider**; the system receives and stores only a card token.
+- All interaction with the provider is concentrated in the **payment service**, isolated from the rest of the system.
+- Payment results are confirmed by provider webhooks; webhook handling is idempotent.
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **Власна обробка карток** — повна сертифікація PCI DSS, неприйнятно для MVP.
-- **Кілька провайдерів одразу** — суперечить CON-6, ускладнює звірку платежів.
+- **Processing cards in-house** — full PCI DSS certification, not acceptable for the MVP.
+- **Several providers at once** — contradicts CON-6 and complicates payment reconciliation.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Повні дані карток не потрапляють у систему — обсяг аудиту мінімальний.
-- Apple Pay і Google Pay підтримуються провайдером з коробки.
+- Full card data never enters the system — the audit scope is minimal.
+- Apple Pay and Google Pay are supported by the provider out of the box.
 
-**Негативні:**
+**Negative:**
 
-- Комісія провайдера 1,5–2,5% від суми оплат ([бюджет](../../project/budget.md)).
-- Залежність від доступності провайдера: при збої пасажиру пропонується оплата готівкою.
+- Provider fee of 1.5–2.5% of payment volume ([budget](../../project/budget.md)).
+- Dependency on provider availability: if it fails, the passenger is offered cash payment.

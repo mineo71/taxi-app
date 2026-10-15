@@ -1,28 +1,28 @@
-# C1 — System Context diagram: система замовлення таксі
+# C1 — System Context diagram: Taxi ordering system
 
-Погляд на систему ззовні: вона показана однією коробкою, а навколо — ті, хто нею користується, і зовнішні сервіси, без яких вона не працює. На цьому рівні немає жодної технології, бо він призначений для замовника, а не для розробника.
+The system seen from the outside: it is shown as a single box, surrounded by the people who use it and the external services it cannot work without. There are no technologies at this level because it is meant for the client, not for developers.
 
 ```mermaid
 flowchart TB
-  passenger["<b>Пасажир</b><br/>[Person]<br/><br/>Замовляє поїздку, оплачує її<br/>та оцінює водія"]
-  driver["<b>Водій</b><br/>[Person]<br/><br/>Приймає замовлення<br/>і виконує поїздки"]
-  operator["<b>Оператор підтримки</b><br/>[Person]<br/><br/>Модерує водіїв, налаштовує тарифи,<br/>обробляє скарги"]
+  passenger["<b>Passenger</b><br/>[Person]<br/><br/>Orders a ride, pays for it<br/>and rates the driver"]
+  driver["<b>Driver</b><br/>[Person]<br/><br/>Accepts orders<br/>and completes trips"]
+  operator["<b>Support operator</b><br/>[Person]<br/><br/>Moderates drivers, configures tariffs,<br/>handles complaints"]
 
-  system["<b>Система замовлення таксі</b><br/>[Software System]<br/><br/>З'єднує пасажирів і водіїв: приймає замовлення,<br/>підбирає найближче авто, веде поїздку<br/>та розраховує вартість"]
+  system["<b>Taxi ordering system</b><br/>[Software System]<br/><br/>Connects passengers and drivers: takes orders,<br/>finds the nearest car, runs the trip<br/>and calculates the price"]
 
-  maps["<b>Картографічний сервіс</b><br/>[External Software System]<br/><br/>Будує маршрут і розраховує час подачі"]
-  payments["<b>Платіжний шлюз</b><br/>[External Software System]<br/><br/>Списує кошти з картки пасажира"]
-  sms["<b>Шлюз коротких повідомлень</b><br/>[External Software System]<br/><br/>Надсилає одноразовий код для входу"]
-  push["<b>Сервіс сповіщень</b><br/>[External Software System]<br/><br/>Доставляє сповіщення на телефон"]
+  maps["<b>Maps service</b><br/>[External Software System]<br/><br/>Builds routes and calculates pickup ETA"]
+  payments["<b>Payment gateway</b><br/>[External Software System]<br/><br/>Charges the passenger's card"]
+  sms["<b>SMS gateway</b><br/>[External Software System]<br/><br/>Sends one-time login codes"]
+  push["<b>Push notification service</b><br/>[External Software System]<br/><br/>Delivers notifications to phones"]
 
-  passenger -- "Замовляє поїздку, оплачує, оцінює<br/>[HTTPS / JSON]" --> system
-  driver -- "Приймає замовлення, передає геопозицію<br/>[HTTPS / WebSocket]" --> system
-  operator -- "Керує тарифами і водіями<br/>[HTTPS / JSON]" --> system
+  passenger -- "Orders a ride, pays, rates<br/>[HTTPS / JSON]" --> system
+  driver -- "Accepts orders, sends location<br/>[HTTPS / WebSocket]" --> system
+  operator -- "Manages tariffs and drivers<br/>[HTTPS / JSON]" --> system
 
-  system -- "Запитує маршрут і час подачі<br/>[HTTPS / REST]" --> maps
-  system -- "Створює платіж<br/>[HTTPS / REST]" --> payments
-  system -- "Надсилає код підтвердження<br/>[HTTPS / REST]" --> sms
-  system -- "Надсилає сповіщення про статус поїздки<br/>[HTTPS / REST]" --> push
+  system -- "Requests route and pickup ETA<br/>[HTTPS / REST]" --> maps
+  system -- "Creates a payment<br/>[HTTPS / REST]" --> payments
+  system -- "Sends a verification code<br/>[HTTPS / REST]" --> sms
+  system -- "Sends trip status notifications<br/>[HTTPS / REST]" --> push
 
   classDef person fill:#08427b,stroke:#052e56,color:#ffffff
   classDef internal fill:#1168bd,stroke:#0b4884,color:#ffffff
@@ -32,17 +32,17 @@ flowchart TB
   class maps,payments,sms,push external
 ```
 
-## Учасники
+## Elements
 
-| Елемент | Тип | Роль |
+| Element | Type | Role |
 |---|---|---|
-| Пасажир | Людина | Замовляє поїздку, оплачує її та оцінює водія |
-| Водій | Людина | Приймає замовлення і виконує поїздки |
-| Оператор підтримки | Людина | Модерує водіїв, налаштовує тарифи, обробляє скарги |
-| Система замовлення таксі | Наша система | З'єднує пасажирів і водіїв |
-| Картографічний сервіс | Зовнішня система | Маршрут, відстань, час подачі |
-| Платіжний шлюз | Зовнішня система | Списання коштів з картки |
-| Шлюз коротких повідомлень | Зовнішня система | Одноразовий код для входу |
-| Сервіс сповіщень | Зовнішня система | Push-сповіщення на телефон |
+| Passenger | Person | Orders a ride, pays for it and rates the driver |
+| Driver | Person | Accepts orders and completes trips |
+| Support operator | Person | Moderates drivers, configures tariffs, handles complaints |
+| Taxi ordering system | Our system | Connects passengers and drivers |
+| Maps service | External system | Routes, distance, pickup ETA |
+| Payment gateway | External system | Card charges |
+| SMS gateway | External system | One-time login codes |
+| Push notification service | External system | Push notifications to phones |
 
-Наступний рівень: [C2 — Containers](c2-containers.md).
+Next level: [C2 — Containers](c2-containers.md).

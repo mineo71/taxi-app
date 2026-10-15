@@ -1,18 +1,18 @@
-# Обмеження (constraints)
+# Constraints
 
-Обмеження — це умови, накладені ззовні, які команда не може змінити за власним бажанням. Від нефункціональних вимог вони відрізняються тим, що це не мета, якої прагнуть, а готова умова.
+Constraints are conditions imposed from outside that the team cannot change at will. Unlike non-functional requirements, they are not a goal to strive for but a given.
 
-Приклад різниці: «застосунок має бути швидким» — нефункціональна вимога. «Пишемо на Flutter, бо команда знає тільки його» — обмеження.
+Example of the difference: "the app must be fast" is a non-functional requirement. "We write in Flutter because the team only knows Flutter" is a constraint.
 
-| Код | Тип | Обмеження |
+| ID | Type | Constraint |
 |---|---|---|
-| CON-1 | Бюджет | Розробка MVP — до 60 000 $. Щомісячні витрати на інфраструктуру — до 2 000 $. Деталі в [бюджеті](../project/budget.md) |
-| CON-2 | Терміни | Запуск MVP — через 4–6 місяців від старту розробки |
-| CON-3 | Команда | Обсяг роботи обмежений бюджетом: ≈ 1 600 людино-годин за ставки 25–50 $/год |
-| CON-4 | Технології | Мобільні застосунки — Flutter (досвід команди), адмін-панель — React ([ADR-0003](../architecture/adr/0003-flutter-and-react-clients.md)) |
-| CON-5 | Інтеграції | Картографія — Google Maps API |
-| CON-6 | Інтеграції | Оплата лише через одного платіжного провайдера з сертифікацією PCI DSS ([ADR-0012](../architecture/adr/0012-external-payment-provider.md)) |
-| CON-7 | Законодавство | Відповідність законодавству України: захист персональних даних, фіскалізація розрахунків |
-| CON-8 | Інфраструктура | Зберігання даних на серверах в Україні або ЄС |
-| CON-9 | Платформи | Відповідність вимогам App Store та Google Play |
-| CON-10 | Платформи | Підтримка старих версій Android (від Android 8) |
+| CON-1 | Budget | MVP development up to $60,000. Monthly infrastructure costs up to $2,000. Details in the [budget](../project/budget.md) |
+| CON-2 | Timeline | MVP launch 4–6 months after development starts |
+| CON-3 | Team | Effort is limited by the budget: ≈ 1,600 person-hours at $25–50 per hour |
+| CON-4 | Technology | Mobile apps in Flutter (team experience), admin panel in React ([ADR-0003](../architecture/adr/0003-flutter-and-react-clients.md)) |
+| CON-5 | Integrations | Maps: Google Maps API |
+| CON-6 | Integrations | Payments through a single PCI DSS-certified payment provider ([ADR-0012](../architecture/adr/0012-external-payment-provider.md)) |
+| CON-7 | Legal | Compliance with Ukrainian law: personal data protection, fiscalisation of payments |
+| CON-8 | Infrastructure | Data stored on servers in Ukraine or the EU |
+| CON-9 | Platforms | Compliance with App Store and Google Play guidelines |
+| CON-10 | Platforms | Support for older Android versions (Android 8 and later) |

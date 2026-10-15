@@ -1,45 +1,45 @@
-# C3 — Component diagram: сервіс замовлень
+# C3 — Component diagram: Order service
 
-**Компонент** — логічно згрупований блок коду всередині одного контейнера: пакет, модуль, набір класів за спільним інтерфейсом. Окремо він не запускається, живе в тому ж процесі, що й решта компонентів контейнера.
+A **component** is a logically grouped block of code inside one container: a package, a module, a set of classes behind a common interface. It does not run on its own; it lives in the same process as the other components of the container.
 
-На рівні C3 розкривають **один** контейнер. Обрано сервіс замовлень, бо він містить основну бізнес-логіку. Решта сервісів здебільшого є тонкими обгортками над зовнішніми інтеграціями: сервіс оплати фактично передає виклик платіжному шлюзу, сервіс сповіщень — провайдеру push.
+At the C3 level only **one** container is opened up. The order service was chosen because it holds the core business logic. The other services are mostly thin wrappers around external integrations: the payment service essentially forwards calls to the payment gateway, the notification service to the push provider.
 
 ```mermaid
 flowchart TB
-  gateway["<b>API Gateway</b><br/>[Container: Node.js]<br/><br/>Єдина точка входу для застосунків<br/>пасажира, водія та адміністратора"]
+  gateway["<b>API Gateway</b><br/>[Container: Node.js]<br/><br/>Single entry point for the passenger,<br/>driver and admin apps"]
 
-  subgraph orders["Сервіс замовлень [Container: Node.js]"]
+  subgraph orders["Order service [Container: Node.js]"]
     direction TB
-    controller["<b>Контролер замовлень</b><br/>[Component: Express, REST]<br/><br/>Приймає запити на створення, зміну<br/>та скасування поїздки і перевіряє вхідні дані"]
+    controller["<b>Order controller</b><br/>[Component: Express, REST]<br/><br/>Accepts requests to create, update<br/>and cancel a trip and validates input"]
 
-    lifecycle["<b>Менеджер життєвого циклу поїздки</b><br/>[Component: TypeScript]<br/><br/>Керує станами: створено, водія знайдено,<br/>в дорозі, завершено"]
-    pricing["<b>Калькулятор вартості</b><br/>[Component: TypeScript]<br/><br/>Рахує ціну з урахуванням тарифу,<br/>відстані та простою"]
-    cancel["<b>Обробник скасувань</b><br/>[Component: TypeScript]<br/><br/>Визначає, чи нараховувати штраф<br/>за скасування"]
+    lifecycle["<b>Trip lifecycle manager</b><br/>[Component: TypeScript]<br/><br/>Manages states: created, driver assigned,<br/>in progress, completed"]
+    pricing["<b>Price calculator</b><br/>[Component: TypeScript]<br/><br/>Calculates the price from tariff,<br/>distance and waiting time"]
+    cancel["<b>Cancellation handler</b><br/>[Component: TypeScript]<br/><br/>Decides whether a cancellation<br/>fee applies"]
 
-    repo["<b>Репозиторій поїздок</b><br/>[Component: Prisma]<br/><br/>Читає і записує дані поїздок у базу"]
-    publisher["<b>Видавець подій</b><br/>[Component: Kafka client]<br/><br/>Публікує події зміни статусу поїздки"]
-    matchingClient["<b>Клієнт сервісу підбору водіїв</b><br/>[Component: gRPC client]<br/><br/>Надсилає запит на пошук вільного авто"]
-    mapsClient["<b>Клієнт картографічного сервісу</b><br/>[Component: HTTP client]<br/><br/>Отримує відстань і тривалість маршруту"]
+    repo["<b>Trip repository</b><br/>[Component: Prisma]<br/><br/>Reads and writes trip data in the database"]
+    publisher["<b>Event publisher</b><br/>[Component: Kafka client]<br/><br/>Publishes trip status change events"]
+    matchingClient["<b>Matching service client</b><br/>[Component: gRPC client]<br/><br/>Requests a search for an available car"]
+    mapsClient["<b>Maps service client</b><br/>[Component: HTTP client]<br/><br/>Gets route distance and duration"]
   end
 
-  db[("<b>Основна база даних</b><br/>[Container: PostgreSQL]")]
-  kafka[("<b>Черга повідомлень</b><br/>[Container: Kafka]")]
-  matching["<b>Сервіс підбору водіїв</b><br/>[Container: Go]"]
-  maps["<b>Картографічний сервіс</b><br/>[External Software System]"]
+  db[("<b>Main database</b><br/>[Container: PostgreSQL]")]
+  kafka[("<b>Message broker</b><br/>[Container: Kafka]")]
+  matching["<b>Driver matching service</b><br/>[Container: Go]"]
+  maps["<b>Maps service</b><br/>[External Software System]"]
 
-  gateway -- "Передає запити щодо поїздки<br/>[HTTPS / JSON]" --> controller
-  controller -- "Передає команду зміни стану<br/>[виклик у коді]" --> lifecycle
-  lifecycle -- "Запитує, чи нараховувати штраф<br/>[виклик у коді]" --> cancel
-  lifecycle -- "Запитує вартість поїздки<br/>[виклик у коді]" --> pricing
-  lifecycle -- "Зберігає стан поїздки<br/>[виклик у коді]" --> repo
-  lifecycle -- "Публікує подію зміни статусу<br/>[виклик у коді]" --> publisher
-  lifecycle -- "Просить знайти водія<br/>[виклик у коді]" --> matchingClient
-  pricing -- "Запитує відстань і тривалість<br/>[виклик у коді]" --> mapsClient
+  gateway -- "Forwards trip requests<br/>[HTTPS / JSON]" --> controller
+  controller -- "Passes a state change command<br/>[in-process call]" --> lifecycle
+  lifecycle -- "Asks whether a fee applies<br/>[in-process call]" --> cancel
+  lifecycle -- "Requests the trip price<br/>[in-process call]" --> pricing
+  lifecycle -- "Saves trip state<br/>[in-process call]" --> repo
+  lifecycle -- "Publishes a status change event<br/>[in-process call]" --> publisher
+  lifecycle -- "Asks to find a driver<br/>[in-process call]" --> matchingClient
+  pricing -- "Requests distance and duration<br/>[in-process call]" --> mapsClient
 
-  repo -- "Читає і записує дані<br/>[SQL / TCP]" --> db
-  publisher -- "Надсилає події<br/>[Kafka protocol]" --> kafka
-  matchingClient -- "Викликає пошук водія<br/>[gRPC]" --> matching
-  mapsClient -- "Запитує маршрут<br/>[HTTPS / REST]" --> maps
+  repo -- "Reads and writes data<br/>[SQL / TCP]" --> db
+  publisher -- "Sends events<br/>[Kafka protocol]" --> kafka
+  matchingClient -- "Calls driver search<br/>[gRPC]" --> matching
+  mapsClient -- "Requests a route<br/>[HTTPS / REST]" --> maps
 
   classDef component fill:#85bbf0,stroke:#5d82a8,color:#0b2540
   classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff
@@ -50,60 +50,60 @@ flowchart TB
   style orders fill:none,stroke:#0b4884,stroke-dasharray:6 4
 ```
 
-## Компоненти
+## Components
 
-| Компонент | Роль |
+| Component | Role |
 |---|---|
-| Контролер замовлень | Приймає HTTP-запити від шлюзу, перевіряє вхідні дані, передає команду далі. Бізнес-логіки в ньому немає — лише перетворення запиту на виклик |
-| Менеджер життєвого циклу | Серце сервісу. Реалізує скінченний автомат станів поїздки і стежить, щоб неможливі переходи не відбувалися. Координує решту компонентів |
-| Калькулятор вартості | Чистий розрахунок: тариф, відстань, час, простій, коефіцієнт попиту. Винесений окремо, бо правила ціноутворення змінюються найчастіше |
-| Обробник скасувань | Вирішує, чи нараховувати штраф, залежно від часу й того, чи встиг водій виїхати |
-| Репозиторій поїздок | Єдине місце, яке знає про базу. Решта працює з об'єктами предметної області й не бачить SQL |
-| Видавець подій | Адаптер до черги: перетворює подію бізнес-логіки на повідомлення Kafka |
-| Клієнт сервісу підбору | Адаптер до сервісу підбору водіїв через gRPC |
-| Клієнт картографічного сервісу | Адаптер до зовнішніх карт через HTTP |
+| Order controller | Accepts HTTP requests from the gateway, validates input, passes the command on. Contains no business logic — it only turns a request into a call |
+| Trip lifecycle manager | The heart of the service. Implements the trip state machine and prevents impossible transitions. Coordinates the other components |
+| Price calculator | Pure calculation: tariff, distance, time, waiting, surge multiplier. Kept separate because pricing rules change most often |
+| Cancellation handler | Decides whether to charge a fee based on timing and whether the driver has already set off |
+| Trip repository | The only place that knows about the database. Everything else works with domain objects and never sees SQL |
+| Event publisher | Adapter to the broker: turns a business event into a Kafka message |
+| Matching service client | Adapter to the driver matching service over gRPC |
+| Maps service client | Adapter to the external maps API over HTTP |
 
-## Шари
+## Layers
 
-Компоненти діляться на три шари, і це видно за розташуванням на діаграмі:
+The components fall into three layers, which is visible from their position on the diagram:
 
-1. **Вхід у систему** — контролер.
-2. **Чиста логіка**, яка нічого не знає про зовнішній світ — менеджер життєвого циклу, калькулятор вартості, обробник скасувань.
-3. **Адаптери** до всього зовнішнього — репозиторій, видавець подій, клієнти.
+1. **Entry point** — the controller.
+2. **Pure logic** that knows nothing about the outside world — the lifecycle manager, price calculator, cancellation handler.
+3. **Adapters** to everything external — the repository, event publisher, clients.
 
-Залежності йдуть лише згори вниз. Логіка не залежить від бази чи протоколів, а навпаки — адаптери підлаштовуються під неї. Це гексагональна архітектура (ports and adapters), див. [ADR-0011](adr/0011-hexagonal-architecture-order-service.md).
+Dependencies only point downwards. The logic does not depend on the database or protocols; the adapters adapt to the logic instead. This is hexagonal architecture (ports and adapters), see [ADR-0011](adr/0011-hexagonal-architecture-order-service.md).
 
-## Стани поїздки
+## Trip states
 
-Менеджер життєвого циклу допускає лише такі переходи:
+The lifecycle manager allows only these transitions:
 
 ```mermaid
 stateDiagram-v2
-  state "Створено" as Created
-  state "Пошук водія" as Searching
-  state "Водія знайдено" as Assigned
-  state "Водій на місці" as Arrived
-  state "В дорозі" as InProgress
-  state "Завершено" as Completed
-  state "Скасовано" as Cancelled
+  state "Created" as Created
+  state "Searching for driver" as Searching
+  state "Driver assigned" as Assigned
+  state "Driver arrived" as Arrived
+  state "In progress" as InProgress
+  state "Completed" as Completed
+  state "Cancelled" as Cancelled
 
   [*] --> Created
-  Created --> Searching: пасажир підтвердив замовлення
-  Searching --> Assigned: водій прийняв пропозицію
-  Searching --> Cancelled: пасажир скасував або водія не знайдено
-  Assigned --> Arrived: водій прибув
-  Assigned --> Cancelled: скасування, можливий штраф
-  Arrived --> InProgress: водій почав поїздку
-  Arrived --> Cancelled: скасування зі штрафом
-  InProgress --> Completed: водій завершив поїздку
+  Created --> Searching: passenger confirmed the order
+  Searching --> Assigned: driver accepted the offer
+  Searching --> Cancelled: passenger cancelled or no driver found
+  Assigned --> Arrived: driver arrived
+  Assigned --> Cancelled: cancellation, fee may apply
+  Arrived --> InProgress: driver started the trip
+  Arrived --> Cancelled: cancellation with fee
+  InProgress --> Completed: driver completed the trip
   Completed --> [*]
   Cancelled --> [*]
 ```
 
-## Відмова зовнішнього сервісу
+## External service failure
 
-Якщо сервіс підбору або карти недоступні, адаптер повертає помилку, менеджер переводить поїздку в очікування або скасовує її, а пасажир отримує сповіщення. Саме заради такої ізоляції адаптери й виділяють.
+If the matching service or the maps API is unavailable, the adapter returns an error, the lifecycle manager puts the trip on hold or cancels it, and the passenger is notified. Adapters are separated precisely for this kind of isolation.
 
-Чому клієнти зовнішніх сервісів — компоненти, а не контейнери: це код усередині того самого процесу, а не окремо запущена програма. Контейнером є сам сервіс підбору водіїв.
+Why external service clients are components rather than containers: they are code inside the same process, not a separately running program. The container is the driver matching service itself.
 
-Попередній рівень: [C2 — Containers](c2-containers.md).
+Previous level: [C2 — Containers](c2-containers.md).

@@ -1,26 +1,29 @@
-# Глосарій
+# Glossary
 
-| Термін | Значення |
+| Term | Meaning |
 |---|---|
-| Поїздка | Одне замовлення від створення до завершення або скасування |
-| Подача | Приїзд водія до точки, де чекає пасажир |
-| Простій | Очікування пасажира водієм понад безкоштовні 3 хвилини, оплачується за тарифом |
-| Клас авто | Економ, Комфорт, Бізнес — визначає тариф і вимоги до авто |
-| Тариф | Подача, вартість кілометра, хвилини та простою для класу авто в місті |
-| Коефіцієнт попиту (surge) | Множник ціни, коли замовлень більше, ніж вільних водіїв |
-| Рівень прийняття | Частка запропонованих водієві замовлень, які він прийняв |
-| Маскований номер | Тимчасовий номер-посередник, через який пасажир і водій дзвонять, не бачачи реальних номерів |
-| На лінії | Стан водія, в якому він отримує пропозиції замовлень |
-| API Gateway (шлюз) | Єдина точка входу для клієнтських застосунків |
-| Контейнер (C4) | Окремо запущена одиниця, де виконується код або зберігаються дані. Не плутати з Docker-контейнером |
-| Компонент (C4) | Логічний блок коду всередині одного контейнера |
-| ADR | Architecture Decision Record — запис одного архітектурного рішення |
-| Геоіндекс | Структура даних для швидкого пошуку найближчих точок на карті |
-| Подія | Повідомлення про факт, що вже стався, наприклад «поїздку завершено» |
-| p95 | 95-й перцентиль: 95% запитів виконуються не довше за це значення |
-| RPO | Recovery Point Objective — скільки даних допустимо втратити при аварії |
-| RTO | Recovery Time Objective — за який час система має відновитися |
-| PCI DSS | Стандарт безпеки для обробки даних платіжних карток |
-| WCAG | Рекомендації з доступності вебконтенту |
-| Feature flag | Перемикач, що вмикає функцію для частини користувачів без нового релізу |
-| MVP | Мінімальна версія продукту, з якою можна вийти до користувачів |
+| Trip | One order from creation to completion or cancellation |
+| Pickup | The driver arriving at the point where the passenger is waiting |
+| Paid waiting | Driver waiting for the passenger beyond the free 3 minutes, charged per the tariff |
+| Car class | Economy, Comfort, Business — defines the tariff and car requirements |
+| Tariff | Pickup fee, per-km, per-minute and waiting rates for a car class in a city |
+| Surge multiplier | Price multiplier applied when there are more orders than available drivers |
+| Acceptance rate | Share of offered orders a driver accepts |
+| Masked number | A temporary proxy number that lets the passenger and driver call each other without seeing real numbers |
+| Online | Driver state in which they receive order offers |
+| API Gateway | Single entry point for the client apps |
+| Container (C4) | A separately running unit that executes code or stores data. Not to be confused with a Docker container |
+| Component (C4) | A logical block of code inside one container |
+| ADR | Architecture Decision Record — a record of one architecture decision |
+| Geo index | Data structure for fast nearest-point search on a map |
+| Event | A message about a fact that has already happened, e.g. "trip completed" |
+| p95 | 95th percentile: 95% of requests complete within this value |
+| RPO | Recovery Point Objective — how much data may be lost in a failure |
+| RTO | Recovery Time Objective — how quickly the system must be restored |
+| PCI DSS | Security standard for handling payment card data |
+| WCAG | Web Content Accessibility Guidelines |
+| Feature flag | A switch that enables a feature for part of the users without a new release |
+| MVP | Minimum viable product — the smallest version that can go to real users |
+| North Star metric | The single metric that best reflects the value the product delivers |
+| NPS | Net Promoter Score — share of promoters minus share of detractors |
+| PRRO | Software cash register used in Ukraine to issue fiscal receipts |

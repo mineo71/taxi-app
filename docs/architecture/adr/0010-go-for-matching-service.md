@@ -1,29 +1,29 @@
-# ADR-0010: Go для сервісу підбору водіїв
+# ADR-0010: Go for the driver matching service
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Сервіс підбору водіїв — найгарячіше місце за навантаженням: кожне замовлення запускає пошук у геоіндексі, ранжування кандидатів за відстанню, рейтингом і рівнем прийняття ([FR-35](../../requirements/functional.md)) і розсилку пропозицій з обмеженим часом на відповідь ([FR-22](../../requirements/functional.md)). Ціль — до 5 секунд у 95% випадків ([NFR-1](../../requirements/non-functional.md)) і витримка п'ятикратного піку ([NFR-5](../../requirements/non-functional.md)).
+The driver matching service is the hottest path under load: every order triggers a geo index search, candidate ranking by pickup ETA, rating and acceptance rate ([FR-35](../../requirements/functional.md)), and dispatching offers with a 15-second response window ([FR-22](../../requirements/functional.md)). The targets are p95 ≤ 5 s ([NFR-1](../../requirements/non-functional.md)) and holding a 5× peak ([NFR-5](../../requirements/non-functional.md)).
 
-## Рішення
+## Decision
 
-Сервіс підбору водіїв пишеться на **Go**. Решта бекенд-сервісів — Node.js (TypeScript).
+The driver matching service is written in **Go**. The other backend services use Node.js (TypeScript).
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **Node.js, як решта сервісів** — один стек простіший, але однопотокова модель гірше підходить для паралельного ранжування й великої кількості одночасних таймерів пропозицій.
-- **Rust** — вища продуктивність, але довша розробка й вужчий ринок розробників.
+- **Node.js, like the other services** — a single stack is simpler, but the single-threaded model is a worse fit for parallel ranking and a large number of concurrent offer timers.
+- **Rust** — higher performance, but slower development and a smaller hiring pool.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Горутини природно моделюють паралельні пропозиції водіям з таймаутами.
-- Низьке споживання пам'яті й передбачувана затримка під навантаженням.
+- Goroutines naturally model parallel driver offers with timeouts.
+- Low memory usage and predictable latency under load.
 
-**Негативні:**
+**Negative:**
 
-- Другий бекенд-стек у команді.
-- Контракти з іншими сервісами описуються через gRPC-схеми ([ADR-0013](0013-grpc-for-internal-calls.md)), а не спільні TypeScript-типи.
+- A second backend stack in the team.
+- Contracts with other services are defined in gRPC schemas ([ADR-0013](0013-grpc-for-internal-calls.md)) rather than shared TypeScript types.

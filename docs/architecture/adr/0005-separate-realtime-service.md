@@ -1,30 +1,30 @@
-# ADR-0005: Окремий сервіс реального часу на WebSocket
+# ADR-0005: Separate real-time service on WebSocket
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Позиція водія має оновлюватися на карті пасажира кожні 2–5 секунд ([NFR-2](../../requirements/non-functional.md), [FR-10](../../requirements/functional.md)). Звичайні HTTP-запити живуть частки секунди, а з'єднання для відстеження висить годинами, поки триває поїздка або водій на лінії.
+The driver position must refresh on the passenger map every 2–5 seconds ([NFR-2](../../requirements/non-functional.md), [FR-10](../../requirements/functional.md)). Regular HTTP requests live for a fraction of a second, while a tracking connection stays open for hours — for the whole trip or the whole time a driver is online.
 
-## Рішення
+## Decision
 
-Передачу позицій і статусів у реальному часі винесено в **окремий сервіс реального часу** (Node.js, WebSocket). Застосунок водія надсилає позицію через WebSocket, сервіс оновлює геоіндекс у Redis і транслює позицію застосунку пасажира.
+Real-time position and status delivery is moved into a **separate real-time service** (Node.js, WebSocket). The driver app sends its position over WebSocket, the service updates the geo index in Redis and pushes the position to the passenger app.
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **WebSocket у шлюзі** — довгі з'єднання з'їдять ресурси, потрібні коротким запитам, а масштабувати їх доведеться разом.
-- **Періодичне опитування (polling)** — при оновленні кожні 2–5 секунд створює багато зайвих запитів і витрачає батарею ([NFR-23](../../requirements/non-functional.md)).
-- **Керований сервіс (Firebase, Ably)** — швидший старт, але залежність від постачальника й вартість за повідомлення при зростанні.
+- **WebSocket in the gateway** — long-lived connections would eat resources needed by short requests, and both would have to scale together.
+- **Polling** — with a 2–5 s refresh it creates many redundant requests and drains the battery ([NFR-23](../../requirements/non-functional.md)).
+- **Managed service (Firebase, Ably)** — faster start, but vendor lock-in and per-message costs as usage grows.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Шлюз і сервіс реального часу масштабуються незалежно: шлюз — за кількістю запитів, сервіс реального часу — за кількістю активних з'єднань.
-- Збій сервісу реального часу не зупиняє замовлення поїздок.
+- The gateway and the real-time service scale independently: the gateway by request count, the real-time service by open connections.
+- A failure of the real-time service does not stop ride ordering.
 
-**Негативні:**
+**Negative:**
 
-- Потрібне перепідключення клієнтів при обриві зв'язку й відновлення стану ([NFR-9](../../requirements/non-functional.md)).
-- Кілька екземплярів сервісу потребують спільного каналу розсилки між ними.
+- Clients must reconnect after a dropped connection and restore state ([NFR-9](../../requirements/non-functional.md)).
+- Multiple instances of the service need a shared fan-out channel between them.

@@ -1,27 +1,27 @@
-# ADR-XXXX: Назва рішення
+# ADR-XXXX: Decision title
 
-- **Статус:** Запропоновано | Прийнято | Відхилено | Замінено ADR-XXXX
-- **Дата:** YYYY-MM-DD
+- **Status:** Proposed | Accepted | Rejected | Superseded by ADR-XXXX
+- **Date:** YYYY-MM-DD
 
-## Контекст
+## Context
 
-Яка проблема або потреба. Які вимоги й обмеження на неї впливають.
+What problem or need is being addressed. Which requirements and constraints affect it.
 
-## Рішення
+## Decision
 
-Що саме вирішили — одним-двома реченнями, у стверджувальній формі.
+What was decided, in one or two sentences, stated affirmatively.
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **Варіант A** — чому не обрали.
-- **Варіант B** — чому не обрали.
+- **Option A** — why it was not chosen.
+- **Option B** — why it was not chosen.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
 - …
 
-**Негативні:**
+**Negative:**
 
 - …

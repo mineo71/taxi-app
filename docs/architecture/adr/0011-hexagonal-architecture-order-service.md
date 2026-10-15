@@ -1,38 +1,38 @@
-# ADR-0011: Гексагональна архітектура сервісу замовлень
+# ADR-0011: Hexagonal architecture for the order service
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Сервіс замовлень містить основну бізнес-логіку системи: життєвий цикл поїздки, розрахунок вартості, правила скасування. Ця логіка має бути покрита автотестами ([NFR-24](../../requirements/non-functional.md)) і не повинна залежати від того, яка база, черга чи картографічний сервіс використовуються. Правила ціноутворення змінюються найчастіше.
+The order service holds the core business logic of the system: the trip lifecycle, price calculation and cancellation rules. This logic must be covered by automated tests (≥ 80%, [NFR-24](../../requirements/non-functional.md)) and must not depend on which database, broker or maps provider is used. Pricing rules change most often.
 
-## Рішення
+## Decision
 
-Сервіс замовлень побудований за **гексагональною архітектурою** (ports and adapters), три шари:
+The order service follows **hexagonal architecture** (ports and adapters) with three layers:
 
-1. **Вхід** — контролер замовлень: перетворює HTTP-запит на виклик, бізнес-логіки не містить.
-2. **Логіка** — менеджер життєвого циклу (скінченний автомат станів), калькулятор вартості, обробник скасувань. Нічого не знає про зовнішній світ.
-3. **Адаптери** — репозиторій поїздок, видавець подій, клієнти сервісу підбору й карт.
+1. **Entry point** — the order controller: turns an HTTP request into a call, contains no business logic.
+2. **Logic** — the trip lifecycle manager (state machine), price calculator, cancellation handler. Knows nothing about the outside world.
+3. **Adapters** — trip repository, event publisher, matching and maps clients.
 
-Залежності йдуть лише згори вниз; логіка визначає інтерфейси, адаптери їх реалізують. Наприклад, менеджер викликає `publishTripCompleted(trip)`, а вся робота з Kafka — у видавці подій.
+Dependencies only point downwards; the logic defines interfaces and the adapters implement them. For example, the lifecycle manager calls `publishTripCompleted(trip)`, and all Kafka-specific work lives in the event publisher.
 
-Деталі — на діаграмі [C3](../c3-order-service.md).
+Details are on the [C3 diagram](../c3-order-service.md).
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **Контролер напряму працює з репозиторієм** — логіка переходів між станами розмазується по контролеру, її неможливо протестувати окремо.
-- **Класична тришарова архітектура** (контролер → сервіс → репозиторій) — логіка залежить від шару даних, підміна бази чи черги зачіпає бізнес-код.
+- **Controller talks to the repository directly** — state transition logic gets spread across the controller and cannot be tested in isolation.
+- **Classic three-layer architecture** (controller → service → repository) — the logic depends on the data layer, so replacing the database or broker touches business code.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Логіку завершення поїздки можна тестувати без Kafka й бази — адаптери підміняються заглушками.
-- Перехід з Kafka на іншу чергу змінює один компонент.
-- Повторні спроби, таймаути й буферизація зібрані в адаптерах, а не розмазані по бізнес-логіці.
-- Якщо зовнішній сервіс недоступний, адаптер повертає помилку, а менеджер вирішує, що робити з поїздкою.
+- Trip completion logic can be tested without Kafka or a database — adapters are replaced with stubs.
+- Moving from Kafka to another broker changes one component.
+- Retries, timeouts and buffering are concentrated in the adapters instead of being spread across business logic.
+- If an external service is unavailable, the adapter returns an error and the lifecycle manager decides what to do with the trip.
 
-**Негативні:**
+**Negative:**
 
-- Більше інтерфейсів і класів, ніж у простому CRUD-сервісі.
+- More interfaces and classes than in a simple CRUD service.

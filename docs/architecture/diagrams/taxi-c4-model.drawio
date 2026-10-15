@@ -5,79 +5,79 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <mxCell id="t1" value="&lt;b&gt;Рівень C1 — System Context diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Система замовлення таксі" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
+        <mxCell id="t1" value="&lt;b&gt;Level C1 — System Context diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Taxi ordering system" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
           <mxGeometry x="60" y="40" width="800" height="80" as="geometry" />
         </mxCell>
 
-        <mxCell id="p1" value="&lt;b&gt;Пасажир&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;br&gt;Замовляє поїздку, оплачує її та оцінює водія" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
+        <mxCell id="p1" value="&lt;b&gt;Passenger&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;br&gt;Orders a ride, pays for it and rates the driver" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="200" y="180" width="300" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="p2" value="&lt;b&gt;Водій&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;br&gt;Приймає замовлення і виконує поїздки" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
+        <mxCell id="p2" value="&lt;b&gt;Driver&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;br&gt;Accepts orders and completes trips" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="620" y="180" width="300" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="p3" value="&lt;b&gt;Оператор підтримки&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;br&gt;Модерує водіїв, налаштовує тарифи, обробляє скарги" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
+        <mxCell id="p3" value="&lt;b&gt;Support operator&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;br&gt;Moderates drivers, configures tariffs, handles complaints" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="1040" y="180" width="300" height="120" as="geometry" />
         </mxCell>
 
-        <mxCell id="sys" value="&lt;b style=&quot;font-size: 15px;&quot;&gt;Система замовлення таксі&lt;/b&gt;&lt;br&gt;[Software System]&lt;br&gt;&lt;br&gt;Зʼєднує пасажирів і водіїв: приймає замовлення, підбирає найближче авто, веде поїздку та розраховує вартість" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;fontSize=13;spacing=12;" vertex="1" parent="1">
+        <mxCell id="sys" value="&lt;b style=&quot;font-size: 15px;&quot;&gt;Taxi ordering system&lt;/b&gt;&lt;br&gt;[Software System]&lt;br&gt;&lt;br&gt;Connects passengers and drivers: takes orders, finds the nearest car, runs the trip and calculates the price" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#1168BD;strokeColor=#0B4884;fontColor=#FFFFFF;fontSize=13;spacing=12;" vertex="1" parent="1">
           <mxGeometry x="180" y="500" width="1180" height="170" as="geometry" />
         </mxCell>
 
-        <mxCell id="e1" value="&lt;b&gt;Картографічний сервіс&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;Будує маршрут і розраховує час подачі" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="e1" value="&lt;b&gt;Maps service&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;Builds routes and calculates pickup ETA" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="180" y="880" width="280" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="e2" value="&lt;b&gt;Платіжний шлюз&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;Списує кошти з картки пасажира" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="e2" value="&lt;b&gt;Payment gateway&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;Charges the passenger’s card" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="520" y="880" width="280" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="e3" value="&lt;b&gt;Шлюз коротких повідомлень&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;Надсилає одноразовий код для входу" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="e3" value="&lt;b&gt;SMS gateway&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;Sends one-time login codes" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="860" y="880" width="280" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="e4" value="&lt;b&gt;Сервіс сповіщень&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;Доставляє сповіщення на телефон" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="e4" value="&lt;b&gt;Push notification service&lt;/b&gt;&lt;br&gt;[External Software System]&lt;br&gt;&lt;br&gt;Delivers notifications to phones" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="1200" y="880" width="280" height="120" as="geometry" />
         </mxCell>
 
-        <mxCell id="r1" value="Замовляє поїздку,&lt;br&gt;оплачує, оцінює&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.144;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1" target="sys">
+        <mxCell id="r1" value="Orders a ride,&lt;br&gt;pays, rates&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.144;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1" target="sys">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r2" value="Приймає замовлення,&lt;br&gt;передає геопозицію&lt;br&gt;[HTTPS / WebSocket]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p2" target="sys">
+        <mxCell id="r2" value="Accepts orders,&lt;br&gt;sends location&lt;br&gt;[HTTPS / WebSocket]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p2" target="sys">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="r3" value="Керує тарифами&lt;br&gt;і водіями&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.856;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p3" target="sys">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <mxCell id="r4" value="Запитує маршрут&lt;br&gt;і час подачі&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.119;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sys" target="e1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="r5" value="Створює платіж&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.407;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sys" target="e2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="r6" value="Надсилає код&lt;br&gt;підтвердження&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.695;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sys" target="e3">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="r7" value="Надсилає сповіщення&lt;br&gt;про статус поїздки&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.983;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sys" target="e4">
+        <mxCell id="r3" value="Manages tariffs&lt;br&gt;and drivers&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.856;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p3" target="sys">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="lg" value="&lt;b&gt;Легенда&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9A9A9A;verticalAlign=top;align=left;spacingLeft=16;spacingTop=12;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="r4" value="Requests a route&lt;br&gt;and pickup ETA&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.119;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sys" target="e1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" value="Creates a payment&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.407;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sys" target="e2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" value="Sends a&lt;br&gt;verification code&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.695;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sys" target="e3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r7" value="Sends trip status&lt;br&gt;notifications&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.983;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sys" target="e4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lg" value="&lt;b&gt;Legend&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9A9A9A;verticalAlign=top;align=left;spacingLeft=16;spacingTop=12;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="1520" y="180" width="240" height="280" as="geometry" />
         </mxCell>
         <mxCell id="lg1" value="" style="rounded=1;arcSize=20;html=1;fillColor=#08427B;strokeColor=#052E56;" vertex="1" parent="1">
           <mxGeometry x="1540" y="230" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lg1t" value="Людина" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lg1t" value="Person" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1586" y="230" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="lg2" value="" style="rounded=1;arcSize=20;html=1;fillColor=#1168BD;strokeColor=#0B4884;" vertex="1" parent="1">
           <mxGeometry x="1540" y="286" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lg2t" value="Наша система" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lg2t" value="Our system" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1586" y="286" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="lg3" value="" style="rounded=1;arcSize=20;html=1;fillColor=#999999;strokeColor=#6B6B6B;" vertex="1" parent="1">
           <mxGeometry x="1540" y="342" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lg3t" value="Зовнішня система" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lg3t" value="External system" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1586" y="342" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="lg4" value="" style="endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;" edge="1" parent="1">
@@ -86,7 +86,7 @@
             <mxPoint x="1574" y="411" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="lg4t" value="Напрямок взаємодії&lt;br&gt;(підпис + протокол)" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lg4t" value="Interaction direction&lt;br&gt;(label + protocol)" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1586" y="392" width="160" height="38" as="geometry" />
         </mxCell>
       </root>
@@ -99,88 +99,88 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <mxCell id="t2" value="&lt;b&gt;Рівень C2 — Container diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Система замовлення таксі" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
+        <mxCell id="t2" value="&lt;b&gt;Level C2 — Container diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Taxi ordering system" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
           <mxGeometry x="60" y="30" width="800" height="80" as="geometry" />
         </mxCell>
 
-        <mxCell id="cp1" value="&lt;b&gt;Пасажир&lt;/b&gt;&lt;br&gt;[Person]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
+        <mxCell id="cp1" value="&lt;b&gt;Passenger&lt;/b&gt;&lt;br&gt;[Person]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="120" y="160" width="300" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="cp2" value="&lt;b&gt;Водій&lt;/b&gt;&lt;br&gt;[Person]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
+        <mxCell id="cp2" value="&lt;b&gt;Driver&lt;/b&gt;&lt;br&gt;[Person]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="480" y="160" width="300" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="cp3" value="&lt;b&gt;Оператор підтримки&lt;/b&gt;&lt;br&gt;[Person]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
+        <mxCell id="cp3" value="&lt;b&gt;Support operator&lt;/b&gt;&lt;br&gt;[Person]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#052E56;fontColor=#FFFFFF;fontSize=13;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="1200" y="160" width="300" height="100" as="geometry" />
         </mxCell>
 
-        <mxCell id="bnd" value="Система замовлення таксі&amp;nbsp;&amp;nbsp;[Software System]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#8C8C8C;dashed=1;dashPattern=8 6;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=13;fontColor=#6B6B6B;" vertex="1" parent="1">
+        <mxCell id="bnd" value="Taxi ordering system&amp;nbsp;&amp;nbsp;[Software System]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#8C8C8C;dashed=1;dashPattern=8 6;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=13;fontColor=#6B6B6B;" vertex="1" parent="1">
           <mxGeometry x="80" y="320" width="1580" height="1040" as="geometry" />
         </mxCell>
 
-        <mxCell id="c1" value="&lt;b&gt;Застосунок пасажира&lt;/b&gt;&lt;br&gt;[Container: Flutter]&lt;br&gt;&lt;br&gt;Замовлення поїздки, карта, оплата, оцінка" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="c1" value="&lt;b&gt;Passenger app&lt;/b&gt;&lt;br&gt;[Container: Flutter]&lt;br&gt;&lt;br&gt;Ride ordering, map, payment, rating" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="120" y="380" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="c2" value="&lt;b&gt;Застосунок водія&lt;/b&gt;&lt;br&gt;[Container: Flutter]&lt;br&gt;&lt;br&gt;Прийом замовлень, навігація, заробіток" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="c2" value="&lt;b&gt;Driver app&lt;/b&gt;&lt;br&gt;[Container: Flutter]&lt;br&gt;&lt;br&gt;Accepting orders, navigation, earnings" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="480" y="380" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="c4" value="&lt;b&gt;Сервіс реального часу&lt;/b&gt;&lt;br&gt;[Container: Node.js, WebSocket]&lt;br&gt;&lt;br&gt;Передає позицію авто на карту пасажира" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="c4" value="&lt;b&gt;Real-time service&lt;/b&gt;&lt;br&gt;[Container: Node.js, WebSocket]&lt;br&gt;&lt;br&gt;Streams the car position to the passenger map" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="840" y="380" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="c3" value="&lt;b&gt;Панель адміністратора&lt;/b&gt;&lt;br&gt;[Container: React]&lt;br&gt;&lt;br&gt;Модерація водіїв, тарифи, аналітика" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="c3" value="&lt;b&gt;Admin panel&lt;/b&gt;&lt;br&gt;[Container: React]&lt;br&gt;&lt;br&gt;Driver moderation, tariffs, analytics" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="1200" y="380" width="300" height="130" as="geometry" />
         </mxCell>
 
-        <mxCell id="c5" value="&lt;b&gt;Шлюз інтерфейсу програмування (API Gateway)&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Єдина точка входу: автентифікація, перевірка прав, маршрутизація запитів" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=10;" vertex="1" parent="1">
+        <mxCell id="c5" value="&lt;b&gt;API Gateway&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Single entry point: authentication, authorization, request routing" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=10;" vertex="1" parent="1">
           <mxGeometry x="120" y="630" width="1380" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="c6" value="&lt;b&gt;Сервіс замовлень&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Життєвий цикл поїздки і розрахунок вартості" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="c6" value="&lt;b&gt;Order service&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Trip lifecycle and price calculation" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="120" y="880" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="c7" value="&lt;b&gt;Сервіс підбору водіїв&lt;/b&gt;&lt;br&gt;[Container: Go]&lt;br&gt;&lt;br&gt;Знаходить найближче вільне авто" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="c7" value="&lt;b&gt;Driver matching service&lt;/b&gt;&lt;br&gt;[Container: Go]&lt;br&gt;&lt;br&gt;Finds the nearest available car" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="480" y="880" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="c9" value="&lt;b&gt;Сервіс сповіщень&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Сповіщення на телефон і коди підтвердження" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="c9" value="&lt;b&gt;Notification service&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Push notifications and verification codes" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="840" y="880" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="c8" value="&lt;b&gt;Сервіс оплати&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Списання коштів, чеки, повернення" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="c8" value="&lt;b&gt;Payment service&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Charges, receipts, refunds" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="1200" y="880" width="300" height="130" as="geometry" />
         </mxCell>
 
-        <mxCell id="d1" value="&lt;b&gt;Основна база даних&lt;/b&gt;&lt;br&gt;[Container: PostgreSQL]&lt;br&gt;&lt;br&gt;Користувачі, поїздки, тарифи" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;size=16;spacing=6;" vertex="1" parent="1">
+        <mxCell id="d1" value="&lt;b&gt;Main database&lt;/b&gt;&lt;br&gt;[Container: PostgreSQL]&lt;br&gt;&lt;br&gt;Users, trips, tariffs" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;size=16;spacing=6;" vertex="1" parent="1">
           <mxGeometry x="120" y="1130" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="d2" value="&lt;b&gt;Кеш і географічний індекс&lt;/b&gt;&lt;br&gt;[Container: Redis]&lt;br&gt;&lt;br&gt;Позиції вільних водіїв" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;size=16;spacing=6;" vertex="1" parent="1">
+        <mxCell id="d2" value="&lt;b&gt;Cache and geo index&lt;/b&gt;&lt;br&gt;[Container: Redis]&lt;br&gt;&lt;br&gt;Positions of available drivers" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;size=16;spacing=6;" vertex="1" parent="1">
           <mxGeometry x="480" y="1130" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="d3" value="&lt;b&gt;Черга повідомлень&lt;/b&gt;&lt;br&gt;[Container: Kafka]&lt;br&gt;&lt;br&gt;Обмін подіями між сервісами" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="d3" value="&lt;b&gt;Message broker&lt;/b&gt;&lt;br&gt;[Container: Kafka]&lt;br&gt;&lt;br&gt;Events between services" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="840" y="1130" width="300" height="130" as="geometry" />
         </mxCell>
 
-        <mxCell id="x1" value="&lt;b&gt;Картографічний сервіс&lt;/b&gt;&lt;br&gt;[External Software System]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="x1" value="&lt;b&gt;Maps service&lt;/b&gt;&lt;br&gt;[External Software System]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="120" y="1470" width="300" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="x3" value="&lt;b&gt;Сервіс сповіщень і коротких повідомлень&lt;/b&gt;&lt;br&gt;[External Software System]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="x3" value="&lt;b&gt;Push and SMS providers&lt;/b&gt;&lt;br&gt;[External Software System]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="480" y="1470" width="300" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="x2" value="&lt;b&gt;Платіжний шлюз&lt;/b&gt;&lt;br&gt;[External Software System]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="x2" value="&lt;b&gt;Payment gateway&lt;/b&gt;&lt;br&gt;[External Software System]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="1200" y="1470" width="300" height="100" as="geometry" />
         </mxCell>
 
-        <mxCell id="k1" value="Замовляє поїздку&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cp1" target="c1">
+        <mxCell id="k1" value="Orders a ride&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cp1" target="c1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="k2" value="Приймає замовлення&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cp2" target="c2">
+        <mxCell id="k2" value="Accepts orders&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cp2" target="c2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="k3" value="Керує системою&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cp3" target="c3">
+        <mxCell id="k3" value="Manages the system&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cp3" target="c3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="k7" value="Надсилає позицію&lt;br&gt;[WebSocket]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="c2" target="c4">
+        <mxCell id="k7" value="Sends location&lt;br&gt;[WebSocket]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="c2" target="c4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="k8" value="Передає позицію авто на карту пасажира&amp;nbsp; [WebSocket]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="c4" target="c1">
+        <mxCell id="k8" value="Streams the car position to the passenger map&amp;nbsp; [WebSocket]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="c4" target="c1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="930" y="570" />
@@ -189,39 +189,39 @@
           </mxGeometry>
         </mxCell>
 
-        <mxCell id="k4" value="Викликає запити&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.109;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c1" target="c5">
+        <mxCell id="k4" value="Makes API calls&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.109;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c1" target="c5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="k5" value="Викликає запити&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.37;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c2" target="c5">
+        <mxCell id="k5" value="Makes API calls&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.37;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c2" target="c5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="k6" value="Викликає запити&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.891;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c3" target="c5">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <mxCell id="k9" value="Створює і веде поїздку&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.109;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c6">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="k10" value="Запитує водія&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.37;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c7">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="k11" value="Надсилає коди входу&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.63;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c9">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="k12" value="Ініціює оплату&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.891;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c8">
+        <mxCell id="k6" value="Makes API calls&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.891;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c3" target="c5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="k13" value="Читає і записує дані&lt;br&gt;[SQL / TCP]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c6" target="d1">
+        <mxCell id="k9" value="Creates and manages trips&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.109;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="k14" value="Шукає найближчих водіїв&lt;br&gt;[Redis protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c7" target="d2">
+        <mxCell id="k10" value="Requests a driver&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.37;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="k16" value="Читає події&lt;br&gt;[Kafka protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c9" target="d3">
+        <mxCell id="k11" value="Sends login codes&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.63;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c9">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="k15" value="Публікує події поїздки&amp;nbsp; [Kafka protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c6" target="d3">
+        <mxCell id="k12" value="Initiates payment&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.891;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="k13" value="Reads and writes data&lt;br&gt;[SQL / TCP]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c6" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k14" value="Finds nearest drivers&lt;br&gt;[Redis protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c7" target="d2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k16" value="Consumes events&lt;br&gt;[Kafka protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c9" target="d3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k15" value="Publishes trip events&amp;nbsp; [Kafka protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c6" target="d3">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="390" y="1075" />
@@ -229,7 +229,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="k17" value="Оновлює позиції водіїв&amp;nbsp; [Redis protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="c4" target="d2">
+        <mxCell id="k17" value="Updates driver positions&amp;nbsp; [Redis protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="c4" target="d2">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1580" y="471" />
@@ -239,7 +239,7 @@
           </mxGeometry>
         </mxCell>
 
-        <mxCell id="k18" value="Запитує маршрут&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c6" target="x1">
+        <mxCell id="k18" value="Requests a route&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c6" target="x1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="100" y="945" />
@@ -248,7 +248,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="k19" value="Надсилає сповіщення і коди&amp;nbsp; [HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c9" target="x3">
+        <mxCell id="k19" value="Sends notifications and codes&amp;nbsp; [HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c9" target="x3">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="810" y="945" />
@@ -257,41 +257,41 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="k20" value="Списує кошти&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c8" target="x2">
+        <mxCell id="k20" value="Charges cards&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c8" target="x2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="lgb" value="&lt;b&gt;Легенда&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9A9A9A;verticalAlign=top;align=left;spacingLeft=16;spacingTop=12;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="lgb" value="&lt;b&gt;Legend&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9A9A9A;verticalAlign=top;align=left;spacingLeft=16;spacingTop=12;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="1700" y="160" width="260" height="340" as="geometry" />
         </mxCell>
         <mxCell id="lb1" value="" style="rounded=1;arcSize=20;html=1;fillColor=#08427B;strokeColor=#052E56;" vertex="1" parent="1">
           <mxGeometry x="1720" y="210" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lb1t" value="Людина" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lb1t" value="Person" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1766" y="210" width="180" height="26" as="geometry" />
         </mxCell>
         <mxCell id="lb2" value="" style="rounded=1;arcSize=20;html=1;fillColor=#438DD5;strokeColor=#2E6295;" vertex="1" parent="1">
           <mxGeometry x="1720" y="266" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lb2t" value="Контейнер нашої системи" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lb2t" value="Container of our system" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1766" y="259" width="180" height="40" as="geometry" />
         </mxCell>
         <mxCell id="lb3" value="" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;html=1;fillColor=#438DD5;strokeColor=#2E6295;size=7;" vertex="1" parent="1">
           <mxGeometry x="1720" y="322" width="34" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="lb3t" value="Сховище даних" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lb3t" value="Data store" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1766" y="322" width="180" height="32" as="geometry" />
         </mxCell>
         <mxCell id="lb4" value="" style="rounded=1;arcSize=20;html=1;fillColor=#999999;strokeColor=#6B6B6B;" vertex="1" parent="1">
           <mxGeometry x="1720" y="384" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lb4t" value="Зовнішня система" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lb4t" value="External system" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1766" y="384" width="180" height="26" as="geometry" />
         </mxCell>
         <mxCell id="lb5" value="" style="rounded=0;html=1;fillColor=none;strokeColor=#8C8C8C;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
           <mxGeometry x="1720" y="440" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lb5t" value="Межа системи" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lb5t" value="System boundary" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1766" y="440" width="180" height="26" as="geometry" />
         </mxCell>
       </root>
@@ -304,72 +304,72 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <mxCell id="t3" value="&lt;b&gt;Рівень C3 — Component diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Контейнер «Сервіс замовлень» системи замовлення таксі" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
+        <mxCell id="t3" value="&lt;b&gt;Level C3 — Component diagram&lt;/b&gt;&lt;br&gt;&lt;br&gt;Order service container of the taxi ordering system" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;" vertex="1" parent="1">
           <mxGeometry x="60" y="30" width="900" height="80" as="geometry" />
         </mxCell>
 
-        <mxCell id="g1" value="&lt;b&gt;Шлюз інтерфейсу програмування (API Gateway)&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Єдина точка входу для застосунків пасажира, водія та адміністратора" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=10;" vertex="1" parent="1">
+        <mxCell id="g1" value="&lt;b&gt;API Gateway&lt;/b&gt;&lt;br&gt;[Container: Node.js]&lt;br&gt;&lt;br&gt;Single entry point for the passenger, driver and admin apps" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=10;" vertex="1" parent="1">
           <mxGeometry x="280" y="180" width="660" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="bnd3" value="Сервіс замовлень&amp;nbsp;&amp;nbsp;[Container: Node.js]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#8C8C8C;dashed=1;dashPattern=8 6;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=13;fontColor=#6B6B6B;" vertex="1" parent="1">
+        <mxCell id="bnd3" value="Order service&amp;nbsp;&amp;nbsp;[Container: Node.js]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#8C8C8C;dashed=1;dashPattern=8 6;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=13;fontColor=#6B6B6B;" vertex="1" parent="1">
           <mxGeometry x="60" y="380" width="1460" height="760" as="geometry" />
         </mxCell>
 
-        <mxCell id="m1" value="&lt;b&gt;Контролер замовлень&lt;/b&gt;&lt;br&gt;[Component: Express, REST]&lt;br&gt;&lt;br&gt;Приймає запити на створення, зміну та скасування поїздки і перевіряє вхідні дані" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=10;" vertex="1" parent="1">
+        <mxCell id="m1" value="&lt;b&gt;Order controller&lt;/b&gt;&lt;br&gt;[Component: Express, REST]&lt;br&gt;&lt;br&gt;Accepts requests to create, update and cancel a trip and validates input" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=10;" vertex="1" parent="1">
           <mxGeometry x="100" y="430" width="1020" height="120" as="geometry" />
         </mxCell>
 
-        <mxCell id="m4" value="&lt;b&gt;Обробник скасувань&lt;/b&gt;&lt;br&gt;[Component: TypeScript]&lt;br&gt;&lt;br&gt;Визначає, чи нараховувати штраф за скасування" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="m4" value="&lt;b&gt;Cancellation handler&lt;/b&gt;&lt;br&gt;[Component: TypeScript]&lt;br&gt;&lt;br&gt;Decides whether a cancellation fee applies" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="100" y="680" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="m2" value="&lt;b&gt;Менеджер життєвого циклу поїздки&lt;/b&gt;&lt;br&gt;[Component: TypeScript]&lt;br&gt;&lt;br&gt;Керує станами: створено, водія знайдено, в дорозі, завершено" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="m2" value="&lt;b&gt;Trip lifecycle manager&lt;/b&gt;&lt;br&gt;[Component: TypeScript]&lt;br&gt;&lt;br&gt;Manages states: created, driver assigned, in progress, completed" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="460" y="680" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="m3" value="&lt;b&gt;Калькулятор вартості&lt;/b&gt;&lt;br&gt;[Component: TypeScript]&lt;br&gt;&lt;br&gt;Рахує ціну з урахуванням тарифу, відстані та простою" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="m3" value="&lt;b&gt;Price calculator&lt;/b&gt;&lt;br&gt;[Component: TypeScript]&lt;br&gt;&lt;br&gt;Calculates the price from tariff, distance and waiting time" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="820" y="680" width="300" height="130" as="geometry" />
         </mxCell>
 
-        <mxCell id="m5" value="&lt;b&gt;Репозиторій поїздок&lt;/b&gt;&lt;br&gt;[Component: Prisma]&lt;br&gt;&lt;br&gt;Читає і записує дані поїздок у базу" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="m5" value="&lt;b&gt;Trip repository&lt;/b&gt;&lt;br&gt;[Component: Prisma]&lt;br&gt;&lt;br&gt;Reads and writes trip data in the database" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="100" y="960" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="m6" value="&lt;b&gt;Видавець подій&lt;/b&gt;&lt;br&gt;[Component: Kafka client]&lt;br&gt;&lt;br&gt;Публікує події зміни статусу поїздки" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="m6" value="&lt;b&gt;Event publisher&lt;/b&gt;&lt;br&gt;[Component: Kafka client]&lt;br&gt;&lt;br&gt;Publishes trip status change events" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="460" y="960" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="m7" value="&lt;b&gt;Клієнт сервісу підбору водіїв&lt;/b&gt;&lt;br&gt;[Component: gRPC client]&lt;br&gt;&lt;br&gt;Надсилає запит на пошук вільного авто" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="m7" value="&lt;b&gt;Matching service client&lt;/b&gt;&lt;br&gt;[Component: gRPC client]&lt;br&gt;&lt;br&gt;Requests a search for an available car" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="820" y="960" width="300" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="m8" value="&lt;b&gt;Клієнт картографічного сервісу&lt;/b&gt;&lt;br&gt;[Component: HTTP client]&lt;br&gt;&lt;br&gt;Отримує відстань і тривалість маршруту" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="m8" value="&lt;b&gt;Maps service client&lt;/b&gt;&lt;br&gt;[Component: HTTP client]&lt;br&gt;&lt;br&gt;Gets route distance and duration" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;fontColor=#0A0A0A;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="1180" y="960" width="300" height="130" as="geometry" />
         </mxCell>
 
-        <mxCell id="o1" value="&lt;b&gt;Основна база даних&lt;/b&gt;&lt;br&gt;[Container: PostgreSQL]" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;size=14;spacing=6;" vertex="1" parent="1">
+        <mxCell id="o1" value="&lt;b&gt;Main database&lt;/b&gt;&lt;br&gt;[Container: PostgreSQL]" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;size=14;spacing=6;" vertex="1" parent="1">
           <mxGeometry x="100" y="1260" width="300" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="o2" value="&lt;b&gt;Черга повідомлень&lt;/b&gt;&lt;br&gt;[Container: Kafka]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="o2" value="&lt;b&gt;Message broker&lt;/b&gt;&lt;br&gt;[Container: Kafka]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="460" y="1260" width="300" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="o3" value="&lt;b&gt;Сервіс підбору водіїв&lt;/b&gt;&lt;br&gt;[Container: Go]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="o3" value="&lt;b&gt;Driver matching service&lt;/b&gt;&lt;br&gt;[Container: Go]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#438DD5;strokeColor=#2E6295;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="820" y="1260" width="300" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="o4" value="&lt;b&gt;Картографічний сервіс&lt;/b&gt;&lt;br&gt;[External Software System]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
+        <mxCell id="o4" value="&lt;b&gt;Maps service&lt;/b&gt;&lt;br&gt;[External Software System]" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#6B6B6B;fontColor=#FFFFFF;fontSize=12;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="1180" y="1260" width="300" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="n1" value="Передає запити щодо поїздки&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="g1" target="m1">
+        <mxCell id="n1" value="Forwards trip requests&lt;br&gt;[HTTPS / JSON]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="g1" target="m1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="n2" value="Передає команду зміни стану&lt;br&gt;[виклик у коді]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m1" target="m2">
+        <mxCell id="n2" value="Passes a state change command&lt;br&gt;[in-process call]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m1" target="m2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="n3" value="Запитує, чи нараховувати штраф&lt;br&gt;[виклик у коді]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m4">
+        <mxCell id="n3" value="Asks whether a fee applies&lt;br&gt;[in-process call]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="n4" value="Запитує вартість поїздки&lt;br&gt;[виклик у коді]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m3">
+        <mxCell id="n4" value="Requests the trip price&lt;br&gt;[in-process call]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="n5" value="Зберігає стан поїздки&lt;br&gt;[виклик у коді]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m5">
+        <mxCell id="n5" value="Saves trip state&lt;br&gt;[in-process call]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m5">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="520" y="905" />
@@ -377,12 +377,12 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="n6" value="Публікує подію&lt;br&gt;зміни статусу&lt;br&gt;[виклик у коді]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m6">
+        <mxCell id="n6" value="Publishes a&lt;br&gt;status change event&lt;br&gt;[in-process call]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m6">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-66" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="n7" value="Просить знайти водія&lt;br&gt;[виклик у коді]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m7">
+        <mxCell id="n7" value="Asks to find a driver&lt;br&gt;[in-process call]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m2" target="m7">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="700" y="905" />
@@ -390,7 +390,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="n8" value="Запитує відстань і тривалість&lt;br&gt;[виклик у коді]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m3" target="m8">
+        <mxCell id="n8" value="Requests distance and duration&lt;br&gt;[in-process call]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m3" target="m8">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1060" y="925" />
@@ -399,50 +399,50 @@
           </mxGeometry>
         </mxCell>
 
-        <mxCell id="n9" value="Читає і записує дані&lt;br&gt;[SQL / TCP]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m5" target="o1">
+        <mxCell id="n9" value="Reads and writes data&lt;br&gt;[SQL / TCP]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m5" target="o1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="n10" value="Надсилає події&lt;br&gt;[Kafka protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m6" target="o2">
+        <mxCell id="n10" value="Sends events&lt;br&gt;[Kafka protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m6" target="o2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="n11" value="Викликає пошук водія&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m7" target="o3">
+        <mxCell id="n11" value="Calls driver search&lt;br&gt;[gRPC]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m7" target="o3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="n12" value="Запитує маршрут&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m8" target="o4">
+        <mxCell id="n12" value="Requests a route&lt;br&gt;[HTTPS / REST]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=blockThin;html=1;strokeColor=#808080;strokeWidth=1.5;fontSize=11;fontColor=#404040;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="m8" target="o4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="lgc" value="&lt;b&gt;Легенда&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9A9A9A;verticalAlign=top;align=left;spacingLeft=16;spacingTop=12;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="lgc" value="&lt;b&gt;Legend&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9A9A9A;verticalAlign=top;align=left;spacingLeft=16;spacingTop=12;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="1620" y="430" width="280" height="340" as="geometry" />
         </mxCell>
         <mxCell id="lc1" value="" style="rounded=1;arcSize=20;html=1;fillColor=#85BBF0;strokeColor=#5D82A8;" vertex="1" parent="1">
           <mxGeometry x="1640" y="480" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lc1t" value="Компонент усередині&lt;br&gt;сервісу замовлень" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lc1t" value="Component inside&lt;br&gt;the order service" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1686" y="473" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="lc2" value="" style="rounded=1;arcSize=20;html=1;fillColor=#438DD5;strokeColor=#2E6295;" vertex="1" parent="1">
           <mxGeometry x="1640" y="540" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lc2t" value="Інший контейнер системи" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lc2t" value="Other container of the system" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1686" y="533" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="lc3" value="" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;html=1;fillColor=#438DD5;strokeColor=#2E6295;size=7;" vertex="1" parent="1">
           <mxGeometry x="1640" y="600" width="34" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="lc3t" value="Сховище даних" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lc3t" value="Data store" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1686" y="600" width="200" height="32" as="geometry" />
         </mxCell>
         <mxCell id="lc4" value="" style="rounded=1;arcSize=20;html=1;fillColor=#999999;strokeColor=#6B6B6B;" vertex="1" parent="1">
           <mxGeometry x="1640" y="662" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lc4t" value="Зовнішня система" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lc4t" value="External system" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1686" y="662" width="200" height="26" as="geometry" />
         </mxCell>
         <mxCell id="lc5" value="" style="rounded=0;html=1;fillColor=none;strokeColor=#8C8C8C;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
           <mxGeometry x="1640" y="718" width="34" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="lc5t" value="Межа контейнера" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="lc5t" value="Container boundary" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1686" y="718" width="200" height="26" as="geometry" />
         </mxCell>
       </root>

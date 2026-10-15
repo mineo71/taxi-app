@@ -1,63 +1,63 @@
-# C2 — Container diagram: система замовлення таксі
+# C2 — Container diagram: Taxi ordering system
 
-Систему розкрито на окремі застосунки й сервіси, кожен зі своєю технологією: мобільні клієнти, шлюз, сервіс реального часу, чотири внутрішні сервіси та три сховища.
+The system is broken down into separate apps and services, each with its own technology: mobile clients, a gateway, a real-time service, four internal services and three data stores.
 
-**Контейнер** у C4 — це не Docker, а окремо запущена одиниця, всередині якої виконується код або зберігаються дані. Критерій простий: якщо щось можна зупинити й перезапустити незалежно від решти — це окремий контейнер. Застосунок на телефоні — теж контейнер. Бібліотека чи модуль усередині процесу контейнером не є.
+A **container** in C4 is not Docker — it is a separately running unit that executes code or stores data. The test is simple: if it can be stopped and restarted independently of everything else, it is a separate container. A mobile app on a phone is a container too. A library or module inside a process is not.
 
 ```mermaid
 flowchart TB
-  passenger["<b>Пасажир</b><br/>[Person]"]
-  driver["<b>Водій</b><br/>[Person]"]
-  operator["<b>Оператор підтримки</b><br/>[Person]"]
+  passenger["<b>Passenger</b><br/>[Person]"]
+  driver["<b>Driver</b><br/>[Person]"]
+  operator["<b>Support operator</b><br/>[Person]"]
 
-  subgraph boundary["Система замовлення таксі [Software System]"]
+  subgraph boundary["Taxi ordering system [Software System]"]
     direction TB
-    passengerApp["<b>Застосунок пасажира</b><br/>[Container: Flutter]<br/><br/>Замовлення поїздки, карта, оплата, оцінка"]
-    driverApp["<b>Застосунок водія</b><br/>[Container: Flutter]<br/><br/>Прийом замовлень, навігація, заробіток"]
-    adminApp["<b>Панель адміністратора</b><br/>[Container: React]<br/><br/>Модерація водіїв, тарифи, аналітика"]
+    passengerApp["<b>Passenger app</b><br/>[Container: Flutter]<br/><br/>Ride ordering, map, payment, rating"]
+    driverApp["<b>Driver app</b><br/>[Container: Flutter]<br/><br/>Accepting orders, navigation, earnings"]
+    adminApp["<b>Admin panel</b><br/>[Container: React]<br/><br/>Driver moderation, tariffs, analytics"]
 
-    gateway["<b>API Gateway</b><br/>[Container: Node.js]<br/><br/>Єдина точка входу: автентифікація,<br/>перевірка прав, маршрутизація запитів"]
-    realtime["<b>Сервіс реального часу</b><br/>[Container: Node.js, WebSocket]<br/><br/>Передає позицію авто на карту пасажира"]
+    gateway["<b>API Gateway</b><br/>[Container: Node.js]<br/><br/>Single entry point: authentication,<br/>authorization, request routing"]
+    realtime["<b>Real-time service</b><br/>[Container: Node.js, WebSocket]<br/><br/>Streams the car position to the passenger map"]
 
-    orders["<b>Сервіс замовлень</b><br/>[Container: Node.js]<br/><br/>Життєвий цикл поїздки<br/>і розрахунок вартості"]
-    matching["<b>Сервіс підбору водіїв</b><br/>[Container: Go]<br/><br/>Знаходить найближче вільне авто"]
-    payment["<b>Сервіс оплати</b><br/>[Container: Node.js]<br/><br/>Списання коштів, чеки, повернення"]
-    notify["<b>Сервіс сповіщень</b><br/>[Container: Node.js]<br/><br/>Сповіщення на телефон<br/>і коди підтвердження"]
+    orders["<b>Order service</b><br/>[Container: Node.js]<br/><br/>Trip lifecycle<br/>and price calculation"]
+    matching["<b>Driver matching service</b><br/>[Container: Go]<br/><br/>Finds the nearest available car"]
+    payment["<b>Payment service</b><br/>[Container: Node.js]<br/><br/>Charges, receipts, refunds"]
+    notify["<b>Notification service</b><br/>[Container: Node.js]<br/><br/>Push notifications<br/>and verification codes"]
 
-    db[("<b>Основна база даних</b><br/>[Container: PostgreSQL]<br/><br/>Користувачі, поїздки, тарифи")]
-    redis[("<b>Кеш і географічний індекс</b><br/>[Container: Redis]<br/><br/>Позиції вільних водіїв")]
-    kafka[("<b>Черга повідомлень</b><br/>[Container: Kafka]<br/><br/>Обмін подіями між сервісами")]
+    db[("<b>Main database</b><br/>[Container: PostgreSQL]<br/><br/>Users, trips, tariffs")]
+    redis[("<b>Cache and geo index</b><br/>[Container: Redis]<br/><br/>Positions of available drivers")]
+    kafka[("<b>Message broker</b><br/>[Container: Kafka]<br/><br/>Events between services")]
   end
 
-  maps["<b>Картографічний сервіс</b><br/>[External Software System]"]
-  smsPush["<b>Сервіс сповіщень і коротких повідомлень</b><br/>[External Software System]"]
-  gatewayPay["<b>Платіжний шлюз</b><br/>[External Software System]"]
+  maps["<b>Maps service</b><br/>[External Software System]"]
+  smsPush["<b>Push and SMS providers</b><br/>[External Software System]"]
+  gatewayPay["<b>Payment gateway</b><br/>[External Software System]"]
 
-  passenger -- "Замовляє поїздку<br/>[HTTPS / JSON]" --> passengerApp
-  driver -- "Приймає замовлення<br/>[HTTPS / JSON]" --> driverApp
-  operator -- "Керує системою<br/>[HTTPS / JSON]" --> adminApp
+  passenger -- "Orders a ride<br/>[HTTPS / JSON]" --> passengerApp
+  driver -- "Accepts orders<br/>[HTTPS / JSON]" --> driverApp
+  operator -- "Manages the system<br/>[HTTPS / JSON]" --> adminApp
 
-  passengerApp -- "Викликає запити<br/>[HTTPS / JSON]" --> gateway
-  driverApp -- "Викликає запити<br/>[HTTPS / JSON]" --> gateway
-  adminApp -- "Викликає запити<br/>[HTTPS / JSON]" --> gateway
-  driverApp -- "Надсилає позицію<br/>[WebSocket]" --> realtime
-  realtime -- "Передає позицію авто<br/>[WebSocket]" --> passengerApp
+  passengerApp -- "Makes API calls<br/>[HTTPS / JSON]" --> gateway
+  driverApp -- "Makes API calls<br/>[HTTPS / JSON]" --> gateway
+  adminApp -- "Makes API calls<br/>[HTTPS / JSON]" --> gateway
+  driverApp -- "Sends location<br/>[WebSocket]" --> realtime
+  realtime -- "Streams car position<br/>[WebSocket]" --> passengerApp
 
-  gateway -- "Створює і веде поїздку<br/>[gRPC]" --> orders
-  gateway -- "Надсилає коди входу<br/>[gRPC]" --> notify
-  orders -- "Запитує водія<br/>[gRPC]" --> matching
-  orders -- "Ініціює оплату<br/>[gRPC]" --> payment
+  gateway -- "Creates and manages trips<br/>[gRPC]" --> orders
+  gateway -- "Sends login codes<br/>[gRPC]" --> notify
+  orders -- "Requests a driver<br/>[gRPC]" --> matching
+  orders -- "Initiates payment<br/>[gRPC]" --> payment
 
-  orders -- "Читає і записує дані<br/>[SQL / TCP]" --> db
-  orders -- "Публікує події поїздки<br/>[Kafka protocol]" --> kafka
-  matching -- "Шукає найближчих водіїв<br/>[Redis protocol]" --> redis
-  realtime -- "Оновлює позиції водіїв<br/>[Redis protocol]" --> redis
-  notify -- "Читає події<br/>[Kafka protocol]" --> kafka
-  payment -- "Читає події<br/>[Kafka protocol]" --> kafka
+  orders -- "Reads and writes data<br/>[SQL / TCP]" --> db
+  orders -- "Publishes trip events<br/>[Kafka protocol]" --> kafka
+  matching -- "Finds nearest drivers<br/>[Redis protocol]" --> redis
+  realtime -- "Updates driver positions<br/>[Redis protocol]" --> redis
+  notify -- "Consumes events<br/>[Kafka protocol]" --> kafka
+  payment -- "Consumes events<br/>[Kafka protocol]" --> kafka
 
-  orders -- "Запитує маршрут<br/>[HTTPS / REST]" --> maps
-  notify -- "Надсилає сповіщення і коди<br/>[HTTPS / REST]" --> smsPush
-  payment -- "Списує кошти<br/>[HTTPS / REST]" --> gatewayPay
+  orders -- "Requests a route<br/>[HTTPS / REST]" --> maps
+  notify -- "Sends notifications and codes<br/>[HTTPS / REST]" --> smsPush
+  payment -- "Charges cards<br/>[HTTPS / REST]" --> gatewayPay
 
   classDef person fill:#08427b,stroke:#052e56,color:#ffffff
   classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff
@@ -70,33 +70,33 @@ flowchart TB
   style boundary fill:none,stroke:#0b4884,stroke-dasharray:6 4
 ```
 
-## Склад діаграми
+## What is on the diagram
 
-**Клієнтський ряд.** Три застосунки для трьох ролей: пасажирський і водійський на Flutter, адмінка на React. Вони окремі, бо сценарії принципово різні: водієві потрібне фонове відстеження позиції й робота офлайн, пасажирові — ні. Див. [ADR-0003](adr/0003-flutter-and-react-clients.md).
+**Client row.** Three apps for three roles: passenger and driver apps in Flutter, admin panel in React. They are separate because the scenarios are fundamentally different: the driver needs background location tracking and offline work, the passenger does not. See [ADR-0003](adr/0003-flutter-and-react-clients.md).
 
-**API Gateway.** Єдина точка входу для всіх трьох клієнтів. Бере на себе те, що інакше довелося б дублювати в кожному сервісі: перевірку токена, права доступу, обмеження частоти запитів, маршрутизацію. Див. [ADR-0004](adr/0004-api-gateway-single-entry-point.md).
+**API Gateway.** The single entry point for all three clients. It takes over what would otherwise be duplicated in every service: token validation, access rights, rate limiting, routing. See [ADR-0004](adr/0004-api-gateway-single-entry-point.md).
 
-**Сервіс реального часу.** Винесений окремо від шлюзу. Звичайні запити живуть частки секунди, а WebSocket-з'єднання висить годинами, поки триває поїздка. Масштабуються вони теж по-різному: шлюз — за кількістю запитів, сервіс реального часу — за кількістю активних з'єднань. Див. [ADR-0005](adr/0005-separate-realtime-service.md).
+**Real-time service.** Kept separate from the gateway. Regular requests live for a fraction of a second, while a WebSocket connection stays open for hours during a trip. They also scale differently: the gateway by request count, the real-time service by the number of open connections. See [ADR-0005](adr/0005-separate-realtime-service.md).
 
-**Чотири внутрішні сервіси.** Поділ іде за зонами відповідальності, а не за сутностями бази. Див. [ADR-0006](adr/0006-services-by-responsibility.md).
+**Four internal services.** Split by area of responsibility, not by database entities. See [ADR-0006](adr/0006-services-by-responsibility.md).
 
-**Три сховища.** PostgreSQL — джерело істини: користувачі, поїздки, тарифи, платежі. Redis — позиції вільних водіїв, які змінюються кожні кілька секунд. Kafka — асинхронний обмін подіями між сервісами. Див. [ADR-0007](adr/0007-postgresql-as-source-of-truth.md), [ADR-0008](adr/0008-redis-geo-index-for-driver-positions.md), [ADR-0009](adr/0009-kafka-for-async-events.md).
+**Three data stores.** PostgreSQL is the source of truth: users, trips, tariffs, payments. Redis holds the positions of available drivers, which change every few seconds. Kafka carries asynchronous events between services. See [ADR-0007](adr/0007-postgresql-as-source-of-truth.md), [ADR-0008](adr/0008-redis-geo-index-for-driver-positions.md), [ADR-0009](adr/0009-kafka-for-async-events.md).
 
-## Контейнери
+## Containers
 
-| Контейнер | Технологія | Відповідальність | Як масштабується | Вимоги |
+| Container | Technology | Responsibility | Scales by | Requirements |
 |---|---|---|---|---|
-| Застосунок пасажира | Flutter | Замовлення, карта, оплата, оцінка | — | FR-1 … FR-19 |
-| Застосунок водія | Flutter | Прийом замовлень, навігація, заробіток | — | FR-20 … FR-28 |
-| Панель адміністратора | React | Модерація, тарифи, аналітика | — | FR-29 … FR-34 |
-| API Gateway | Node.js | Автентифікація, права, rate limiting, маршрутизація | За кількістю запитів | NFR-3, NFR-11, NFR-13, NFR-14 |
-| Сервіс реального часу | Node.js, WebSocket | Позиція авто й статуси поїздки наживо | За кількістю активних з'єднань | FR-10, NFR-2 |
-| Сервіс замовлень | Node.js | Життєвий цикл поїздки, вартість, скасування | За кількістю поїздок | FR-5, FR-9, FR-24, FR-37 |
-| Сервіс підбору водіїв | Go | Пошук найближчого вільного авто | За кількістю пошуків | FR-22, FR-35, NFR-1 |
-| Сервіс оплати | Node.js | Списання, чеки, повернення | За кількістю платежів | FR-15, FR-18, FR-32, NFR-12 |
-| Сервіс сповіщень | Node.js | Push-сповіщення, коди підтвердження | За кількістю подій | FR-1, FR-14 |
-| Основна база даних | PostgreSQL | Користувачі, поїздки, тарифи, платежі | Репліки для читання | NFR-10 |
-| Кеш і геоіндекс | Redis | Позиції вільних водіїв | Кластер | NFR-1 |
-| Черга повідомлень | Kafka | Події між сервісами | Партиції | NFR-8 |
+| Passenger app | Flutter | Ordering, map, payment, rating | — | FR-1 … FR-19 |
+| Driver app | Flutter | Accepting orders, navigation, earnings | — | FR-20 … FR-28 |
+| Admin panel | React | Moderation, tariffs, analytics | — | FR-29 … FR-34 |
+| API Gateway | Node.js | Authentication, authorization, rate limiting, routing | Request count | NFR-3, NFR-11, NFR-13, NFR-14 |
+| Real-time service | Node.js, WebSocket | Live car position and trip status | Open connections | FR-10, NFR-2 |
+| Order service | Node.js | Trip lifecycle, pricing, cancellations | Number of trips | FR-5, FR-9, FR-24, FR-37 |
+| Driver matching service | Go | Finding the nearest available car | Number of searches | FR-22, FR-35, NFR-1 |
+| Payment service | Node.js | Charges, receipts, refunds | Number of payments | FR-15, FR-18, FR-32, NFR-12 |
+| Notification service | Node.js | Push notifications, verification codes | Number of events | FR-1, FR-14 |
+| Main database | PostgreSQL | Users, trips, tariffs, payments | Read replicas | NFR-10 |
+| Cache and geo index | Redis | Positions of available drivers | Cluster | NFR-1 |
+| Message broker | Kafka | Events between services | Partitions | NFR-8 |
 
-Попередній рівень: [C1 — System Context](c1-system-context.md). Наступний рівень: [C3 — Components](c3-order-service.md).
+Previous level: [C1 — System Context](c1-system-context.md). Next level: [C3 — Components](c3-order-service.md).

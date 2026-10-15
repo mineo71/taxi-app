@@ -1,25 +1,25 @@
-# Архітектурні рішення (ADR)
+# Architecture decision records (ADR)
 
-Architecture Decision Record — короткий документ, що фіксує одне значуще архітектурне рішення: контекст, саме рішення, розглянуті альтернативи та наслідки. Формат описано в [ADR-0001](0001-record-architecture-decisions.md), шаблон — [template.md](template.md).
+An Architecture Decision Record is a short document that captures one significant architecture decision: its context, the decision itself, the alternatives considered and the consequences. The format is described in [ADR-0001](0001-record-architecture-decisions.md); the template is in [template.md](template.md).
 
-| № | Рішення | Статус |
+| # | Decision | Status |
 |---|---|---|
-| [0001](0001-record-architecture-decisions.md) | Фіксувати архітектурні рішення у форматі ADR | Прийнято |
-| [0002](0002-monorepo.md) | Монорепозиторій для клієнтів, сервісів і документації | Прийнято |
-| [0003](0003-flutter-and-react-clients.md) | Flutter для мобільних застосунків, React для адмін-панелі | Прийнято |
-| [0004](0004-api-gateway-single-entry-point.md) | API Gateway як єдина точка входу | Прийнято |
-| [0005](0005-separate-realtime-service.md) | Окремий сервіс реального часу на WebSocket | Прийнято |
-| [0006](0006-services-by-responsibility.md) | Поділ на сервіси за зонами відповідальності | Прийнято |
-| [0007](0007-postgresql-as-source-of-truth.md) | PostgreSQL як основне сховище | Прийнято |
-| [0008](0008-redis-geo-index-for-driver-positions.md) | Redis з геоіндексом для позицій вільних водіїв | Прийнято |
-| [0009](0009-kafka-for-async-events.md) | Kafka для асинхронного обміну подіями | Прийнято |
-| [0010](0010-go-for-matching-service.md) | Go для сервісу підбору водіїв | Прийнято |
-| [0011](0011-hexagonal-architecture-order-service.md) | Гексагональна архітектура сервісу замовлень | Прийнято |
-| [0012](0012-external-payment-provider.md) | Платежі через зовнішнього провайдера з PCI DSS | Прийнято |
-| [0013](0013-grpc-for-internal-calls.md) | gRPC для синхронних викликів між сервісами | Прийнято |
+| [0001](0001-record-architecture-decisions.md) | Record architecture decisions as ADRs | Accepted |
+| [0002](0002-monorepo.md) | Monorepo for clients, services and documentation | Accepted |
+| [0003](0003-flutter-and-react-clients.md) | Flutter for mobile apps, React for the admin panel | Accepted |
+| [0004](0004-api-gateway-single-entry-point.md) | API Gateway as the single entry point | Accepted |
+| [0005](0005-separate-realtime-service.md) | Separate real-time service on WebSocket | Accepted |
+| [0006](0006-services-by-responsibility.md) | Split services by area of responsibility | Accepted |
+| [0007](0007-postgresql-as-source-of-truth.md) | PostgreSQL as the main data store | Accepted |
+| [0008](0008-redis-geo-index-for-driver-positions.md) | Redis geo index for available driver positions | Accepted |
+| [0009](0009-kafka-for-async-events.md) | Kafka for asynchronous events | Accepted |
+| [0010](0010-go-for-matching-service.md) | Go for the driver matching service | Accepted |
+| [0011](0011-hexagonal-architecture-order-service.md) | Hexagonal architecture for the order service | Accepted |
+| [0012](0012-external-payment-provider.md) | Payments through an external PCI DSS provider | Accepted |
+| [0013](0013-grpc-for-internal-calls.md) | gRPC for synchronous calls between services | Accepted |
 
-## Правила
+## Rules
 
-- Один ADR — одне рішення.
-- Прийнятий ADR не редагується. Якщо рішення змінюється, створюється новий ADR, а старий отримує статус «Замінено ADR-XXXX».
-- Нумерація наскрізна, номери не перевикористовуються.
+- One ADR — one decision.
+- An accepted ADR is not edited. If a decision changes, a new ADR is created and the old one gets the status "Superseded by ADR-XXXX".
+- Numbering is sequential and numbers are never reused.

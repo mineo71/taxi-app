@@ -1,33 +1,33 @@
-# ADR-0009: Kafka для асинхронного обміну подіями
+# ADR-0009: Kafka for asynchronous events
 
-- **Статус:** Прийнято
-- **Дата:** 2026-10-15
+- **Status:** Accepted
+- **Date:** 2026-10-15
 
-## Контекст
+## Context
 
-Після завершення поїздки має статися кілька речей: списати кошти, надіслати чек і сповіщення, оновити баланс водія, порахувати статистику, нарахувати бонуси.
+When a trip is completed, several things must happen: charge the passenger, send the receipt and notifications, update the driver's balance, update statistics, award bonuses.
 
-Без черги сервіс замовлень мусив би викликати всіх по черзі й чекати відповіді від кожного. Якщо сервіс сповіщень ліг — весь запит падає, хоча поїздка насправді завершена. Якщо статистика рахується повільно — пасажир дивиться на спінер. Коли додадуть шосту дію, доведеться знову змінювати код сервісу замовлень. Сервіс замовлень знає про всіх, залежить від усіх і падає разом з будь-яким із них.
+Without a broker, the order service would have to call everyone in turn and wait for each response. If the notification service is down, the whole request fails even though the trip is actually completed. If statistics are slow, the passenger stares at a spinner. When a sixth action is added, the order service code has to change again. The order service knows about everyone, depends on everyone and fails together with any of them.
 
-## Рішення
+## Decision
 
-Сервіс замовлень публікує події зміни статусу поїздки (`TripCreated`, `DriverAssigned`, `TripCompleted`, `TripCancelled`) у **Kafka**. Кожен зацікавлений сервіс сам читає події зі своєю швидкістю.
+The order service publishes trip status events (`TripCreated`, `DriverAssigned`, `TripCompleted`, `TripCancelled`) to **Kafka**. Each interested service consumes the events at its own pace.
 
-## Розглянуті альтернативи
+## Alternatives considered
 
-- **Синхронні HTTP-виклики** — описані вище проблеми зв'язаності.
-- **RabbitMQ** — підходить для черг задач, але повідомлення видаляються після читання: немає повторного читання подій і кількох незалежних споживачів одного потоку без додаткового налаштування.
+- **Synchronous HTTP calls** — the coupling problems described above.
+- **RabbitMQ** — good for task queues, but messages are deleted once consumed: no replay and no multiple independent consumers of the same stream without extra setup.
 
-## Наслідки
+## Consequences
 
-**Позитивні:**
+**Positive:**
 
-- Сервіс замовлень не знає, хто читає його події. Новий сервіс (наприклад, аналітика) підписується на ту саму тему без змін у сервісі замовлень.
-- **Події зберігаються**: сервіс, що лежав дві години, після підняття прочитає все накопичене ([NFR-8](../../requirements/non-functional.md)).
-- **Кожен читає у своєму темпі**: швидкий сервіс оплати не чекає на повільну аналітику.
-- **Можна перечитати заново**: після виправлення помилки події за минулий тиждень обробляються ще раз.
+- The order service does not know who reads its events. A new service (for example, analytics) subscribes to the same topic without any change to the order service.
+- **Events are retained**: a service that was down for two hours reads everything it missed after it comes back ([NFR-8](../../requirements/non-functional.md)).
+- **Everyone reads at their own pace**: the fast payment service does not wait for slow analytics.
+- **Events can be replayed**: after a bug fix, last week's events can be processed again.
 
-**Негативні:**
+**Negative:**
 
-- Kafka — окрема інфраструктура, яку треба експлуатувати.
-- Узгодженість між сервісами — кінцева (eventual consistency); обробники подій мають бути ідемпотентними.
+- Kafka is separate infrastructure that has to be operated.
+- Consistency between services is eventual; event handlers must be idempotent.
