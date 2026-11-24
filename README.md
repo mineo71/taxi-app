@@ -19,7 +19,7 @@ taxi-app/
     ├── overview.md     vision, roles, MVP scope
     ├── requirements/   actors, functional and non-functional requirements, unhappy paths, constraints, success metrics
     ├── project/        budget
-    ├── architecture/   C4 model (C1–C3) and ADRs
+    ├── architecture/   characteristics, C4 model (C1–C3), deployment, ADRs
     └── glossary.md
 ```
 
@@ -36,6 +36,7 @@ taxi-app/
 | Success metrics | [docs/requirements/success-metrics.md](docs/requirements/success-metrics.md) |
 | Budget | [docs/project/budget.md](docs/project/budget.md) |
 | Architecture (C4) | [docs/architecture/README.md](docs/architecture/README.md) |
+| Architecture characteristics and quality scenarios | [docs/architecture/characteristics.md](docs/architecture/characteristics.md) |
 | Architecture decision records | [docs/architecture/adr/README.md](docs/architecture/adr/README.md) |
 | Glossary | [docs/glossary.md](docs/glossary.md) |
 

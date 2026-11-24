@@ -47,5 +47,6 @@ Short summary; goals, permissions and external actors are described in [actors](
 - [Success metrics](requirements/success-metrics.md)
 - [Budget](project/budget.md)
 - [Architecture (C4)](architecture/README.md)
+- [Architecture characteristics](architecture/characteristics.md)
 - [Architecture decision records](architecture/adr/README.md)
 - [Glossary](glossary.md)

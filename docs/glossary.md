@@ -15,6 +15,12 @@
 | Container (C4) | A separately running unit that executes code or stores data. Not to be confused with a Docker container |
 | Component (C4) | A logical block of code inside one container |
 | ADR | Architecture Decision Record — a record of one architecture decision |
+| Architecture characteristic | A quality the architecture is optimised for, such as availability or performance. Becomes architectural only when backed by a tactic that changes the structure |
+| Quality attribute scenario (QAS) | A testable description of a characteristic: source, stimulus, artifact, environment, response, response measure |
+| Availability zone | An isolated data centre within a cloud region with its own power and network |
+| Failover | Automatic switch from a failed primary to its standby or replica |
+| Idempotency key | A unique request ID that lets the server apply a retried request only once |
+| Transactional outbox | A table where an event is saved in the same transaction as the business change, then delivered by a separate process |
 | Geo index | Data structure for fast nearest-point search on a map |
 | Event | A message about a fact that has already happened, e.g. "trip completed" |
 | p95 | 95th percentile: 95% of requests complete within this value |
