@@ -8,12 +8,14 @@ Principles:
 2. **Modular monolith instead of microservices.** One backend codebase split into modules that mirror the ideal services. Modules call each other in-process, not over the network.
 3. **Specific technology only where it is really needed.** Every technology outside TypeScript must be justified by a requirement.
 4. **Managed services instead of self-hosted infrastructure.** PostgreSQL and Redis are rented as managed services, so the team does not operate databases.
+5. **Optimised for availability, fault tolerance and performance.** These are the three top [architecture characteristics](../characteristics.md); the others get a baseline and a stated consequence.
 
 ## Diagrams
 
 - [C1 — System Context](c1-system-context.md)
 - [C2 — Containers](c2-containers.md)
 - [C3 — Components of the backend API](c3-backend-api.md)
+- [Deployment](deployment.md)
 - draw.io: [`diagrams/taxi-c4-model-starting.drawio`](diagrams/taxi-c4-model-starting.drawio)
 
 ## Languages
@@ -43,7 +45,7 @@ Every container of the ideal architecture and what happens to it at the start:
 | Order service | Node.js | **Module** of the backend — trips module | Core logic stays isolated as a module |
 | Driver matching service | Go | **Module** of the backend — matching module, in TypeScript | 10–50 orders per minute do not need Go. The heavy part — nearest-driver search — is done by Redis |
 | Payment service | Node.js | **Module** of the backend — payments module | Card data never reaches us anyway (provider tokens, NFR-12), so a separate service gives little extra isolation |
-| Notification service | Node.js | **Background worker** — same codebase, separate process | Sending push and SMS must not slow down API requests |
+| Notification service | Node.js | **Background worker** — same codebase, separate process, 2 instances | Sending push and SMS must not slow down API requests. Also relays the outbox ([ADR-0006](../adr/0006-idempotent-actions-offline-queue-and-outbox.md)) |
 | PostgreSQL | PostgreSQL | **Kept** — managed PostgreSQL | Needs a real relational database (see below) |
 | Redis | Redis | **Kept** — managed Redis, used for more jobs | Needs Redis (see below) |
 | Kafka | Kafka | **Removed** — replaced by a job queue in Redis (BullMQ) | A Kafka cluster is expensive to run and operate; at 10 orders per minute a Redis queue with retries is enough |
@@ -56,7 +58,7 @@ Result: **12 containers → 7**, **5 languages → 3**, **3 data stores → 2**.
 | Technology | Why plain TypeScript code is not enough | Requirements |
 |---|---|---|
 | **PostgreSQL** | Trips and payments need transactions and integrity (a trip must not be paid twice). Managed PostgreSQL gives point-in-time recovery for RPO ≤ 15 min | NFR-10, FR-37, FR-15 |
-| **Redis** | One tool covers five jobs: (1) geo index of available drivers — nearest-driver search in milliseconds with ≈ 330–1,700 position updates per second; (2) one-time login codes and offer timers with automatic expiry (TTL); (3) job queue with retries for notifications, receipts and payment retries; (4) pub/sub that delivers WebSocket events between the two backend instances; (5) rate-limit counters. Without Redis each of these would need a separate solution | NFR-1, NFR-2, NFR-13, FR-1, FR-22, FR-14 |
+| **Redis** | One tool covers six jobs: (1) geo index of available drivers — nearest-driver search in milliseconds with ≈ 330–1,700 position updates per second, never written to PostgreSQL on the hot path ([ADR-0007](../adr/0007-driver-positions-in-redis-only.md)); (2) one-time login codes and offer timers with automatic expiry (TTL); (3) job queue with retries for notifications, receipts and payment retries; (4) pub/sub that delivers WebSocket events and live positions between the two backend instances; (5) rate-limit counters; (6) cache of repeated routes. Without Redis each of these would need a separate solution | NFR-1, NFR-2, NFR-13, FR-1, FR-22, FR-14 |
 | **Flutter** | Team constraint; background location and native maps on both platforms | CON-4, NFR-22, NFR-23 |
 | **Google Maps API** | Routes, ETA and address autocomplete are not something to build ourselves | CON-5, FR-4, FR-10 |
 | **Payment provider** | PCI DSS — card data must stay with a certified provider | CON-6, NFR-12 |
@@ -76,20 +78,7 @@ Result: **12 containers → 7**, **5 languages → 3**, **3 data stores → 2**.
 
 ## Deployment
 
-```
-Mobile apps, admin panel
-        │  HTTPS / WebSocket — one address: api.<domain>
-        ▼
-Managed load balancer (TLS)
-        │
-        ├── Backend API — 2 instances in different availability zones
-        └── Background worker — 1 instance
-                │
-                ├── Managed PostgreSQL — primary + standby, point-in-time recovery
-                └── Managed Redis — primary + replica, persistence enabled
-```
-
-Two backend instances in different zones and managed databases with a standby cover the 99.9% availability target ([NFR-7](../../requirements/non-functional.md)).
+One EU region, two availability zones: two backend instances and two workers (one of each per zone), PostgreSQL primary + synchronous standby and Redis primary + replica in different zones, all behind a managed load balancer. This covers the 99.9% availability target ([NFR-7](../../requirements/non-functional.md)) and survives the loss of a whole zone. Details and the diagram: [deployment](deployment.md), decision: [ADR-0005](../adr/0005-two-availability-zones-with-failover.md).
 
 ### Infrastructure cost estimate
 
@@ -98,18 +87,22 @@ Rough monthly estimate for one EU region (Google Maps and SMS are counted separa
 | Item | USD per month |
 |---|---|
 | Backend API, 2 instances (2 vCPU, 4 GB) | 80 – 150 |
-| Background worker, 1 instance | 40 – 70 |
+| Background worker, 2 instances | 80 – 140 |
 | Managed PostgreSQL with standby | 150 – 300 |
 | Managed Redis with replica | 60 – 120 |
 | Load balancer, file storage (driver documents), backups | 50 – 100 |
 | Logging and monitoring | 0 – 100 |
-| **Total** | **≈ 380 – 840** |
+| **Total** | **≈ 420 – 910** |
 
 ## Trade-offs
 
 - **One deployable:** a bug in one module can take down the whole backend. Mitigated by two instances, staged rollout ([NFR-26](../../requirements/non-functional.md)) and fast rollback.
 - **Shared database load:** a heavy analytics query from the admin panel can slow down trips. Mitigated by limiting admin queries and adding a read replica when needed.
-- **No event replay:** a Redis job queue does not keep a history of events the way Kafka does. Trip state lives in PostgreSQL, so nothing is lost, but past events cannot be re-processed.
+- **No event replay:** a Redis job queue does not keep a history of events the way Kafka does. Trip state and the outbox live in PostgreSQL, so nothing is lost, but past events cannot be re-processed.
+- **One region:** a whole-region outage is not covered by failover; recovery from backups in the second region takes hours (NFR-10 holds for zone failures only).
+- **Payments in the same process:** the separate network zone for payments (NFR-12) exists only in the ideal architecture.
+
+These follow from the characteristics that were deliberately left out of the top three, see [characteristics](../characteristics.md#left-out-and-the-consequence).
 
 ## Path to the ideal architecture
 

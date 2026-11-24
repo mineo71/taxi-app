@@ -93,5 +93,10 @@ NFR-9 and NFR-10 deserve special attention: power outages and overloaded mobile 
 | NFR-3, NFR-7, NFR-11, NFR-13, NFR-14 | [ADR-0004](../architecture/adr/0004-api-gateway-single-entry-point.md) API Gateway as the single entry point |
 | NFR-22 | [ADR-0003](../architecture/adr/0003-flutter-and-react-clients.md) Flutter for mobile apps, React for the admin panel |
 | NFR-24 | [ADR-0002](../architecture/adr/0002-monorepo.md) Monorepo |
+| NFR-7, NFR-10 | [ADR-0005](../architecture/adr/0005-two-availability-zones-with-failover.md) Two availability zones with automatic failover |
+| NFR-8, NFR-9 | [ADR-0006](../architecture/adr/0006-idempotent-actions-offline-queue-and-outbox.md) Idempotent actions, offline queue and transactional outbox |
+| NFR-1, NFR-2, NFR-3 | [ADR-0007](../architecture/adr/0007-driver-positions-in-redis-only.md) Driver positions only in Redis |
+
+Which of these requirements drive the architecture, and which were deliberately given lower priority, is analysed in [architecture characteristics](../architecture/characteristics.md).
 
 Product metrics (conversion, cancellations, retention) are listed in the [success metrics](success-metrics.md).

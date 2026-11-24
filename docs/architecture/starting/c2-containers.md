@@ -12,21 +12,25 @@ Seven containers instead of twelve: three client apps, one backend, one backgrou
 
 **Backend API.** One NestJS application that replaces the gateway, the real-time service and four services of the ideal architecture. Inside it is split into modules with the same boundaries as the ideal services, see [C3](c3-backend-api.md). It runs as two instances behind a managed load balancer, so clients know one address ([ADR-0004](../adr/0004-api-gateway-single-entry-point.md)).
 
-**Background worker.** The same codebase started in worker mode. It processes jobs from the Redis queue: push notifications, SMS codes, receipts, payment retries, clean-up of old location data ([NFR-16](../../requirements/non-functional.md)). Slow external calls never block an API request.
+**Driver app offline queue.** Actions the driver takes without a network are stored in a local SQLite database and replayed in order with idempotency keys after reconnection ([ADR-0006](../adr/0006-idempotent-actions-offline-queue-and-outbox.md)). SQLite runs inside the app process, so it is part of the driver app container, not a separate one.
 
-**Two data stores.** PostgreSQL is the source of truth. Redis is the only extra technology on the server side and is used for five jobs: driver geo index, login codes and offer timers with TTL, job queue, WebSocket pub/sub between instances, rate-limit counters.
+**Background worker.** The same codebase started in worker mode, two instances. It relays the outbox — events written by the backend in the same transaction as the business change — and processes jobs from the Redis queue: push notifications, SMS codes, receipts, payment charges and retries, batched trip tracks, clean-up of old location data ([NFR-16](../../requirements/non-functional.md)). Slow external calls never block an API request.
+
+**Two data stores.** PostgreSQL is the source of truth, including the outbox and idempotency keys. Redis is the only extra technology on the server side and is used for six jobs: driver geo index and live positions ([ADR-0007](../adr/0007-driver-positions-in-redis-only.md)), login codes and offer timers with TTL, job queue, WebSocket pub/sub between instances, rate-limit counters, route cache.
+
+How the containers are placed in two availability zones is shown on the [deployment diagram](deployment.md).
 
 ## Containers
 
 | Container | Technology | Responsibility | Instances | Requirements |
 |---|---|---|---|---|
 | Passenger app | Flutter | Ordering, map, payment, rating | — | FR-1 … FR-19 |
-| Driver app | Flutter | Accepting orders, navigation, earnings | — | FR-20 … FR-28 |
+| Driver app | Flutter, SQLite | Accepting orders, navigation, earnings, offline action queue | — | FR-20 … FR-28, NFR-9 |
 | Admin panel | React, TypeScript | Moderation, tariffs, analytics | — | FR-29 … FR-34 |
-| Backend API | Node.js, TypeScript, NestJS, Socket.IO | REST API, WebSocket, all business logic | 2 | FR-1 … FR-38, NFR-1, NFR-3 |
-| Background worker | Node.js, TypeScript, BullMQ | Notifications, receipts, payment retries, clean-up jobs | 1 | FR-14, FR-15, FR-18, NFR-16, NFR-17 |
-| Main database | PostgreSQL (managed) | Users, drivers, trips, tariffs, payments | Primary + standby | NFR-10 |
-| Redis | Redis (managed) | Geo index, TTL keys, job queue, pub/sub, rate limits | Primary + replica | NFR-1, NFR-2, NFR-13 |
+| Backend API | Node.js, TypeScript, NestJS, Socket.IO | REST API, WebSocket, all business logic, idempotency keys | 2, one per zone | FR-1 … FR-38, NFR-1, NFR-3, NFR-8 |
+| Background worker | Node.js, TypeScript, BullMQ | Outbox relay, notifications, receipts, payment charges and retries, clean-up jobs | 2, one per zone | FR-14, FR-15, FR-18, NFR-8, NFR-16, NFR-17 |
+| Main database | PostgreSQL (managed) | Users, drivers, trips, tariffs, payments, outbox, idempotency keys | Primary + synchronous standby | NFR-8, NFR-10 |
+| Redis | Redis (managed) | Geo index, live positions, TTL keys, job queue, pub/sub, rate limits, route cache | Primary + replica | NFR-1, NFR-2, NFR-13 |
 
 ## Compared with the ideal C2
 

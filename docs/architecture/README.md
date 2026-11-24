@@ -18,8 +18,12 @@ Both implement the same [requirements](../requirements/functional.md). The start
 | Languages | Dart, TypeScript, SQL | Dart, TypeScript, Go, SQL, Protobuf |
 | Data stores | PostgreSQL, Redis | PostgreSQL, Redis, Kafka |
 | Communication inside the backend | In-process calls, Redis job queue | gRPC, Kafka events |
-| Infrastructure cost | ≈ $380–840 per month | Several times higher: Kafka cluster, more instances |
+| Infrastructure cost | ≈ $420–910 per month | Several times higher: Kafka cluster, more instances |
 | Suited for | MVP, one city, ≈ 10–50 orders per minute | Many cities, hundreds of orders per minute, several teams |
+
+## Architecture characteristics
+
+The three characteristics the architecture is optimised for — availability, fault tolerance and performance — the consequences of leaving out the others, quality attribute scenarios and the resulting changes are in [characteristics.md](characteristics.md).
 
 ## C4 model
 
@@ -31,6 +35,7 @@ Both versions are described with the **C4 model**: four levels of detail, from t
 | C2 — Containers | Separately running apps, services and data stores, each with its technology | Architect, whole team | [C2](starting/c2-containers.md) | [C2](ideal/c2-containers.md) |
 | C3 — Components | Internals of the container with the core business logic | Developers | [C3: backend API](starting/c3-backend-api.md) | [C3: order service](ideal/c3-order-service.md) |
 | C4 — Code | Classes and methods of a component | — | Not drawn: code changes daily and the diagram would go stale faster than it could be updated | |
+| Deployment | Zones, instances, replicas and failover in production | Architect, operations | [Deployment](starting/deployment.md) | — |
 
 ## Diagrams
 
@@ -38,7 +43,7 @@ All diagrams in the project are drawn in **draw.io**. Each document shows a PNG 
 
 | File | Pages |
 |---|---|
-| [`starting/diagrams/taxi-c4-model-starting.drawio`](starting/diagrams/taxi-c4-model-starting.drawio) | C1, C2, C3 of the starting architecture |
+| [`starting/diagrams/taxi-c4-model-starting.drawio`](starting/diagrams/taxi-c4-model-starting.drawio) | C1, C2, C3 and deployment of the starting architecture |
 | [`ideal/diagrams/taxi-c4-model.drawio`](ideal/diagrams/taxi-c4-model.drawio) | C1, C2, C3 of the ideal architecture |
 | [`../requirements/diagrams/taxi-requirements.drawio`](../requirements/diagrams/taxi-requirements.drawio) | Use cases, two sequence diagrams, passenger funnel, trip state machine |
 

@@ -8,6 +8,9 @@ An Architecture Decision Record is a short document that captures one significan
 | [0002](0002-monorepo.md) | Monorepo for clients, services and documentation | Accepted |
 | [0003](0003-flutter-and-react-clients.md) | Flutter for mobile apps, React for the admin panel | Accepted |
 | [0004](0004-api-gateway-single-entry-point.md) | API Gateway as the single entry point | Accepted |
+| [0005](0005-two-availability-zones-with-failover.md) | Two availability zones with automatic failover | Accepted |
+| [0006](0006-idempotent-actions-offline-queue-and-outbox.md) | Idempotent actions, offline queue in the driver app and transactional outbox | Accepted |
+| [0007](0007-driver-positions-in-redis-only.md) | Driver positions only in Redis, pushed to passengers over WebSocket | Accepted |
 
 ## Rules
 

@@ -8,8 +8,8 @@ One TypeScript codebase, two processes ([C2 starting](../docs/architecture/start
 
 | Service | Technology | Responsibility |
 |---|---|---|
-| `api` | Node.js, TypeScript, NestJS, Socket.IO | REST API and WebSocket; modules: auth, admin, trips, matching, payments ([C3](../docs/architecture/starting/c3-backend-api.md)) |
-| `api` in worker mode | Node.js, TypeScript, BullMQ | Background jobs: notifications, SMS codes, receipts, payment retries, clean-up |
+| `api` | Node.js, TypeScript, NestJS, Socket.IO | REST API and WebSocket; modules: auth, admin, trips, matching, location, payments ([C3](../docs/architecture/starting/c3-backend-api.md)) |
+| `api` in worker mode | Node.js, TypeScript, BullMQ | Outbox relay and background jobs: card charges, notifications, SMS codes, receipts, payment retries, batched trip tracks, clean-up |
 
 Data stores: PostgreSQL (main database), Redis (geo index, TTL keys, job queue, pub/sub).
 
